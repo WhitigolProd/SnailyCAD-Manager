@@ -2,6 +2,7 @@
   "name": "scv4-manager",
   "productName": "SnailyCAD v4 - Manager",
   "version": "1.0.0",
+  "icon": "public/img/icon.png",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
