@@ -2,6 +2,7 @@
 window.$ = window.jQuery = require('jquery');
 //! ------------------------------------------------- !//
 
+// On Load
 $(function() {
-  $('scripts').remove();
+  $('scripts').remove(); //? Remove Scripts Tag
 });

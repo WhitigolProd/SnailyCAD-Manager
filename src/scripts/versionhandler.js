@@ -1,6 +1,8 @@
 //? Version Check ?//
-let currentversion = null;
-let latestversion = null;;
+let ver = {
+    current: null,
+    latest: null,
+}
 
 $(function(){
     //Current Version Check
@@ -10,7 +12,7 @@ $(function(){
         
         elements.versions.current.text(`${snailyjson.version}`)
         console.log(`Current Version: ${snailyjson.version}`);
-        currentversion = `${snailyjson.version}`
+        ver.current = `${snailyjson.version}`
     }());
     
     // Latest Version Check
@@ -24,7 +26,7 @@ $(function(){
             });
             console.log(`Latest Version: ${versions[0].name}`);
             elements.versions.latest.text(versions[0].name);
-            latestversion = `${versions[0].name}`
+            ver.latest = `${versions[0].name}`
 
             CompareVersions();
           });
@@ -32,14 +34,15 @@ $(function(){
     
     // Compare Versions
     function CompareVersions(){
-        if (elements.versions.current.text() < elements.versions.latest.text()) {
-            elements.versions.current.css('color', '#ffa600').append(` (Update <u>${latestversion}</u> Available)`)
-            elements.titlebar.title.append(`&nbsp;<span style="color: orange;">(Update <u>${latestversion}</u> available)</span>`)
-            console.log(`Versions ${elements.versions.current.text()} and ${elements.versions.latest.text()} do NOT match`)
+        if (ver.current < ver.latest) {
+            elements.versions.current.css('color', '#ffa600').append(` (Update <u>${ver.latest}</u> Available)`)
+            elements.titlebar.title.append(`&nbsp;<span style="color: orange;">(Update <u>${ver.latest}</u> available)</span>`)
+            console.log(`%cVersion Mismatch - Update Available`, `background: red; font-weight: bold; padding: 2px 5px;`)
         }else {
             elements.versions.current.css('color', 'lime').append(' (Up to Date)')
-
+            console.log(`%cVersion Match - No Updates Available`, `background: green; font-weight: bold; padding: 2px 5px;`)
         }
+        HandleUpdateButton();
     };
 })
 //? ------------- ?//
