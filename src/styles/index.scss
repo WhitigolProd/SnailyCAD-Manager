@@ -1,0 +1,65 @@
+@import './titlbar';
+@import './buttons';
+
+html {
+    background-color: transparent;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    margin: 0;
+    overflow: hidden;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+app {
+    position: absolute;
+    inset: 0;
+    top: 30px;
+    height: calc(100vh - 30px);
+    width: 100vw;
+}
+
+.bg {
+    background-color: #2c2f33;
+    border-radius: 15px;
+    min-height: 100vh;
+    min-width: 100vw;
+    z-index: -100;
+}
+
+.versions {
+    position: absolute;
+    width: 100vw;
+    bottom: 10px;
+    left: 10px;
+    font-weight: bold;
+
+    span {
+        display: inline-block;
+        font-weight: normal;
+    }
+}
+
+.main {
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        margin-top: 5vh;
+
+        &:first-child {
+            margin: 0;
+        }
+    }
+}

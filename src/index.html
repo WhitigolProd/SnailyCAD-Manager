@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/index.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <title>SnailyCAD v4 - Manager</title>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <header class="titlebar">
+    <div class="title">SnailyCAD v4 Manager</div>
+    <div class="buttons">
+      <div class="btn" id="app-minimize"><span class="material-icons-outlined">remove</span></div>
+      <div class="btn" id="app-close"><span class="material-icons-outlined">close</span></div>
+    </div>
+  </header>
+  
+  <app>
+
+    <div class="main">
+      <div class="row">
+        <span class="main-btn success raise" id="sc-start"><span class="material-icons-outlined">play_arrow</span> Start SnailyCAD</span>
+        <span class="main-btn blue raise" id="sc-update"><span class="material-icons-outlined">upgrade</span> Update SnailyCAD</span>
+      </div>
+    </div>
+  
+    <div class="versions">
+      <div id="current">Current (Installed): <span>Not Installed</span></div>
+      <div id="latest" style="display: none;">Latest Release: <span>ERROR</span></div>
+    </div>
+  </app>
+
+  <scripts>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/elements.js"></script>
+    <script src="scripts/versionhandler.js"></script>
+    <script src="scripts/functions/commandline.js"></script>
+    <script src="scripts/functions/ipc.js"></script>
+    <!-- GITHUB VERSION CHECK -->
+    <script src="https://rawgit.com/hippich/bower-semver/master/semver.min.js"></script>
+  </scripts>
+</body>
+</html>

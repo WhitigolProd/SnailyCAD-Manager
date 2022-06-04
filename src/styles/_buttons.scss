@@ -1,0 +1,50 @@
+$success: lime;
+$warn: orange;
+$error: rgb(255, 64, 64);
+$blue: rgb(0, 123, 255);
+
+.main-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: solid;
+    cursor: pointer;
+    box-shadow: 0 5px 0.5em 0px rgba(0, 0, 0, 0.8);
+
+    &.raise {
+        transition: ease-in-out 200ms all;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5em 0.5em -0.4em white;
+        }
+    }
+
+    &.success {
+        border-color: $success;
+    }
+
+    &.warn {
+        border-color: $warn;
+    }
+
+    &.error {
+        border-color: $error;
+    }
+
+    &.blue {
+        border-color: $blue;
+    }
+}
+
+@media (max-width: 450px) {
+    .main-btn {
+        font-size: 10px !important;
+        padding: 5px 10px;
+    }
+}
