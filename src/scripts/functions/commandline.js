@@ -14,8 +14,8 @@ function cmd(cmd) {
 }
 
 //? Use this function for executing pre-defined commands inside the manager-app code.
-function command(cmd, wd /* (Working Directory) ⚠ MUST MAKE USE OF DOUBLE FORWARD-SLASH '\\' */) {
-    exec(cmd, {'cwd':`${wd}`}, (error, stdout, stderr)=> {
+function command(cmd) {
+    exec(cmd, {'cwd':`${process.env.CAD_DIR}`}, (error, stdout, stderr)=> {
         if (error) {
             addToOutputStream(error, 'c')
         }
@@ -27,8 +27,6 @@ function command(cmd, wd /* (Working Directory) ⚠ MUST MAKE USE OF DOUBLE FORW
         }
     })
 }
-
-
 
 function addToOutputStream(output, type) {
     if (type == 'a') {

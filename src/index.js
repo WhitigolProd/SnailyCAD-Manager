@@ -3,9 +3,8 @@ const path = require('path');
 const ipc = ipcMain;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-  app.quit();
-}
+if (require('electron-squirrel-startup')) app.quit(); // eslint-disable-line global-require
+
 
 const createWindow = () => {
   // Create the browser window.
@@ -21,6 +20,8 @@ const createWindow = () => {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
+      devTools: require('./storage/storage-loader').nodeEnv  === 'development',
+      preload: path.join(__dirname, 'preload.js')
     },
   });
   
@@ -29,11 +30,11 @@ const createWindow = () => {
   
   // Main Window Functions
   
-  ipc.on('close-app', ()=>{
+  ipc.on('close-app', () => {
     mainWindow.close();
   });
 
-  ipc.on('minimize-app', ()=>{
+  ipc.on('minimize-app', () => {
     mainWindow.minimize();
   })
 };
