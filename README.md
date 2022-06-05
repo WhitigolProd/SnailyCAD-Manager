@@ -7,4 +7,4 @@ You are welcome to contribute to the project by submitting a Pull Request with y
 _All stars/forks are appreciated!_
 
 ## Current Contributors:
-- [subtosharki](https://github.com/subtosharki)
+- [sharki](https://github.com/subtosharki)
