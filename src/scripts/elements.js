@@ -7,8 +7,10 @@ let elements = {
     main: {
         buttons: {
             start: $('#sc-start'),
-            update: $('#sc-update')
+            update: $('#sc-update'),
         },
+
+        cmdoutput: $('.cmd'),
     },
 
     titlebar: {

@@ -1,0 +1,25 @@
+.cmd {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    padding: 10px;
+    overflow-y: auto;
+    line-height: 1.2;
+    overflow-wrap: break-word;
+    height: 20vh;
+    width: 45vw;
+    border-bottom-right-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 12px;
+
+    span {
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

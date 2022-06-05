@@ -1,5 +1,6 @@
 @import './titlbar';
 @import './buttons';
+@import './cmd';
 
 html {
     background-color: transparent;
@@ -33,7 +34,7 @@ app {
 
 .versions {
     position: absolute;
-    width: 100vw;
+    width: 50vw;
     bottom: 10px;
     left: 10px;
     font-weight: bold;

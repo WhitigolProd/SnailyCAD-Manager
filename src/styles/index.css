@@ -143,6 +143,36 @@
   }
 }
 
+.cmd {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  overflow-y: auto;
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  height: 20vh;
+  width: 45vw;
+  border-bottom-right-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 12px;
+}
+
+.cmd span {
+  margin-bottom: 10px;
+}
+
+.cmd span:last-child {
+  margin-bottom: 0;
+}
+
 html {
   background-color: transparent;
 }
@@ -176,7 +206,7 @@ app {
 
 .versions {
   position: absolute;
-  width: 100vw;
+  width: 50vw;
   bottom: 10px;
   left: 10px;
   font-weight: bold;
