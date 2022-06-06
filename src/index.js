@@ -1,43 +1,51 @@
+const electron = require('electron');
+require('electron-reload');
+
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const ipc = ipcMain;
+const { nodeEnv, autoStart, autoOpen } = require('./preload');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) app.quit(); // eslint-disable-line global-require
 
-
 const createWindow = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 645,
-    height: 500,
-    minWidth: 645,
-    minHeight: 500,
-    transparent: true,
-    titleBarStyle: 'hidden',
-    icon: path.join(__dirname, 'img/icon.png'),
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true,
-      devTools: require('./storage/storage-loader').nodeEnv  === 'development',
-      preload: path.join(__dirname, 'preload.js')
-    },
-  });
-  
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  
-  // Main Window Functions
-  
-  ipc.on('close-app', () => {
-    mainWindow.close();
-  });
+    // Create the browser window.
+    const mainWindow = new BrowserWindow({
+        width: 645,
+        height: 500,
+        minWidth: 645,
+        minHeight: 500,
+        transparent: true,
+        titleBarStyle: 'hidden',
+        icon: path.join(__dirname, 'img/icon.png'),
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,
+            devTools:
+                require('./storage/config.json').nodeEnv === 'development',
+            preload: path.join(__dirname, 'preload.js'),
+        },
+    });
 
-  ipc.on('minimize-app', () => {
-    mainWindow.minimize();
-  })
+    // and load the index.html of the app.
+    mainWindow.loadFile(path.join(__dirname, 'index.html'));
+
+    // Main Window Functions
+    ipc.on('close-app', () => {
+        mainWindow.close();
+    });
+
+    ipc.on('minimize-app', () => {
+        mainWindow.minimize();
+    });
 };
+
+//auto open
+app.setLoginItemSettings({
+    openAtLogin: true,
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -48,17 +56,17 @@ app.on('ready', createWindow);
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
 });
 
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+    }
 });
 
 // In this file you can include the rest of your app's specific main process

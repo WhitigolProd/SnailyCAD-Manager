@@ -1,61 +1,63 @@
 {
-  "name": "scv4-manager",
-  "productName": "SnailyCAD v4 - Manager",
-  "version": "1.0.0",
-  "icon": "public/img/icon.png",
-  "description": "SnailyCAD v4 - Manager | Manager app for SnailyCAD v4 | Made by Whitigol",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\"",
-    "output": "npx electron-packager . \"SnailyCAD v4 - Manager\" --asar --overwrite --icon './src/img/icon.ico'"
-  },
-  "keywords": [],
-  "author": {
-    "name": "WhitigolProd",
-    "email": "36452182+WhitigolProd@users.noreply.github.com"
-  },
-  "license": "MIT",
-  "config": {
-    "forge": {
-      "packagerConfig": {},
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "scv4m"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
+    "name": "scv4-manager",
+    "productName": "SnailyCAD v4 - Manager",
+    "version": "1.0.0",
+    "icon": "public/img/icon.png",
+    "description": "SnailyCAD v4 - Manager | Manager app for SnailyCAD v4 | Made by Whitigol",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "electron-forge start",
+        "package": "electron-forge package",
+        "make": "electron-forge make",
+        "publish": "electron-forge publish",
+        "lint": "npx prettier --write .",
+        "output": "npx electron-packager . \"SnailyCAD v4 - Manager\" --asar --overwrite --icon './src/img/icon.ico'"
+    },
+    "keywords": [],
+    "author": {
+        "name": "WhitigolProd",
+        "email": "36452182+WhitigolProd@users.noreply.github.com"
+    },
+    "license": "MIT",
+    "config": {
+        "forge": {
+            "packagerConfig": {},
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": {
+                        "name": "scv4m"
+                    }
+                },
+                {
+                    "name": "@electron-forge/maker-zip",
+                    "platforms": [
+                        "darwin"
+                    ]
+                },
+                {
+                    "name": "@electron-forge/maker-deb",
+                    "config": {}
+                },
+                {
+                    "name": "@electron-forge/maker-rpm",
+                    "config": {}
+                }
+            ]
         }
-      ]
+    },
+    "dependencies": {
+        "electron-squirrel-startup": "^1.0.0",
+        "jquery": "^3.6.0",
+        "kill-port": "^2.0.0"
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "^6.0.0-beta.61",
+        "@electron-forge/maker-deb": "^6.0.0-beta.61",
+        "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+        "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+        "@electron-forge/maker-zip": "^6.0.0-beta.61",
+        "electron": "19.0.3",
+        "electron-reload": "^2.0.0-alpha.1"
     }
-  },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
-    "jquery": "^3.6.0"
-  },
-  "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.61",
-    "@electron-forge/maker-deb": "^6.0.0-beta.61",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
-    "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "electron": "19.0.3"
-  }
 }

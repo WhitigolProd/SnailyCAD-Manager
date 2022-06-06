@@ -1,7 +1,10 @@
 {
-    "cadDir": "",
-    "nodeEnv": "production",
+    "cadDir": "path/to/cad",
+    "cadPort": 3000,
+    "cadAPI": 8080,
+    "nodeEnv": "development",
     "color": "",
-    "autoOpen": true,
-    "autoStart": true
+    "autoOpen": false,
+    "autoStart": false,
+    "firstRun": false
 }

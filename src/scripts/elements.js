@@ -21,4 +21,4 @@ let elements = {
             minimize: $('#app-minimize'),
         },
     },
-}
+};
