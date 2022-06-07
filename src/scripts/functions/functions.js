@@ -15,3 +15,7 @@ $(elements.main.buttons.update).on('click', () => {
         `curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > script.js && node script.js`
     );
 });
+
+$('#clearCMD').on('click', () => {
+    $('.cmd').html('')
+})
