@@ -1,4 +1,4 @@
-const { command } = require('./scripts/functions/commandline');
+// const { command } = require('./scripts/functions/commandline');
 const { app } = require('electron');
 
 module.exports = {

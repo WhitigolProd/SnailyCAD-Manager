@@ -1,51 +1,34 @@
-const { writeFileSync } = require('node:fs');
-const path = './src/storage/config.json';
-const { config } = require('../preload');
+// Get Initial Configuration
+let config = {
+    cadDir: localStorage.getItem('cadDir'),
+    cadPort: localStorage.getItem('cadPort'),
+    cadAPI: localStorage.getItem('cadAPI'),
+    nodeEnv: 'development',
+    color: localStorage.getItem('color'),
+    autoStart: localStorage.getItem('autoStart'),
+    firstRun: localStorage.getItem('firstRun')
+}
 
-module.exports = class StorageManager {
-    constructor() {
-        this.config = config;
+
+const setConfig = {
+    cadDir: function (cadDir) {
+        localStorage.setItem('cadDir', cadDir);
+        config.cadDir = cadDir;
+    },
+    cadPort: function (cadPort) {
+        localStorage.setItem('cadPort', cadPort);
+        config.cadPort = cadPort;
+    },
+    cadAPI: function (cadAPI) {
+        localStorage.setItem('cadAPI', cadAPI);
+        config.cadAPI = cadAPI;
+    },
+    color: function (color) {
+        localStorage.setItem('color', color);
+        config.color = color;
+    },
+    autoRun: function (autoStart) {
+        localStorage.setItem('autoStart', autoStart);
+        config.autoStart = autoStart;
     }
-    set setCadDir(dir) {
-        this.config.cadDir = dir;
-        writeFileSync(path, JSON.stringify(this.config, null, 2), (err) => {
-            if (err) console.log(err);
-        });
-    }
-    set setCadPort(port) {
-        this.config.cadPort = port;
-        writeFileSync(path, JSON.stringify(this.config, null, 2), (err) => {
-            if (err) console.log(err);
-        });
-    }
-    set setCadAPI(api) {
-        this.config.cadAPI = api;
-        writeFileSync(path, JSON.stringify(this.config, null, 2), (err) => {
-            if (err) console.log(err);
-        });
-    }
-    set setColor(color) {
-        this.config.color = color;
-        writeFileSync(path, JSON.stringify(this.config, null, 2), (err) => {
-            if (err) console.log(err);
-        });
-    }
-    set setAutoOpen(autoOpen) {
-        this.config.autoOpen = autoOpen;
-        writeFileSync(path, JSON.stringify(this.config, null, 2), (err) => {
-            if (err) console.log(err);
-        });
-    }
-    set setAutoStart(autoStart) {
-        this.config.autoStart = autoStart;
-        writeFileSync(path, JSON.stringify(this.config, null, 2), (err) => {
-            if (err) console.log(err);
-        });
-    }
-    set setFirstRun(firstRun) {
-        this.config.firstRun = firstRun;
-        writeFileSync(path, JSON.stringify(this.config, null, 2), (err) => {
-            if (err) console.log(err);
-        });
-    }
-};
+}

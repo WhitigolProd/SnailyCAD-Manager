@@ -196,14 +196,16 @@
 }
 
 .cmd-container .header span {
-  background-color: #0014ff;
+  background-color: #0064ff;
   padding: 2px 8px;
   border-radius: 15px;
   cursor: pointer;
+  -webkit-transition: ease-in-out 200ms background-color;
+  transition: ease-in-out 200ms background-color;
 }
 
 .cmd-container .header span:hover {
-  background-color: rgba(0, 20, 255, 0.7);
+  background-color: rgba(0, 100, 255, 0.7);
 }
 
 .cmd-container .cmd {

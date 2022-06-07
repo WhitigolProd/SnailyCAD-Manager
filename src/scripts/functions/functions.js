@@ -18,4 +18,5 @@ $(elements.main.buttons.update).on('click', () => {
 
 $('#clearCMD').on('click', () => {
     $('.cmd').html('')
+    addToOutputStream('Command View Cleared', 'f')
 })
