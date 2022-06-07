@@ -16,6 +16,18 @@ $blue: rgb(0, 123, 255);
     cursor: pointer;
     box-shadow: 0 5px 0.5em 0px rgba(0, 0, 0, 0.8);
 
+    .material-icons-outlined {
+        font-size: 16px !important;
+    }
+
+    >* {
+        margin-right: 5px;
+    }
+
+    :last-child {
+        margin-right: 0;
+    }
+
     &.raise {
         transition: ease-in-out 200ms all;
 
@@ -53,3 +65,4 @@ $blue: rgb(0, 123, 255);
 #sc-update {
     display: none;
 }
+

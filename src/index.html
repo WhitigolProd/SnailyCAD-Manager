@@ -10,12 +10,16 @@
             href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+        />
         <title>SnailyCAD v4 - Manager</title>
     </head>
     <body>
         <div class="bg"></div>
 
-        <header class="titlebar">
+        <div class="titlebar">
             <div class="title">SnailyCAD v4 Manager</div>
             <div class="buttons">
                 <div class="btn" id="app-minimize">
@@ -25,19 +29,74 @@
                     <span class="material-icons-outlined">close</span>
                 </div>
             </div>
-        </header>
+        </div>
 
         <app>
+            <div class="wizard">
+                <div class="header">
+                    <h1>Setup Wizard</h1>
+                    <p>Welcome to the SnailyCAD v4 Setup Wizard!</p>
+                </div>
+
+                <div class="inner">
+                    <div id="step-1">
+                        <fieldset>
+                            <legend>How would you like to continue?</legend>
+                            <label for="small">
+                              <input type="radio" id="small" name="size" value="small" checked>
+                              Install SnailyCAD
+                            </label>
+                            <label for="medium">
+                              <input type="radio" id="medium" name="size" value="medium">
+                              Use Existing Installation
+                            </label>
+                          </fieldset>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <span class="main-btn blue raise" id="sc-gh">
+                        <span class="material-icons-outlined">arrow_back</span>
+                        <span>Back</span>
+                    </span>
+
+                    <span class="main-btn blue raise" id="sc-gh">
+                        <span>Next</span>
+                        <span class="material-icons-outlined"
+                            >arrow_forward</span
+                        >
+                    </span>
+                </div>
+            </div>
+
             <div class="main">
+                <span class="status">
+                    CAD Status:
+                    <span id="sc-status" data-status="offline"></span>
+                </span>
                 <div class="row">
-                    <span class="main-btn success raise" id="sc-start"
-                        ><span class="material-icons-outlined">play_arrow</span>
-                        Start SnailyCAD</span
-                    >
-                    <span class="main-btn blue raise" id="sc-update"
-                        ><span class="material-icons-outlined">upgrade</span>
-                        Update SnailyCAD</span
-                    >
+                    <span class="main-btn success raise" id="sc-start">
+                        <span class="material-icons-outlined">play_arrow</span>
+                        <span>Start SnailyCAD</span>
+                    </span>
+                    <span class="main-btn error raise" id="sc-stop">
+                        <span class="material-icons-outlined">stop</span>
+                        <span>Stop SnailyCAD</span>
+                    </span>
+                    <span class="main-btn blue raise" id="sc-update">
+                        <span class="material-icons-outlined">upgrade</span>
+                        <span>Update SnailyCAD</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="main-btn warn raise" id="sc-dir">
+                        <span class="material-icons-outlined">source</span>
+                        <span>CAD Directory</span>
+                    </span>
+                    <span class="main-btn blue raise" id="sc-gh">
+                        <span class="material-icons-outlined">code</span>
+                        <span>Open SnailyCAD Github</span>
+                    </span>
                 </div>
             </div>
 
@@ -62,8 +121,8 @@
         <scripts>
             <script src="scripts/script.js"></script>
             <script src="storage/StorageManager.js"></script>
-            <script src="scripts/functions/Wizard.js"></script>
             <script src="scripts/elements.js"></script>
+            <script src="scripts/functions/Wizard.js"></script>
             <script src="scripts/VersionHandler.js"></script>
             <script src="scripts/functions/commandline.js"></script>
             <script src="scripts/functions/ipc.js"></script>

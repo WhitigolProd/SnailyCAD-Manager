@@ -37,7 +37,10 @@ function command(cmd) {
 function addToOutputStream(output, type) {
     if (type == 'a') {
         elements.main.cmdoutput.prepend(`<span>${output}</span>`);
-    } else if (type == 'b') {
+    } else if (type == 'g') {
+        elements.main.cmdoutput.prepend(`<span style="color: lime; font-weight: bold;">${output}</span>`);
+    }
+    else if (type == 'b') {
         elements.main.cmdoutput.prepend(
             `<span style="color: orange">${output}</span>`
         );
@@ -56,9 +59,26 @@ function addToOutputStream(output, type) {
     }
 }
 function spw(cmd, args) {
-    let command = spawn(cmd, args, { cwd: `${config.cadDir}` });
+    addToOutputStream('Executing Command - Please Wait...', 'f');
+
+    if (cmd.indexOf('kill-port') >= 0) {
+        setStatus.cad(false);
+        console.log('Killing Ports')
+    }
+
+    let command = spawn(cmd, args, { cwd: `${config.cadDir}`, shell: true });
 
     command.stdout.on('data', (stdout) => {
+        if (stdout.toString().indexOf('exited with code 1') >= 0) {
+            addToOutputStream('<b>CAD Connection Closed</b>', 'b');
+            setStatus.cad(false);
+        } else if (stdout.toString().indexOf('exited with code 0') >= 0) {
+            addToOutputStream('<b>CAD Error<br>Check Logs for Error Output</b>', 'c');
+        }
+        if (stdout.toString().indexOf('running with version') >= 0) {
+            addToOutputStream('CAD Connection Started Successfully', 'g');
+            setStatus.cad(true);
+        }
         addToOutputStream(stdout.toString(), 'a');
         console.log(stdout.toString());
     });

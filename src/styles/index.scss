@@ -1,6 +1,7 @@
 @import './titlbar';
 @import './buttons';
 @import './cmd';
+@import './wizard';
 
 html {
     background-color: transparent;
@@ -51,6 +52,28 @@ app {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .status {
+        font-weight: bold;
+
+        span {
+            font-weight: normal;
+
+            &[data-status='online'] {
+                color: lime;
+                &:after {
+                    content: 'Online';
+                }
+            }
+
+            &[data-status='offline'] {
+                color: orange;
+                &:after {
+                    content: 'Offline';
+                }
+            }
+        }
+    }
 
     .row {
         display: flex;
