@@ -14,7 +14,8 @@
         display: flex;
         z-index: 100;
         inset: 0;
-        transform: translateY(-50px);
+        font-size: 15px;
+        transform: translateY(-40px);
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
@@ -53,7 +54,7 @@
         overflow-wrap: normal;
         height: 20vh;
         width: 45vw;
-        border-bottom-right-radius: 15px;
+        border-radius: 15px 0 15px 0;
         background-color: rgba(0, 0, 0, 0.8);
         font-size: 12px;
 

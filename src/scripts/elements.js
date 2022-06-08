@@ -12,7 +12,8 @@ let elements = {
             stop: $('#sc-stop'),
             update: $('#sc-update'),
             dir: $('#sc-dir'),
-            github: $('#sc-gh')
+            github: $('#sc-gh'),
+            docs: $('#sc-doc'),
         },
         
         status: $('#sc-status'),

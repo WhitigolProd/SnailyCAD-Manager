@@ -32,41 +32,92 @@
         </div>
 
         <app>
-            <div class="wizard">
+            <div class="requirements">
+                <h2>Checking System Requirements</h2>
+                <p>
+                    The manager is checking your system requirements (Required
+                    assets to run SnailyCAD)
+                </p>
+                <button aria-busy="true" id="rqLoad" class="secondary" style="background-color: transparent; border-style: none; width: auto; font-size: 30px;"></button>
+            </div>
+
+            <div class="wizard" style="display: none">
                 <div class="header">
                     <h1>Setup Wizard</h1>
-                    <p>Welcome to the SnailyCAD v4 Setup Wizard!</p>
+                    <p data-info>Welcome to the SnailyCAD v4 Setup Wizard!</p>
                 </div>
 
-                <div class="inner">
-                    <div id="step-1">
-                        <fieldset>
-                            <legend>How would you like to continue?</legend>
-                            <label for="small">
-                              <input type="radio" id="small" name="size" value="small" checked>
-                              Install SnailyCAD
-                            </label>
-                            <label for="medium">
-                              <input type="radio" id="medium" name="size" value="medium">
-                              Use Existing Installation
-                            </label>
-                          </fieldset>
-                    </div>
-                </div>
-
-                <div class="buttons">
-                    <span class="main-btn blue raise" id="sc-gh">
-                        <span class="material-icons-outlined">arrow_back</span>
-                        <span>Back</span>
-                    </span>
-
-                    <span class="main-btn blue raise" id="sc-gh">
-                        <span>Next</span>
-                        <span class="material-icons-outlined"
-                            >arrow_forward</span
+                <!--  -->
+                <step data-step="start">
+                    <div class="inner">
+                        <label for="installation"
+                            >How would you like to continue?</label
                         >
-                    </span>
-                </div>
+                        <select id="installation" required>
+                            <option value="install" selected>
+                                Install SnailyCAD
+                            </option>
+                            <option value="exist">
+                                Use Existing Installation
+                            </option>
+                        </select>
+                    </div>
+                    <div class="buttons">
+                        <span class="main-btn blue raise" data-btn="next">
+                            <span>Next</span>
+                            <span class="material-icons-outlined"
+                                >arrow_forward</span
+                            >
+                        </span>
+                    </div>
+                </step>
+                <!--  -->
+
+                <step data-step="install" style="display: none">
+                    <div class="inner">
+                        <label for="installdir"
+                            >Select a directory for installation.
+                            <input
+                                type="file"
+                                id="installdir"
+                                name="installdir"
+                                webkitdirectory
+                            />
+                        </label>
+                    </div>
+
+                    <div class="buttons">
+                        <span class="main-btn blue raise" data-btn="next">
+                            <span>Next</span>
+                            <span class="material-icons-outlined"
+                                >arrow_forward</span
+                            >
+                        </span>
+                    </div>
+                </step>
+
+                <step data-step="exist" style="display: none">
+                    <div class="inner">
+                        <label for="existdir"
+                            >Select your SnailyCAD Directory
+                            <input
+                                type="file"
+                                webkitdirectory
+                                id="existdir"
+                                name="existdir"
+                            />
+                        </label>
+                    </div>
+
+                    <div class="buttons">
+                        <span class="main-btn blue raise" data-btn="next">
+                            <span>Next</span>
+                            <span class="material-icons-outlined"
+                                >arrow_forward</span
+                            >
+                        </span>
+                    </div>
+                </step>
             </div>
 
             <div class="main">
@@ -89,13 +140,19 @@
                     </span>
                 </div>
                 <div class="row">
-                    <span class="main-btn warn raise" id="sc-dir">
+                    <span class="md-btn warn raise" id="sc-dir">
                         <span class="material-icons-outlined">source</span>
                         <span>CAD Directory</span>
                     </span>
-                    <span class="main-btn blue raise" id="sc-gh">
+                </div>
+                <div class="row">
+                    <span class="sm-btn lnk raise" id="sc-gh">
                         <span class="material-icons-outlined">code</span>
-                        <span>Open SnailyCAD Github</span>
+                        <span>SnailyCAD Github</span>
+                    </span>
+                    <span class="sm-btn lnk raise" id="sc-doc">
+                        <span class="material-icons-outlined">description</span>
+                        <span>SnailyCAD Docs</span>
                     </span>
                 </div>
             </div>

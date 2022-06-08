@@ -5,6 +5,10 @@
 
 html {
     background-color: transparent;
+
+    ::selection {
+        background-color: rgba(135, 157, 255, 0.5);
+    }
 }
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

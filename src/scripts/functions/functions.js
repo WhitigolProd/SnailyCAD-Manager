@@ -53,6 +53,10 @@ $(elements.main.buttons.github).on('click', () => {
     cmd(`start ${config.githubURL}`)
 })
 
+$(elements.main.buttons.docs).on('click', () => {
+    cmd(`start ${config.docs}`)
+})
+
 $('#clearCMD').on('click', () => {
     $('.cmd').html('');
     addToOutputStream('Command View Cleared', 'f');

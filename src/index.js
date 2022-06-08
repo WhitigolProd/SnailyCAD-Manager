@@ -32,6 +32,8 @@ const createWindow = () => {
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
+    mainWindow.webContents.executeJavaScript(`localStorage.getItem('cadDir')`).then(value => console.log(value));
+
     // Main Window Functions
     ipc.on('close-app', () => {
         mainWindow.close();

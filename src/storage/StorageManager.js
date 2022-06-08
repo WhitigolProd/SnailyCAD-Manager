@@ -17,11 +17,15 @@ const setStatus = {
 
 // Get Initial Configuration
 let config = {
+    //? URL Reference
     githubURL: 'https://github.com/SnailyCAD/snaily-cadv4',
+    docs: 'https://cad-docs.caspertheghost.me/',
+
+    //? User Storage
     cadDir: localStorage.getItem('cadDir'),
     cadPort: localStorage.getItem('cadPort'),
     cadAPI: localStorage.getItem('cadAPI'),
-    nodeEnv: 'development',
+    nodeEnv: 'production',
     color: localStorage.getItem('color'),
     autoStart: localStorage.getItem('autoStart'),
     openOnStartup: localStorage.getItem('openOnStartup'),
@@ -53,7 +57,7 @@ const setConfig = {
         localStorage.setItem('autoStart', autoStart);
         config.autoStart = autoStart;
     },
-    firstRun: function(firstRun) {
+    firstRun: function (firstRun) {
         localStorage.setItem('firstRun', firstRun);
         config.firstRun = firstRun;
     }
