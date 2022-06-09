@@ -17,8 +17,10 @@
         <title>SnailyCAD v4 - Manager</title>
     </head>
     <body>
+        <!-- Set Background Color (In a DIV for rounded corners) -->
         <div class="bg"></div>
 
+        <!-- Titlebar -->
         <div class="titlebar">
             <div class="title">SnailyCAD v4 Manager</div>
             <div class="buttons">
@@ -30,24 +32,37 @@
                 </div>
             </div>
         </div>
+        <!-- End Titlebar -->
 
         <app>
-            <div class="requirements">
+            <!-- Requirements -->
+            <div class="requirements" style="display: none">
                 <h2>Checking System Requirements</h2>
                 <p>
-                    The manager is checking your system requirements (Required
-                    assets to run SnailyCAD)
+                    The manager is checking your system for required assets to
+                    run SnailyCAD
                 </p>
-                <button aria-busy="true" id="rqLoad" class="secondary" style="background-color: transparent; border-style: none; width: auto; font-size: 30px;"></button>
+                <button
+                    aria-busy="true"
+                    id="rqLoad"
+                    class="secondary"
+                    style="
+                        background-color: transparent;
+                        border-style: none;
+                        width: auto;
+                        font-size: 30px;
+                    "
+                ></button>
             </div>
+            <!-- End Requirements -->
 
+            <!-- Wizard -->
             <div class="wizard" style="display: none">
                 <div class="header">
                     <h1>Setup Wizard</h1>
                     <p data-info>Welcome to the SnailyCAD v4 Setup Wizard!</p>
                 </div>
 
-                <!--  -->
                 <step data-step="start">
                     <div class="inner">
                         <label for="installation"
@@ -119,7 +134,9 @@
                     </div>
                 </step>
             </div>
+            <!-- End Wizard -->
 
+            <!-- Main Display -->
             <div class="main">
                 <span class="status">
                     CAD Status:
@@ -156,7 +173,9 @@
                     </span>
                 </div>
             </div>
+            <!-- End Main Display -->
 
+            <!-- Version Display -->
             <div class="versions">
                 <div id="current">
                     Current (Installed): <span>Not Installed</span>
@@ -165,7 +184,9 @@
                     Latest Release: <span>ERROR</span>
                 </div>
             </div>
+            <!-- End Version Display -->
 
+            <!-- CMD View -->
             <div class="cmd-container">
                 <div class="header">
                     <div class="title"></div>
@@ -173,6 +194,52 @@
                 </div>
                 <div class="cmd"></div>
             </div>
+            <!-- End CMD View -->
+
+            <!-- Settings -->
+            <div class="sm-btn lnk raise settingsBtn" id="openSettings">
+                <span class="material-icons-outlined">settings</span>
+                <span>Settings</span>
+            </div>
+
+            <!-- Settings Display -->
+            <div class="settings-container" style="display: none;">
+                <div class="sm-btn error raise settingsBtn" id="closeSettings">
+                    <span class="material-icons-outlined">close</span>
+                    <span>Close</span>
+                </div>
+                <div class="header">
+                    <h2>Manager Settings</h2>
+                    <span>Change the settings of the manager.</span>
+                </div>
+
+                <label for="set-winStart">
+                    <input
+                        type="checkbox"
+                        id="set-winStart"
+                        name="set-winStart"
+                        role="switch"
+                    />
+                    Open Manager on Windows Start
+                </label>
+
+                <label for="set-cadAuto">
+                    <input
+                        type="checkbox"
+                        id="set-cadAuto"
+                        name="set-cadAuto"
+                        role="switch"
+                    />
+                    Start CAD on Manager Open
+                </label>
+
+                <div class="md-btn blue raise" id="saveSettings">
+                    <span class="material-icons-outlined">save</span>
+                    <span>Save Settings</span>
+                </div>
+            </div>
+            <!-- End Settings Display -->
+            <!-- End Settings -->
         </app>
 
         <scripts>
@@ -183,6 +250,7 @@
             <script src="scripts/VersionHandler.js"></script>
             <script src="scripts/functions/commandline.js"></script>
             <script src="scripts/functions/ipc.js"></script>
+            <script src="storage/SettingsManager.js"></script>
             <script src="scripts/functions/functions.js"></script>
 
             <!-- GITHUB VERSION CHECK -->

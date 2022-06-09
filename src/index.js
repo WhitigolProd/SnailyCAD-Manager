@@ -1,11 +1,21 @@
 const electron = require('electron');
 require('electron-reload');
+const storage = require('electron-localstorage')
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const ipc = ipcMain;
 const { nodeEnv, autoStart, autoOpen } = require('./preload');
 
+// Handle Auto Updating
+if (!require('electron-is-dev')) {
+    const updateServer = `https://sc-updateserver.vercel.app/`
+    const updateURL = `${updateServer}/update/${process.platform}/${app.getVersion()}`
+
+    autoUpdater.setFeedURL({ updateURL })
+}
+
+console.log(app.getVersion())
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) app.quit(); // eslint-disable-line global-require
 
@@ -23,16 +33,15 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true,
-            devTools:
-                require('./storage/config.json').nodeEnv === 'development',
+            devTools: require('electron-is-dev'),
             preload: path.join(__dirname, 'preload.js'),
         },
     });
 
+    // console.log(storage.getItem('cadDir'))
+
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
-    mainWindow.webContents.executeJavaScript(`localStorage.getItem('cadDir')`).then(value => console.log(value));
 
     // Main Window Functions
     ipc.on('close-app', () => {
@@ -46,7 +55,7 @@ const createWindow = () => {
 
 //auto open
 app.setLoginItemSettings({
-    openAtLogin: true,
+    openAtLogin: storage.getItem('openOnStartup'),
 });
 
 // This method will be called when Electron has finished

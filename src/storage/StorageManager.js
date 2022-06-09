@@ -1,19 +1,19 @@
 // Store Download Links to System Requirements
 let links = {
-    node: ``
-}
+    node: ``,
+};
 
 //? Status of CAD (Set Dynamically)
 let st = {
     cad: localStorage.getItem('cadStatus'),
-}
+};
 
 const setStatus = {
     cad: function (status) {
         localStorage.setItem('cadStatus', `${status}`);
         st.cad = `${status}`;
-    }
-}
+    },
+};
 
 // Get Initial Configuration
 let config = {
@@ -60,5 +60,5 @@ const setConfig = {
     firstRun: function (firstRun) {
         localStorage.setItem('firstRun', firstRun);
         config.firstRun = firstRun;
-    }
+    },
 };

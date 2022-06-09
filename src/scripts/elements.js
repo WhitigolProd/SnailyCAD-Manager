@@ -15,7 +15,7 @@ let elements = {
             github: $('#sc-gh'),
             docs: $('#sc-doc'),
         },
-        
+
         status: $('#sc-status'),
 
         cmdoutput: $('.cmd'),

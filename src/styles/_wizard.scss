@@ -56,11 +56,21 @@
             font-weight: normal;
             text-transform: capitalize;
 
-            &[data-status="false"] {
+            &[data-status='false'] {
                 color: red;
+
+                &::after {
+                    content: '(Not Installed)';
+                    margin-left: 5px;
+                }
             }
-            &[data-status="true"] {
+            &[data-status='true'] {
                 color: lime;
+
+                &::after {
+                    content: '(Installed)';
+                    margin-left: 5px;
+                }
             }
         }
     }

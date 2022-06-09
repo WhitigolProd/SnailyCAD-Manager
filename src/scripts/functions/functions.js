@@ -10,7 +10,7 @@ if (st.cad == 'false') {
     $(elements.main.buttons.stop).css('display', 'none');
     $(elements.main.buttons.start).css('display', 'flex');
 } else if (st.cad == 'true') {
-    $(elements.main.status).attr('data-status', 'online')
+    $(elements.main.status).attr('data-status', 'online');
     $(elements.main.buttons.stop).css('display', 'flex');
     $(elements.main.buttons.start).css('display', 'none');
 }
@@ -20,12 +20,11 @@ setInterval(() => {
         $(elements.main.buttons.stop).css('display', 'none');
         $(elements.main.buttons.start).css('display', 'flex');
     } else if (st.cad == 'true') {
-        $(elements.main.status).attr('data-status', 'online')
+        $(elements.main.status).attr('data-status', 'online');
         $(elements.main.buttons.stop).css('display', 'flex');
         $(elements.main.buttons.start).css('display', 'none');
     }
 }, 1000);
-
 
 $(elements.main.buttons.start).on('click', () => {
     spw(
@@ -34,10 +33,8 @@ $(elements.main.buttons.start).on('click', () => {
 });
 
 $(elements.main.buttons.stop).on('click', () => {
-    spw(
-        `npx kill-port ${config.cadPort} && npx kill-port ${config.cadAPI}`
-    )
-})
+    spw(`npx kill-port ${config.cadPort} && npx kill-port ${config.cadAPI}`);
+});
 
 $(elements.main.buttons.update).on('click', () => {
     spw(
@@ -46,16 +43,16 @@ $(elements.main.buttons.update).on('click', () => {
 });
 
 $(elements.main.buttons.dir).on('click', () => {
-    cmd(`start ${config.cadDir}`)
-})
+    cmd(`start ${config.cadDir}`);
+});
 
 $(elements.main.buttons.github).on('click', () => {
-    cmd(`start ${config.githubURL}`)
-})
+    cmd(`start ${config.githubURL}`);
+});
 
 $(elements.main.buttons.docs).on('click', () => {
-    cmd(`start ${config.docs}`)
-})
+    cmd(`start ${config.docs}`);
+});
 
 $('#clearCMD').on('click', () => {
     $('.cmd').html('');
