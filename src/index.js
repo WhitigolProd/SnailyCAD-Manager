@@ -15,7 +15,6 @@ if (!require('electron-is-dev')) {
     autoUpdater.setFeedURL({ updateURL })
 }
 
-console.log(app.getVersion())
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) app.quit(); // eslint-disable-line global-require
 
