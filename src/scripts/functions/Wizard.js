@@ -9,6 +9,12 @@ let wizard = {
         yarn: null,
         psql: null,
     },
+
+    store: {
+        cadDir: null,
+        cadPort: null,
+        cadAPI: null,
+    }
 };
 
 //? Display Requirements when PSQL is available
@@ -113,7 +119,7 @@ $(() => {
             '%cFirst Run - Showing Setup Wizard',
             'background-color: darkorange; padding: 0.5em 1em; font-weight: bold;'
         );
-        $(elements.wizard).show();
+        // $(elements.wizard).show();
     }
     if (config.firstRun == 'false') {
         $(elements.wizard).hide();
@@ -130,6 +136,33 @@ $(`[data-step="start"] [data-btn="next"]`).on('click', () => {
         $(`[data-step="exist"]`).show();
     }
 });
+
+//! New Install Wizard
+// Set Installation Directory
+$(`[data-step="install"] [data-btn="next"]`).on('click', () => {
+    if ($(`#insdir`).val() == ``) {
+        alert(`Installation Directory can not be empty`)
+    } else {
+        wizard.store.cadDir = $('#insdir').val();
+        $(`#insDirDis`).text($(`#insdir`).val())
+
+        $(`[data-step="install"`).hide();
+        $(`[data-step="ins"]`).show();
+    }
+})
+
+//! Existing Install Wizard
+
+
+
+
+
+
+
+
+
+
+
 
 // Wait for PSQL Variable
 function waitFor(variable, callback) {

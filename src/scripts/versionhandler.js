@@ -21,14 +21,12 @@ console.log(app.versions.current)
 function checkUpdates() {
     //Current Version Check
     (function () {
-        if (!config.firstRun) {
-            let user = require('os').userInfo().username;
-            let snailyjson = require(`C:/Users/${user}/Documents/snaily-cadv4/package.json`);
+        let user = require('os').userInfo().username;
+        let snailyjson = require(`C:/Users/${user}/Documents/snaily-cadv4/package.json`);
 
-            elements.versions.current.text(`${snailyjson.version}`);
-            console.log(`Current Version: ${snailyjson.version}`);
-            ver.current = `${snailyjson.version}`;
-        }
+        elements.versions.current.text(`${snailyjson.version}`);
+        console.log(`Current Version: ${snailyjson.version}`);
+        ver.current = `${snailyjson.version}`;
     })();
 
     // Latest Version Check
@@ -47,6 +45,36 @@ function checkUpdates() {
             CompareVersions();
         });
     })();
+
+    // Version Check every 20 seconds.
+    setInterval(() => {
+        //Current Version Check
+        (function () {
+            let user = require('os').userInfo().username;
+            let snailyjson = require(`C:/Users/${user}/Documents/snaily-cadv4/package.json`);
+
+            elements.versions.current.text(`${snailyjson.version}`);
+            console.log(`Current Version: ${snailyjson.version}`);
+            ver.current = `${snailyjson.version}`;
+        })();
+
+        // Latest Version Check
+        (function () {
+            let ghpath = 'SnailyCAD/snaily-cadv4';
+            let api = `https://api.github.com/repos/${ghpath}/tags`;
+
+            $.get(api).done(function (data) {
+                var versions = data.sort(function (v1, v2) {
+                    return semver.compare(v2.name, v1.name);
+                });
+                console.log(`Latest Version: ${versions[0].name}`);
+                elements.versions.latest.text(versions[0].name);
+                ver.latest = `${versions[0].name}`;
+
+                CompareVersions();
+            });
+        })();
+    }, 20000)
 
     // Compare Versions
     function CompareVersions() {
@@ -71,5 +99,7 @@ function checkUpdates() {
             );
         }
         HandleUpdateButton();
+
+        $(`#loadScreen`).fadeOut();
     }
 }

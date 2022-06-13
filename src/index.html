@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,7 +14,7 @@
             rel="stylesheet"
             href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
         />
-        <title>SnailyCAD v4 - Manager</title>
+        <title>SnailyCAD - Manager</title>
     </head>
     <body>
         <!-- Set Background Color (In a DIV for rounded corners) -->
@@ -22,7 +22,7 @@
 
         <!-- Titlebar -->
         <div class="titlebar">
-            <div class="title">SnailyCAD v4 Manager</div>
+            <div class="title">SnailyCAD Manager</div>
             <div class="buttons">
                 <div class="btn" id="app-minimize">
                     <span class="material-icons-outlined">remove</span>
@@ -60,7 +60,7 @@
             <div class="wizard" style="display: none">
                 <div class="header">
                     <h1>Setup Wizard</h1>
-                    <p data-info>Welcome to the SnailyCAD v4 Setup Wizard!</p>
+                    <p data-info>Welcome to the SnailyCAD Setup Wizard!</p>
                 </div>
 
                 <step data-step="start">
@@ -90,13 +90,19 @@
 
                 <step data-step="install" style="display: none">
                     <div class="inner">
-                        <label for="installdir"
-                            >Select a directory for installation.
+                        <label for="insdir">
+                            Input Installation Directory
+                            <span
+                                >(e.g.<code>C:/Users/Username/Documents</code>)<br />The
+                                <code>snaily-cadv4</code> folder will be added
+                                upon installation.</span
+                            >
                             <input
-                                type="file"
-                                id="installdir"
-                                name="installdir"
-                                webkitdirectory
+                                type="text"
+                                id="insdir"
+                                name="insdir"
+                                placeholder="Instllation Direcotry"
+                                required
                             />
                         </label>
                     </div>
@@ -111,6 +117,33 @@
                     </div>
                 </step>
 
+                <!-- Install -->
+                <step data-step="ins" style="display: none">
+                    <div class="inner">
+                        <h2>Ready to install!</h2>
+                        <span
+                            >Installation Directory:
+                            <code id="insDirDis"></code></span
+                        ><br />
+                        <span style="color: orange; font-weight: bolder"
+                            >If your installation directory is NOT in proper
+                            format, your installation will fail *WITHOUT A
+                            DISPLAYED ERROR*</span
+                        >
+                    </div>
+
+                    <div class="buttons">
+                        <span class="main-btn success raise" data-btn="next">
+                            <span>Start Installation</span>
+                            <span class="material-icons-outlined"
+                                >download</span
+                            >
+                        </span>
+                    </div>
+                </step>
+                <!--  -->
+
+                <!-- Existing Installation -->
                 <step data-step="exist" style="display: none">
                     <div class="inner">
                         <label for="existdir"
@@ -133,6 +166,7 @@
                         </span>
                     </div>
                 </step>
+                <!--  -->
             </div>
             <!-- End Wizard -->
 
@@ -203,43 +237,53 @@
             </div>
 
             <!-- Settings Display -->
-            <div class="settings-container" style="display: none;">
+            <div class="settings-container" style="display: none">
                 <div class="sm-btn error raise settingsBtn" id="closeSettings">
                     <span class="material-icons-outlined">close</span>
                     <span>Close</span>
                 </div>
                 <div class="header">
-                    <h2>Manager Settings</h2>
-                    <span>Change the settings of the manager.</span>
+                    <h2>SnailyCAD Settings</h2>
+                    <span style="color: orange; margin-top: 10px"
+                        >Required Values must be updated before starting
+                        SnailyCAD!</span
+                    >
                 </div>
 
-                <label for="set-winStart">
-                    <input
-                        type="checkbox"
-                        id="set-winStart"
-                        name="set-winStart"
-                        role="switch"
-                    />
-                    Open Manager on Windows Start
-                </label>
+                <div class="row">
+                    <div class="main-btn blue raise" id="editEnv">
+                        <span class="material-icons-outlined">edit</span>
+                        <span>Edit <code>.env</code> file</span>
+                    </div>
+                </div>
 
-                <label for="set-cadAuto">
-                    <input
-                        type="checkbox"
-                        id="set-cadAuto"
-                        name="set-cadAuto"
-                        role="switch"
-                    />
-                    Start CAD on Manager Open
-                </label>
+                <div class="row">
+                    <div class="main-btn error raise" id="editEnv">
+                        <span class="material-icons-outlined">close</span>
+                        <span>Delete SnailyCAD</span>
+                    </div>
+                </div>
 
-                <div class="md-btn blue raise" id="saveSettings">
+                <!-- <div class="md-btn blue raise" id="saveSettings">
                     <span class="material-icons-outlined">save</span>
                     <span>Save Settings</span>
-                </div>
+                </div> -->
             </div>
             <!-- End Settings Display -->
             <!-- End Settings -->
+
+            <!-- Loading Screen -->
+            <load id="loadScreen" style="padding: 30px">
+                <h1>Loading</h1>
+                <progress id="loadProgress"></progress>
+                <script>
+                    document.getElementById(
+                        'loadProgress'
+                    ).indeterminate = true;
+                </script>
+                <span>SnailyCAD Manager is loading...</span>
+            </load>
+            <!--  -->
         </app>
 
         <scripts>
@@ -248,6 +292,7 @@
             <script src="scripts/elements.js"></script>
             <script src="scripts/functions/Wizard.js"></script>
             <script src="scripts/VersionHandler.js"></script>
+            <script src="scripts/functions/cad/envHandler.js"></script>
             <script src="scripts/functions/commandline.js"></script>
             <script src="scripts/functions/ipc.js"></script>
             <script src="storage/SettingsManager.js"></script>

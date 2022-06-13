@@ -1,8 +1,13 @@
+@import './vars';
 @import './titlbar';
 @import './buttons';
 @import './cmd';
 @import './wizard';
 @import './settings';
+
+* {
+    transition: font-size 200ms ease-in-out;
+}
 
 html {
     background-color: transparent;
@@ -20,6 +25,12 @@ body {
     min-height: 100vh;
     background-color: transparent;
     border-radius: 15px;
+    color-scheme: dark;
+    user-select: none;
+
+    code {
+        user-select: text;
+    }
 }
 
 app {
@@ -31,7 +42,7 @@ app {
 }
 
 .bg {
-    background-color: #2c2f33;
+    background-color: $mainBG;
     border-radius: 15px;
     min-height: 100vh;
     min-width: 100vw;
@@ -90,5 +101,27 @@ app {
         &:first-child {
             margin: 0;
         }
+    }
+}
+
+load {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000000000;
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $mainBG;
+
+    h1 {
+        margin: 0;
+    }
+
+    button {
+        margin: 0;
+        font-size: 50px !important;
     }
 }

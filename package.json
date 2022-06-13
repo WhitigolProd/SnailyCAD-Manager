@@ -3,7 +3,7 @@
     "productName": "SnailyCAD v4 - Manager",
     "version": "1.0.0",
     "icon": "public/img/icon.png",
-    "description": "SnailyCAD v4 - Manager | Manager app for SnailyCAD v4 | Made by Whitigol",
+    "description": "SnailyCAD - Manager | Manager app for SnailyCAD v4 | Made by Whitigol",
     "main": "src/index.js",
     "scripts": {
         "start": "electron-forge start",
