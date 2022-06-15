@@ -1,6 +1,6 @@
 function HandleUpdateButton() {
     if (ver.current != ver.latest) {
-        elements.main.buttons.update.css('display', 'block');
+        elements.main.buttons.update.show();
     }
 }
 
@@ -46,12 +46,16 @@ $(elements.main.buttons.dir).on('click', () => {
     cmd(`start ${config.cadDir}`);
 });
 
+$(`#mg-docs`).on('click', () => {
+    cmd(`start ${app.links.manager.docs}`)
+})
+
 $(elements.main.buttons.github).on('click', () => {
-    cmd(`start ${config.githubURL}`);
+    cmd(`start ${app.links.cad.github}`);
 });
 
 $(elements.main.buttons.docs).on('click', () => {
-    cmd(`start ${config.docs}`);
+    cmd(`start ${app.links.cad.docs}`);
 });
 
 $('#clearCMD').on('click', () => {

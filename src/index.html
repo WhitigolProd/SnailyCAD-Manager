@@ -22,7 +22,9 @@
 
         <!-- Titlebar -->
         <div class="titlebar">
-            <div class="title">SnailyCAD Manager</div>
+            <div class="title">
+                SnailyCAD Manager <span id="titleAlt"></span>
+            </div>
             <div class="buttons">
                 <div class="btn" id="app-minimize">
                     <span class="material-icons-outlined">remove</span>
@@ -36,7 +38,7 @@
 
         <app>
             <!-- Requirements -->
-            <div class="requirements" style="display: none">
+            <div class="requirements">
                 <h2>Checking System Requirements</h2>
                 <p>
                     The manager is checking your system for required assets to
@@ -95,8 +97,8 @@
                             <span
                                 >(e.g.<code>C:/Users/Username/Documents</code>)<br />The
                                 <code>snaily-cadv4</code> folder will be added
-                                upon installation.</span
-                            >
+                                upon installation.
+                            </span>
                             <input
                                 type="text"
                                 id="insdir"
@@ -104,6 +106,14 @@
                                 placeholder="Instllation Direcotry"
                                 required
                             />
+                            <span style="color: rgba(255, 166, 0, 0.75)"
+                                >Do NOT include
+                                <code
+                                    style="color: var(--code-color); opacity: 1"
+                                    >snaily-cadv4</code
+                                >
+                                inside the installation directory.</span
+                            >
                         </label>
                     </div>
 
@@ -197,6 +207,10 @@
                     </span>
                 </div>
                 <div class="row">
+                    <span class="sm-btn lnk raise" id="mg-docs">
+                        <span class="material-icons-outlined">summarize</span>
+                        <span>Manager Docs</span>
+                    </span>
                     <span class="sm-btn lnk raise" id="sc-gh">
                         <span class="material-icons-outlined">code</span>
                         <span>SnailyCAD Github</span>
@@ -212,7 +226,7 @@
             <!-- Version Display -->
             <div class="versions">
                 <div id="current">
-                    Current (Installed): <span>Not Installed</span>
+                    SnailyCAD Version: <span>Not Installed</span>
                 </div>
                 <div id="latest" style="display: none">
                     Latest Release: <span>ERROR</span>
@@ -284,17 +298,39 @@
                 <span>SnailyCAD Manager is loading...</span>
             </load>
             <!--  -->
+
+            <update>
+                <h2>Update Available</h2>
+                <p>There's an update available for SnailyCAD Manager</p>
+
+                <div class="row">
+                    <div class="main-btn blue raise" id="appUpdate">
+                        <span class="material-icons-outlined">update</span>
+                        <span>Update Now</span>
+                    </div>
+
+                    <div class="main-btn warn raise" id="noUpdate">
+                        <span class="material-icons-outlined"
+                            >do_not_touch</span
+                        >
+                        <span>Not Now</span>
+                    </div>
+                </div>
+            </update>
+            <hidden>
+                <a href="./cmd.html" target="_blank" id="hidden-cmd">Test</a>
+            </hidden>
         </app>
 
         <scripts>
             <script src="scripts/script.js"></script>
-            <script src="storage/StorageManager.js"></script>
             <script src="scripts/elements.js"></script>
+            <script src="scripts/functions/ipc.js"></script>
+            <script src="storage/StorageManager.js"></script>
             <script src="scripts/functions/Wizard.js"></script>
             <script src="scripts/VersionHandler.js"></script>
             <script src="scripts/functions/cad/envHandler.js"></script>
             <script src="scripts/functions/commandline.js"></script>
-            <script src="scripts/functions/ipc.js"></script>
             <script src="storage/SettingsManager.js"></script>
             <script src="scripts/functions/functions.js"></script>
 

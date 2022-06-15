@@ -1,5 +1,5 @@
 $(`#editEnv`).on('click', () => {
-    exec(`notepad ${config.cadDir}/.env`, (error, stdout, stderr) => {
+    exec(`code ${config.cadDir}/.env || notepad ${config.cadDir}/.env`, (error, stdout, stderr) => {
         if (stderr) {
             console.log(stderr);
         } else if (stdout) {

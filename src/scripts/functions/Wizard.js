@@ -52,6 +52,15 @@ $(() => {
             $('.requirements').append(
                 `<span style="color: orange;">Please install the required assets, then restart the app to continue.</span>`
             );
+            $(`.requirements`).append(
+                `<div style="margin-top: 10px;"
+                class="sm-btn blue raise"
+                onclick="window.location.reload();"
+            >
+                <span class="material-icons-outlined">refresh</span>
+                <span>Restart</span>
+            </div>`
+            )
             $('#rqLoad').hide();
         } else {
             $('.requirements').hide();
@@ -61,7 +70,7 @@ $(() => {
 
 $(function requirements() {
     // GIT
-    rqm('node')
+    rqm('git')
         .then((command) => {
             wizard.requirements.git = true;
         })
@@ -114,12 +123,12 @@ $(function requirements() {
 });
 
 $(() => {
-    if (!config.firstRun || true) {
+    if (!config.firstRun || config.firstRun == 'true') {
         console.log(
             '%cFirst Run - Showing Setup Wizard',
             'background-color: darkorange; padding: 0.5em 1em; font-weight: bold;'
         );
-        // $(elements.wizard).show();
+        $(elements.wizard).show();
     }
     if (config.firstRun == 'false') {
         $(elements.wizard).hide();
@@ -142,13 +151,22 @@ $(`[data-step="start"] [data-btn="next"]`).on('click', () => {
 $(`[data-step="install"] [data-btn="next"]`).on('click', () => {
     if ($(`#insdir`).val() == ``) {
         alert(`Installation Directory can not be empty`)
-    } else {
+    }
+    if ($(`#insdir`).val().indexOf('/') == -1) {
+        alert(`The directory input is invalid`)
+    }
+    else {
         wizard.store.cadDir = $('#insdir').val();
         $(`#insDirDis`).text($(`#insdir`).val())
 
         $(`[data-step="install"`).hide();
         $(`[data-step="ins"]`).show();
     }
+})
+
+// Installation
+$(`[data-step="ins"] [data-btn="next"]`).on('click', () => {
+    
 })
 
 //! Existing Install Wizard

@@ -10,5 +10,6 @@ const uuid = os.userInfo().username;
 // On Load
 $(function () {
     checkUpdates();
+    selfUpdate();
     $('scripts').remove(); //? Remove Scripts Tag
 });

@@ -1,6 +1,5 @@
 const electron = require('electron');
 require('electron-reload');
-const storage = require('electron-localstorage')
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
@@ -27,6 +26,7 @@ const createWindow = () => {
         minHeight: 500,
         transparent: true,
         titleBarStyle: 'hidden',
+        frame: false,
         icon: path.join(__dirname, 'img/icon.png'),
         webPreferences: {
             nodeIntegration: true,
@@ -36,8 +36,6 @@ const createWindow = () => {
             preload: path.join(__dirname, 'preload.js'),
         },
     });
-
-    // console.log(storage.getItem('cadDir'))
 
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
@@ -51,11 +49,6 @@ const createWindow = () => {
         mainWindow.minimize();
     });
 };
-
-//auto open
-app.setLoginItemSettings({
-    openAtLogin: storage.getItem('openOnStartup'),
-});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

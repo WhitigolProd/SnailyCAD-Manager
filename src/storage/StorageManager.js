@@ -3,6 +3,23 @@ let links = {
     node: ``,
 };
 
+let app = {
+    versions: {
+        current: '1.0.0', // Must be set before releasing each update.
+        latest: null, // Sets Dynamically
+    },
+    links: {
+        manager: {
+            docs: `https://cad-manager.cossys.tk/`,
+            download: `https://github.com/WhitigolProd/SnailyCAD-Manager/releases/latest`,
+        },
+        cad: {
+            github: 'https://github.com/SnailyCAD/snaily-cadv4',
+            docs: 'https://cad-docs.caspertheghost.me/',
+        }
+    }
+};
+
 //? Status of CAD (Set Dynamically)
 let st = {
     cad: localStorage.getItem('cadStatus'),
@@ -17,10 +34,6 @@ const setStatus = {
 
 // Get Initial Configuration
 let config = {
-    //? URL Reference
-    githubURL: 'https://github.com/SnailyCAD/snaily-cadv4',
-    docs: 'https://cad-docs.caspertheghost.me/',
-
     //? User Storage
     cadDir: localStorage.getItem('cadDir'),
     cadPort: localStorage.getItem('cadPort'),

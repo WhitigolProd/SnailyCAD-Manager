@@ -1,7 +1,7 @@
 {
     "name": "scv4-manager",
     "productName": "SnailyCAD v4 - Manager",
-    "version": "1.0.0",
+    "version": "0",
     "icon": "public/img/icon.png",
     "description": "SnailyCAD - Manager | Manager app for SnailyCAD v4 | Made by Whitigol",
     "main": "src/index.js",
@@ -48,7 +48,6 @@
     },
     "dependencies": {
         "command-exists": "^1.2.9",
-        "electron-localstorage": "^1.0.5",
         "electron-squirrel-startup": "^1.0.0",
         "jquery": "^3.6.0",
         "kill-port": "^2.0.0",
