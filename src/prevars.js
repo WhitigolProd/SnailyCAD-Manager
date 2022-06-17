@@ -1,3 +1,9 @@
+// Add Powershell Support - DO NOT TOUCH THIS SECTION
+const { exec, spawn } = require('child_process');
+const os = require('os');
+const uuid = os.userInfo().username;
+const fs = require('fs');
+
 // Store Download Links to System Requirements
 let links = {
     node: ``,

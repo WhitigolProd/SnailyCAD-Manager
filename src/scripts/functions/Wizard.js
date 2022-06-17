@@ -1,4 +1,3 @@
-const commandExists = require('command-exists');
 const rqm = require('command-exists');
 
 //? Wizard Storage
@@ -17,20 +16,9 @@ let wizard = {
     }
 };
 
-//? Display Requirements when PSQL is available
-$(() => {
-    function ensurePSQLisFound(timeout) {
-        var start = Date.now();
-        return new Promise(waitForFoo);
-
-        function waitForFoo(resolve, reject) {
-            if (wizard.requirements.psql) resolve(wizard.requirements.psql);
-            else if (timeout && Date.now() - start >= timeout)
-                reject(new Error('timeout'));
-            else setTimeout(waitForFoo.bind(this, resolve, reject), 30);
-        }
-    }
-    ensurePSQLisFound(1000000).then(function () {
+//? Verify Requirements
+function verifyReq() {
+    (function () {
         if (
             !wizard.requirements.git ||
             !wizard.requirements.node ||
@@ -66,9 +54,9 @@ $(() => {
             $('.requirements').hide();
         }
     });
-});
+};
 
-$(function requirements() {
+function requirements() {
     // GIT
     rqm('git')
         .then((command) => {
@@ -103,34 +91,21 @@ $(function requirements() {
         });
 
     // PostgreSQL (Requires pgAdmin)
-    $(() => {
-        exec(
-            `where -r C:\\Users\\%username%\\AppData\\Roaming\\ pgadmin4.*`,
-            (err, stdout, stderr) => {
-                if (err) {
-                    log.add(err);
-                    wizard.requirements.psql = false;
-                    log.add(`Req: PSQL (pgAdmin) Failed`, 1);
-                }
-                if (stderr) {
-                    log.add(stderr);
-                    wizard.requirements.psql = false;
-                    log.add(`Req: PSQL (pgAdmin) Failed`, 1);
-                }
-                if (stdout) {
-                    log.add(stdout);
-                    if (stdout.indexOf('pgadmin4.') >= 0) {
-                        wizard.requirements.psql = true;
-                        log.add(`Req: PSQL (pgAdmin) Passed`, 0);
-                    } else {
-                        wizard.requirements.psql = false;
-                        log.add(`Req: PSQL (pgAdmin) Failed`, 1);
-                    }
-                }
-            }
-        );
-    });
-});
+    try {
+        if (fs.existsSync(`C:\\Users\\${uuid}\\AppData\\Roaming\\pgadmin\\pgadmin4.log`)) {
+            wizard.requirements.psql = true;
+            log.add(`Req: PSQL Passed`, 0)
+        }
+        else {
+            wizard.requirements.psql = false;
+            log.add(`Req: PSQL Failed`, 1)
+        }
+    } catch (err) {
+        console.error(err)
+    }
+
+    waitForRequirements();
+};
 
 $(() => {
     if (!config.firstRun || config.firstRun == 'true') {
@@ -203,16 +178,6 @@ $(`[data-step="ins"] [data-btn="next"]`).on('click', () => {
 
 
 
-// Wait for PSQL Variable
-function waitFor(variable, callback) {
-    var interval = setInterval(function () {
-        if (window[variable]) {
-            clearInterval(interval);
-            callback();
-        }
-    }, 200);
-}
-
 
 function wz(cmd, wd) {
     let command = spawn(cmd, [], { cwd: `${wd}`, shell: true });
@@ -228,3 +193,13 @@ function wz(cmd, wd) {
         log.add(stderr.toString(), 1);
     });
 }
+
+// Wait for requirements to be checked
+function waitForRequirements() {
+    if (wizard.requirements.git != null && wizard.requirements.node != null && wizard.requirements.psql != null && wizard.requirements.yarn != null) {
+        verifyReq();
+    }
+    else {
+        setTimeout(waitForRequirements, 250);
+    }
+};
