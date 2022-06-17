@@ -3,15 +3,28 @@ let mSettings = {
     cadAuto: localStorage.getItem('s-cadAuto') || null,
 };
 
-$(`#saveSettings`).on(`click`, () => {
-    alert(`
-    Settings have been saved!\n
-    Open on Windows Start: ${$('#set-winStart').is(':checked')}\n
-    Auto Start CAD: ${$('#set-cadAuto').is(':checked')}
-    `);
-});
 
-$(() => {});
+// Handle Keyboard Shortcuts
+$(document).on('keydown', (e) => {
+    // Show Log
+    if (e.ctrlKey && (e.key == 'l')) {
+        if ($(`log`).is(':visible')) {
+            $(`log`).fadeOut();
+        }
+        else {
+            $(`log`).fadeIn();
+        }
+    }
+
+    if (e.ctrlKey && (e.key == 's')) {
+        if ($(`.settings-container`).is(':visible')) {
+            $(`settings-container`).fadeOut();
+        }
+        else {
+            $(`.settings-container`).fadeIn();
+        }
+    }
+})
 
 
 

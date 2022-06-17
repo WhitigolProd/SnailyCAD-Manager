@@ -1,3 +1,54 @@
+log {
+  position: absolute;
+  inset: 0;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  overflow-y: scroll;
+  border-radius: 0 0 15px 15px;
+  padding: 25px 15px 15px 15px;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+log out {
+  color: white;
+  font-size: 15px;
+  font-family: 'Consolas', 'Courier New', monospace;
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+  margin-bottom: 5px;
+}
+
+log out::before {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: rgba(255, 255, 255, 0.5);
+  content: 'LOG> ';
+}
+
+log out:last-child {
+  margin-bottom: 0;
+}
+
+log #closeLog {
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+
 .titlebar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -290,6 +341,48 @@
 
 #sc-update {
   display: none;
+}
+
+.reportProblem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 12px !important;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1000000;
+  cursor: pointer;
+  -webkit-transition: color 100ms ease-in-out;
+  transition: color 100ms ease-in-out;
+}
+
+.reportProblem > * {
+  margin-right: 5px;
+}
+
+.reportProblem :last-child {
+  margin-right: 0;
+}
+
+.reportProblem .material-icons-outlined {
+  font-size: 12px !important;
+}
+
+.reportProblem:hover {
+  color: #007bff;
+}
+
+[aria-disabled='true'],
+[disabled] {
+  border-color: gray !important;
+  opacity: 0.1 !important;
 }
 
 .cmd-container {
@@ -608,6 +701,7 @@ app {
   width: 50vw;
   bottom: 10px;
   left: 10px;
+  font-size: 12px !important;
   font-weight: bold;
 }
 
@@ -692,6 +786,7 @@ load {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border-radius: 0 0 15px 15px;
   z-index: 3;
   position: absolute;
   inset: 0;

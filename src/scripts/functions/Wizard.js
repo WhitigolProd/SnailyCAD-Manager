@@ -73,27 +73,33 @@ $(function requirements() {
     rqm('git')
         .then((command) => {
             wizard.requirements.git = true;
+            log.add(`Req: GIT Passed`, 0);
         })
         .catch(() => {
             wizard.requirements.git = false;
+            log.add(`Req: GIT Failed`, 1);
         });
 
     // Node
     rqm('node')
         .then(function (command) {
             wizard.requirements.node = true;
+            log.add(`Req: NODE Passed`, 0);
         })
         .catch(() => {
             wizard.requirements.node = false;
+            log.add(`Req: NODE Failed`, 1);
         });
 
     // Yarn
     rqm('yarn')
         .then((command) => {
             wizard.requirements.yarn = true;
+            log.add(`Req: YARN Passed`, 0);
         })
         .catch(() => {
             wizard.requirements.yarn = false;
+            log.add(`Req: YARN Failed`, 1);
         });
 
     // PostgreSQL (Requires pgAdmin)
@@ -102,19 +108,23 @@ $(function requirements() {
             `where -r C:\\Users\\%username%\\AppData\\Roaming\\ pgadmin4.*`,
             (err, stdout, stderr) => {
                 if (err) {
-                    console.log(err);
+                    log.add(err);
                     wizard.requirements.psql = false;
+                    log.add(`Req: PSQL (pgAdmin) Failed`, 1);
                 }
                 if (stderr) {
-                    console.log(stderr);
+                    log.add(stderr);
                     wizard.requirements.psql = false;
+                    log.add(`Req: PSQL (pgAdmin) Failed`, 1);
                 }
                 if (stdout) {
-                    console.log(stdout);
+                    log.add(stdout);
                     if (stdout.indexOf('pgadmin4.') >= 0) {
                         wizard.requirements.psql = true;
+                        log.add(`Req: PSQL (pgAdmin) Passed`, 0);
                     } else {
                         wizard.requirements.psql = false;
+                        log.add(`Req: PSQL (pgAdmin) Failed`, 1);
                     }
                 }
             }
@@ -124,7 +134,7 @@ $(function requirements() {
 
 $(() => {
     if (!config.firstRun || config.firstRun == 'true') {
-        console.log(
+        log.add(
             '%cFirst Run - Showing Setup Wizard',
             'background-color: darkorange; padding: 0.5em 1em; font-weight: bold;'
         );
@@ -152,8 +162,13 @@ $(`[data-step="install"] [data-btn="next"]`).on('click', () => {
     if ($(`#insdir`).val() == ``) {
         alert(`Installation Directory can not be empty`)
     }
-    if ($(`#insdir`).val().indexOf('/') == -1) {
-        alert(`The directory input is invalid`)
+    if ($(`#insdir`).val().indexOf('/') == -1 || $(`#insdir`).val().indexOf(';') >= 0) {
+        alert(`
+        The directory input is invalid\n
+        • Make sure you have not accidentally included a semi-colon in your directory\n
+        • Make sure your directory points to a Folder inside a Drive, and not just a Drive Directory\n
+          (Can NOT be directly in the C:/ Drive!)
+        `)
     }
     else {
         wizard.store.cadDir = $('#insdir').val();
@@ -166,7 +181,13 @@ $(`[data-step="install"] [data-btn="next"]`).on('click', () => {
 
 // Installation
 $(`[data-step="ins"] [data-btn="next"]`).on('click', () => {
-    
+    $(`[data-step="ins"] .inner h2`).hide();
+    $(`[data-step="ins"] [data-btn="next"]`).hide();
+    $(`[data-step="ins"] .inner #insinfo`).hide();
+    $(`[data-step="ins"] .inner`).append(`<p aria-busy="true">Installation In Progress - Installing to <code>${wizard.store.cadDir}</code></p>`)
+    $(`[data-step="ins"] .inner`).append(`<p><b>DO NOT</b> close or restart the app while the installation is in progress.</p>`)
+    $(`[data-step="ins"] .inner`).append(`<p>The manager will reset once installation is complete. View the log output by pressing <code>CTRL</code> + <code>L</code>.</p>`)
+    wz(`git clone https://github.com/SnailyCAD/snaily-cadv4.git && cd snaily-cadv4 && yarn && copy .env.example .env`, wizard.store.cadDir);
 })
 
 //! Existing Install Wizard
@@ -190,4 +211,20 @@ function waitFor(variable, callback) {
             callback();
         }
     }, 200);
+}
+
+
+function wz(cmd, wd) {
+    let command = spawn(cmd, [], { cwd: `${wd}`, shell: true });
+
+    command.stdout.on('data', (stdout) => {
+        log.add(stdout.toString(), 0);
+        if (stdout.toString().indexOf('1 file(s) copied.') >= 0) {
+            console.log('1 file(s) copied')
+        }
+    });
+
+    command.stderr.on('data', (stderr) => {
+        log.add(stderr.toString(), 1);
+    });
 }

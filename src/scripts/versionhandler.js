@@ -66,7 +66,7 @@ function checkUpdates() {
             elements.versions.current
                 .css('color', '#ffa600')
                 .append(` (Update <u>${ver.latest}</u> Available)`);
-            console.log(
+            log.add(
                 `%cVersion Mismatch - Update Available`,
                 `background: red; font-weight: bold; padding: 2px 5px;`
             );
@@ -74,7 +74,7 @@ function checkUpdates() {
             elements.versions.current
                 .css('color', 'lime')
                 .append(' (Up to Date)');
-            console.log(
+            log.add(
                 `%cVersion Match - No Updates Available`,
                 `background: green; font-weight: bold; padding: 2px 5px;`
             );
@@ -105,19 +105,36 @@ function selfUpdate() {
             });
         })();
 
-        if (app.versions.latest > app.versions.current) {
+        if (app.versions.latest > app.versions.current && !app.versions.skipUpdate) {
             $(`update`).show();
             $(`#titleAlt`).html(`&nbsp;<span style="color: orange;">(Update ${app.versions.latest} Available)</span>`)
+        } if (app.versions.latest > app.versions.current) {
+            $(`#mVer span`).html(`<span style="color: orange;">${app.versions.current} (${app.versions.latest} Available)</span>`)
         } else {
             $(`update`).hide();
+            $(`#mVer span`).html(`<span style="color: lime;">${app.versions.current} (Up to Date)</span>`)
         }
     }, 1000)
 }
 
-$(`#noUpdate`).on(`click`, () => {
-    $(`update`).hide();
-})
 
-$(`#appUpdate`).on(`click`, () => {
-    control.app.minimize();
-})
+function updateApp(cmd, wd) {
+    let command = spawn(cmd, [], { cwd: `${wd}`, shell: true });
+
+    command.stdout.on('data', (stdout) => {
+        log.add(`${stdout.toString()}`, 0);
+        if (stdout.toString().indexOf('File(s) copied') >= 0) {
+            log.add(`${stdout.toString()}`, 0);
+            ipc.send(`hard-restart`)
+        }
+        if (stdout.toString().indexOf('running with version') >= 0) {
+            addToOutputStream('CAD Connection Started Successfully', 'g');
+            setStatus.cad(true);
+        }
+    });
+
+    command.stderr.on('data', (stderr) => {
+        addToOutputStream(stderr.toString(), 'b');
+        log.add(stderr.toString());
+    });
+}

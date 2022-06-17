@@ -172,3 +172,38 @@ $lnk: lightblue;
 #sc-update {
     display: none;
 }
+
+.reportProblem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px !important;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 1000000;
+    cursor: pointer;
+    transition: color 100ms ease-in-out;
+
+    > * {
+        margin-right: 5px;
+    }
+
+    :last-child {
+        margin-right: 0;
+    }
+
+    .material-icons-outlined {
+        font-size: 12px !important;
+    }
+
+    &:hover {
+        color: rgb(0, 123, 255);
+    }
+}
+
+[aria-disabled='true'],
+[disabled] {
+    border-color: gray !important;
+    opacity: 0.1 !important;
+}

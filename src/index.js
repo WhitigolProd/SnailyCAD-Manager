@@ -1,18 +1,10 @@
+const { exec } = require('child_process');
 const electron = require('electron');
 require('electron-reload');
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const ipc = ipcMain;
-const { nodeEnv, autoStart, autoOpen } = require('./preload');
-
-// Handle Auto Updating
-if (!require('electron-is-dev')) {
-    const updateServer = `https://sc-updateserver.vercel.app/`
-    const updateURL = `${updateServer}/update/${process.platform}/${app.getVersion()}`
-
-    autoUpdater.setFeedURL({ updateURL })
-}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) app.quit(); // eslint-disable-line global-require
@@ -33,7 +25,6 @@ const createWindow = () => {
             contextIsolation: false,
             enableRemoteModule: true,
             devTools: require('electron-is-dev'),
-            preload: path.join(__dirname, 'preload.js'),
         },
     });
 
@@ -48,6 +39,11 @@ const createWindow = () => {
     ipc.on('minimize-app', () => {
         mainWindow.minimize();
     });
+
+    ipc.on('hard-restart', () => {
+        app.relaunch({ args: process.argv.slice(1).concat(['--relaunch']) })
+        app.exit(0)
+    })
 };
 
 // This method will be called when Electron has finished
@@ -74,3 +70,6 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+
+// This is a note that should only be added to the downloaded update

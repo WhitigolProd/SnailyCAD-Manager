@@ -37,6 +37,12 @@
         <!-- End Titlebar -->
 
         <app>
+            <!-- Problem Report Button -->
+            <span class="reportProblem">
+                <span class="material-icons-outlined">help</span>
+                <span>Report Problem</span>
+            </span>
+
             <!-- Requirements -->
             <div class="requirements">
                 <h2>Checking System Requirements</h2>
@@ -103,7 +109,7 @@
                                 type="text"
                                 id="insdir"
                                 name="insdir"
-                                placeholder="Instllation Direcotry"
+                                placeholder="Installation Directory"
                                 required
                             />
                             <span style="color: rgba(255, 166, 0, 0.75)"
@@ -131,15 +137,17 @@
                 <step data-step="ins" style="display: none">
                     <div class="inner">
                         <h2>Ready to install!</h2>
-                        <span
-                            >Installation Directory:
-                            <code id="insDirDis"></code></span
-                        ><br />
-                        <span style="color: orange; font-weight: bolder"
-                            >If your installation directory is NOT in proper
-                            format, your installation will fail *WITHOUT A
-                            DISPLAYED ERROR*</span
-                        >
+                        <div id="insinfo">
+                            <span
+                                >Installation Directory:
+                                <code id="insDirDis"></code></span
+                            ><br />
+                            <span style="color: orange; font-weight: bolder"
+                                >If your installation directory is NOT in proper
+                                format, your installation will fail *WITHOUT A
+                                DISPLAYED ERROR*</span
+                            >
+                        </div>
                     </div>
 
                     <div class="buttons">
@@ -156,13 +164,17 @@
                 <!-- Existing Installation -->
                 <step data-step="exist" style="display: none">
                     <div class="inner">
-                        <label for="existdir"
-                            >Select your SnailyCAD Directory
+                        <label for="existdir">
+                            Input Existing Installation Directory
+                            <span
+                                >(e.g.<code>C:/Users/Username/Documents/snaily-cadv4</code>)
+                            </span>
                             <input
-                                type="file"
-                                webkitdirectory
+                                type="text"
                                 id="existdir"
                                 name="existdir"
+                                placeholder="Existing Installation Directory"
+                                required
                             />
                         </label>
                     </div>
@@ -228,9 +240,7 @@
                 <div id="current">
                     SnailyCAD Version: <span>Not Installed</span>
                 </div>
-                <div id="latest" style="display: none">
-                    Latest Release: <span>ERROR</span>
-                </div>
+                <div id="mVer">Manager Version: <span>ERROR</span></div>
             </div>
             <!-- End Version Display -->
 
@@ -258,9 +268,8 @@
                 </div>
                 <div class="header">
                     <h2>SnailyCAD Settings</h2>
-                    <span style="color: orange; margin-top: 10px"
-                        >Required Values must be updated before starting
-                        SnailyCAD!</span
+                    <span style="margin-top: 10px"
+                        >Manage your SnailyCAD Manager settings!</span
                     >
                 </div>
 
@@ -272,9 +281,9 @@
                 </div>
 
                 <div class="row">
-                    <div class="main-btn error raise" id="editEnv">
-                        <span class="material-icons-outlined">close</span>
-                        <span>Delete SnailyCAD</span>
+                    <div class="main-btn warn raise" id="forceShutDown">
+                        <span class="material-icons-outlined">warning</span>
+                        <span>Force Shutdown CAD</span>
                     </div>
                 </div>
 
@@ -309,7 +318,7 @@
                         <span>Update Now</span>
                     </div>
 
-                    <div class="main-btn warn raise" id="noUpdate">
+                    <div class="main-btn warn raise" id="appNoUpdate">
                         <span class="material-icons-outlined"
                             >do_not_touch</span
                         >
@@ -317,12 +326,19 @@
                     </div>
                 </div>
             </update>
-            <hidden>
-                <a href="./cmd.html" target="_blank" id="hidden-cmd">Test</a>
-            </hidden>
+
+            <log style="display: none">
+                <div class="closeLog">
+                    <div class="sm-btn error raise" id="closeLog">
+                        <span class="material-icons-outlined">close</span>
+                        <span>Close</span>
+                    </div>
+                </div>
+            </log>
         </app>
 
         <scripts>
+            <script src="./prevars.js"></script>
             <script src="scripts/script.js"></script>
             <script src="scripts/elements.js"></script>
             <script src="scripts/functions/ipc.js"></script>

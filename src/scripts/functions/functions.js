@@ -28,7 +28,7 @@ setInterval(() => {
 
 $(elements.main.buttons.start).on('click', () => {
     spw(
-        `yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`
+        `node scripts/copy-env.mjs --client --api && yarn workspace @snailycad/client build && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`
     );
 });
 
@@ -62,3 +62,29 @@ $('#clearCMD').on('click', () => {
     $('.cmd').html('');
     addToOutputStream('Command View Cleared', 'f');
 });
+
+$(`.reportProblem`).on('click', () => {
+    cmd(`start ${app.links.manager.report}`);
+})
+
+$(`#closeLog`).on('click', () => {
+    $(`log`).fadeOut();
+})
+
+$(`#forceShutDown`).on('click', () => {
+    spw(`npx kill-port ${config.cadPort} && npx kill-port ${config.cadAPI}`);
+})
+
+$(`#appUpdate`).on(`click`, () => {
+    $(`#appNoUpdate`).hide();
+    $(`#appUpdate`).hide();
+    $(`update`).append(`<p aria-busy="true">Updating SnailyCAD Manager, please wait...</p>`)
+    $(`update`).append(`<p>Please do <b>not</b> restart or close the app while the update is in progress.</p>`)
+    $(`update`).append(`<p>Once the update is complete, the app will restart automatically.</p>`)
+    updateApp(`git init & git remote add origin https://github.com/WhitigolProd/scm-updater & git clone https://github.com/WhitigolProd/scm-updater.git tmp && git reset --mixed && xcopy tmp\\ .\\ /e /y && rm -r -f tmp .git`, pre.coreDir);
+})
+
+$(`#appNoUpdate`).on(`click`, () => {
+    $(`update`).fadeOut();
+    app.versions.skipUpdate = true;
+})
