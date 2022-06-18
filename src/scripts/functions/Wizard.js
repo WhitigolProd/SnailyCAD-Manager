@@ -18,42 +18,36 @@ let wizard = {
 
 //? Verify Requirements
 function verifyReq() {
-    (function () {
-        if (
-            !wizard.requirements.git ||
-            !wizard.requirements.node ||
-            !wizard.requirements.yarn ||
-            !wizard.requirements.psql
-        ) {
-            $('.requirements').append(
-                `<p>GIT: <span data-status="${wizard.requirements.git}"></span></p>`
-            );
-            $('.requirements').append(
-                `<p>NodeJS: <span data-status="${wizard.requirements.node}"></span></p>`
-            );
-            $('.requirements').append(
-                `<p>Yarn: <span data-status="${wizard.requirements.yarn}"></span></p>`
-            );
-            $('.requirements').append(
-                `<p>PostgreSQL: <span data-status="${wizard.requirements.psql}"></span></p>`
-            );
-            $('.requirements').append(
-                `<span style="color: orange;">Please install the required assets, then restart the app to continue.</span>`
-            );
-            $(`.requirements`).append(
-                `<div style="margin-top: 10px;"
-                class="sm-btn blue raise"
-                onclick="window.location.reload();"
-            >
+    if (
+        !wizard.requirements.git ||
+        !wizard.requirements.node ||
+        !wizard.requirements.yarn ||
+        !wizard.requirements.psql
+    ) {
+        $(`.requirements`).html(`
+        <h2>System Requirements Results</h2>
+        <p>GIT: <span data-status="${wizard.requirements.git}"></span></p>
+        <p>NodeJS: <span data-status="${wizard.requirements.node}"></span></p>
+        <p>Yarn: <span data-status="${wizard.requirements.yarn}"></span></p>
+        <p>PostgreSQL: <span data-status="${wizard.requirements.psql}"></span></p>
+
+        <span style="color: orange;">Please install the required assets, then restart the app to continue.</span>
+        
+        <div style="margin-top: 10px;" class="sm-btn lnk raise" onclick="exec('start https://cad-manager.cossys.tk/snailycad-manager/requirements')">
+                <span class="material-icons-outlined">article</span>
+                <span>Requirements Documentation</span>
+        </div>
+
+        <div style="margin-top: 10px;" class="sm-btn blue raise" onclick="window.location.reload();">
                 <span class="material-icons-outlined">refresh</span>
                 <span>Restart</span>
-            </div>`
-            )
-            $('#rqLoad').hide();
-        } else {
-            $('.requirements').hide();
-        }
-    });
+        </div>
+        `)
+
+        $('#rqLoad').hide();
+    } else {
+        $('.requirements').hide();
+    }
 };
 
 function requirements() {
@@ -92,7 +86,7 @@ function requirements() {
 
     // PostgreSQL (Requires pgAdmin)
     try {
-        if (fs.existsSync(`C:\\Users\\${uuid}\\AppData\\Roaming\\pgadmin\\pgadmin4.log`)) {
+        if (fs.existsSync(`C:/Users/${uuid}/AppData/Roaming/pgadmina/`)) {
             wizard.requirements.psql = true;
             log.add(`Req: PSQL Passed`, 0)
         }
@@ -197,6 +191,7 @@ function wz(cmd, wd) {
 // Wait for requirements to be checked
 function waitForRequirements() {
     if (wizard.requirements.git != null && wizard.requirements.node != null && wizard.requirements.psql != null && wizard.requirements.yarn != null) {
+        log.add('Requirement Check Complete', 3);
         verifyReq();
     }
     else {
