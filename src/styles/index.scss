@@ -6,6 +6,12 @@
 @import './wizard';
 @import './settings';
 
+@font-face {
+    font-family: 'CascadiaCode';
+    src: url('../../public/fonts/CascadiaCode.woff2') format('woff2'),
+        url('../../public/fonts/CascadiaCode.ttf') format('truetype');
+}
+
 * {
     transition: font-size 200ms ease-in-out;
 }
