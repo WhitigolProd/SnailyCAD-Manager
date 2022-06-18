@@ -94,6 +94,6 @@ function spw(cmd, args) {
 
     command.stderr.on('data', (stderr) => {
         addToOutputStream(stderr.toString(), 'b');
-        log.add(stderr.toString());
+        log.add(stderr.toString(), 1);
     });
 }

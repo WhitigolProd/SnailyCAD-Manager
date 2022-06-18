@@ -1,3 +1,20 @@
+//! jQuery Initialization - DO NOT TOUCH THIS SECTION !//
+window.$ = window.jQuery = require('jquery');
+//! ------------------------------------------------- !//
+
+// Get Initial Configuration
+let config = {
+    //? User Storage
+    cadDir: localStorage.getItem('cadDir'),
+    cadPort: localStorage.getItem('cadPort'),
+    cadAPI: localStorage.getItem('cadAPI'),
+    nodeEnv: 'production',
+    color: localStorage.getItem('color'),
+    autoStart: localStorage.getItem('autoStart'),
+    openOnStartup: localStorage.getItem('openOnStartup'),
+    firstRun: localStorage.getItem('firstRun'),
+};
+
 // Add Powershell Support - DO NOT TOUCH THIS SECTION
 const { exec, spawn } = require('child_process');
 const os = require('os');
@@ -35,6 +52,11 @@ let st = {
     cad: localStorage.getItem('cadStatus'),
 };
 
+//? Display CAD Directory
+$(() => {
+    $(`.versions #directory span`).css('opacity', '.5').text(`${config.cadDir}`);
+})
+
 const setStatus = {
     cad: function (status) {
         localStorage.setItem('cadStatus', `${status}`);
@@ -42,18 +64,6 @@ const setStatus = {
     },
 };
 
-// Get Initial Configuration
-let config = {
-    //? User Storage
-    cadDir: localStorage.getItem('cadDir'),
-    cadPort: localStorage.getItem('cadPort'),
-    cadAPI: localStorage.getItem('cadAPI'),
-    nodeEnv: 'production',
-    color: localStorage.getItem('color'),
-    autoStart: localStorage.getItem('autoStart'),
-    openOnStartup: localStorage.getItem('openOnStartup'),
-    firstRun: localStorage.getItem('firstRun'),
-};
 
 
 
