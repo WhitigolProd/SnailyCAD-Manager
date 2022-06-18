@@ -24,7 +24,7 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true,
-            devTools: require('electron-is-dev'),
+            devTools: require('dotenv').config({ path: `${__dirname}/.env` }).parsed.MANAGER_ENV === "development",
         },
     });
 

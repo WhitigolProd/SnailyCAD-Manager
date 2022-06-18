@@ -86,7 +86,7 @@ function requirements() {
 
     // PostgreSQL (Requires pgAdmin)
     try {
-        if (fs.existsSync(`C:/Users/${uuid}/AppData/Roaming/pgadmina/`)) {
+        if (fs.existsSync(`C:/Users/${uuid}/AppData/Roaming/pgadmin/`)) {
             wizard.requirements.psql = true;
             log.add(`Req: PSQL Passed`, 0)
         }

@@ -10,6 +10,8 @@ let links = {
 };
 
 let app = {
+    env: require('dotenv').config({ path: `${__dirname}/.env` }),
+
     versions: {
         current: '1.0.1', // Must be set before releasing each update.
         latest: null, // Sets Dynamically
