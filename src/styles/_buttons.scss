@@ -168,11 +168,6 @@ $lnk: lightblue;
     }
 }
 
-// By Default - Hide Update Button
-#sc-update {
-    display: none;
-}
-
 .reportProblem {
     display: flex;
     justify-content: center;
@@ -206,4 +201,9 @@ $lnk: lightblue;
 [disabled] {
     border-color: gray !important;
     opacity: 0.1 !important;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 5px;
 }

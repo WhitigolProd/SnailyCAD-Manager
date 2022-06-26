@@ -14,6 +14,10 @@
             rel="stylesheet"
             href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
         <title>SnailyCAD - Manager</title>
     </head>
     <body>
@@ -207,10 +211,16 @@
                         <span class="material-icons-outlined">stop</span>
                         <span>Stop SnailyCAD</span>
                     </span>
-                    <span class="main-btn blue raise" id="sc-update">
-                        <span class="material-icons-outlined">upgrade</span>
-                        <span>Update SnailyCAD</span>
-                    </span>
+                    <div id="updateWrapper">
+                        <span
+                            class="main-btn blue raise"
+                            id="sc-update"
+                            style="display: none"
+                        >
+                            <span class="material-icons-outlined">upgrade</span>
+                            <span>Update SnailyCAD</span>
+                        </span>
+                    </div>
                 </div>
                 <div class="row">
                     <span class="md-btn warn raise" id="sc-dir">
@@ -275,14 +285,25 @@
                 </div>
 
                 <div class="row">
-                    <div class="main-btn blue raise" id="editEnv">
+                    <div class="md-btn blue raise" id="editEnv">
                         <span class="material-icons-outlined">edit</span>
                         <span>Edit <code>.env</code> file</span>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="main-btn warn raise" id="forceShutDown">
+                    <div
+                        class="md-btn lnk raise"
+                        onclick="$(`log`).fadeIn();"
+                        id="openLog"
+                    >
+                        <span class="material-icons-outlined">terminal</span>
+                        <span>Open Output Log</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="md-btn warn raise" id="forceShutDown">
                         <span class="material-icons-outlined">warning</span>
                         <span>Force Shutdown CAD</span>
                     </div>
@@ -336,9 +357,190 @@
                     </div>
                 </div>
             </log>
+
+            <msg style="display: none"> </msg>
+
+            <env style="display: none">
+                <p style="margin: 0">Edit <code>.env</code></p>
+                <div class="row">
+                    <label
+                        for="env1"
+                        data-tooltip="Postgress Database Password."
+                    >
+                        POSTGRES_PASSWORD
+                        <input
+                            type="text"
+                            name="env1"
+                            id="env1"
+                            placeholder="POSTRESS_PASSWORD"
+                        />
+                    </label>
+                    <label
+                        for="env2"
+                        data-tooltip="Postgress Database Username."
+                    >
+                        POSTGRES_USER
+                        <input
+                            type="text"
+                            name="env2"
+                            id="env2"
+                            placeholder="POSTGRES_USER"
+                        />
+                    </label>
+                    <label
+                        for="env3"
+                        data-tooltip="Database host. (Most likely localhost)."
+                    >
+                        DB_HOST
+                        <input
+                            type="text"
+                            name="env3"
+                            id="env3"
+                            placeholder="DB_HOST"
+                        />
+                    </label>
+                    <label for="env4" data-tooltip="The database port.">
+                        DB_PORT
+                        <input
+                            type="text"
+                            name="env4"
+                            id="env4"
+                            placeholder="DB_PORT"
+                        />
+                    </label>
+                </div>
+                <div class="row">
+                    <label for="env5" data-tooltip="The database name.">
+                        POSTGRES_DB
+                        <input
+                            type="text"
+                            name="env5"
+                            id="env5"
+                            placeholder="POSTGRES_DB"
+                        />
+                    </label>
+                    <label
+                        for="env6"
+                        data-tooltip="Random value to keep the CAD's cookies secured."
+                    >
+                        JWT_SECRET
+                        <input
+                            type="text"
+                            name="env6"
+                            id="env6"
+                            placeholder="JWT_SECRET"
+                        />
+                    </label>
+                    <label
+                        for="env7"
+                        data-tooltip="Secure string of 32 Characters"
+                    >
+                        ENCRYPTION_TOKEN
+                        <input
+                            type="text"
+                            name="env7"
+                            id="env7"
+                            placeholder="ENCRYPTION_TOKEN"
+                        />
+                    </label>
+                    <label for="env8" data-tooltip="URL/IP of the CAD Host.">
+                        CORS_ORIGIN_URL
+                        <input
+                            type="text"
+                            name="env8"
+                            id="env8"
+                            placeholder="CORS_ORIGIN_URL"
+                        />
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        for="env9"
+                        data-tooltip="URL/IP of the CAD API Host."
+                    >
+                        NEXT_PUBLIC_PROD_ORIGIN
+                        <input
+                            type="text"
+                            name="env9"
+                            id="env9"
+                            placeholder="NEXT_PUBLIC_PROD_ORIGIN"
+                        />
+                    </label>
+                    <label
+                        for="env10"
+                        data-tooltip="CAD Domain (Only enter when using a domain!)."
+                    >
+                        DOMAIN
+                        <input
+                            type="text"
+                            name="env10"
+                            id="env10"
+                            placeholder="DOMAIN"
+                        />
+                    </label>
+                    <label for="env13" data-tooltip="SnailyCAD Client Port">
+                        PORT_CLIENT
+                        <input
+                            type="text"
+                            name="env13"
+                            id="env13"
+                            placeholder="PORT_CLIENT"
+                        />
+                    </label>
+                    <label for="env12" data-tooltip="SnailyCAD API Port">
+                        PORT_API
+                        <input
+                            type="text"
+                            name="env12"
+                            id="env12"
+                            placeholder="PORT_API"
+                        />
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        for="env11"
+                        data-tooltip="Only Valid when Using Domain AND SSL"
+                    >
+                        SECURE_COOKIES_FOR_IFRAME
+                        <input
+                            type="checkbox"
+                            name="env11"
+                            id="env11"
+                            placeholder="SECURE_COOKIES_FOR_IFRAME"
+                        />
+                    </label>
+                    <label
+                        for="env14"
+                        data-tooltip="Report Errors to SnailyCAD Project Manager"
+                    >
+                        TELEMETRY_ENABLED
+                        <input
+                            type="checkbox"
+                            name="env14"
+                            id="env14"
+                            placeholder="TELEMETRY_ENABLED"
+                        />
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="md-btn blue raise" id="saveEnv">
+                        <span class="material-icons-outlined">save</span>
+                        <span>Save Changes</span>
+                    </div>
+                </div>
+                <a
+                    href="#"
+                    class="bottom"
+                    id="openEnvFile"
+                    style="font-size: 12px"
+                    >Open File</a
+                >
+            </env>
         </app>
 
         <scripts>
+            <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
             <script src="./prevars.js"></script>
             <script src="scripts/script.js"></script>
             <script src="scripts/elements.js"></script>

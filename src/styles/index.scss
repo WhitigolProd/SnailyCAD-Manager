@@ -153,3 +153,65 @@ update {
 hidden {
     inset: 0;
 }
+
+msg {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $mainBG;
+    z-index: 5;
+    border-radius: $border;
+
+    label {
+        font-size: 12px;
+        margin: 0 2vw 0 0;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    input {
+        height: 15px !important;
+        font-size: 12px;
+    }
+}
+
+env {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    inset: 0;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    background-color: $mainBG;
+    z-index: 6;
+    border-radius: $border;
+
+    .row {
+        margin-top: 3vh !important;
+    }
+
+    label {
+        font-size: 12px;
+        margin: 0 2vw 0 0;
+        border: none !important;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    input {
+        height: 15px !important;
+        font-size: 12px;
+    }
+}

@@ -15,6 +15,6 @@ const control = {
 
         minimize: function () {
             ipc.send('minimize-app');
-        }
-    }
-}
+        },
+    },
+};

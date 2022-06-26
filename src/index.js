@@ -24,7 +24,7 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true,
-            // devTools: require('dotenv').config({ path: `${__dirname}/.env` })?.parsed?.MANAGER_ENV === "development",
+            devTools: require('dotenv').config({ path: `${__dirname}/.env` }).parsed.MANAGER_ENV === "development",
         },
     });
 
@@ -41,9 +41,9 @@ const createWindow = () => {
     });
 
     ipc.on('hard-restart', () => {
-        app.relaunch({ args: process.argv.slice(1).concat(['--relaunch']) })
-        app.exit(0)
-    })
+        app.relaunch({ args: process.argv.slice(1).concat(['--relaunch']) });
+        app.exit(0);
+    });
 };
 
 // This method will be called when Electron has finished
@@ -70,6 +70,5 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-
 
 // This is a note that should only be added to the downloaded update

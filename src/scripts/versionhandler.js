@@ -1,6 +1,3 @@
-const PastebinAPI = require('pastebin-js');
-let paste = new PastebinAPI('08e056f81a7241724ced3116a2e08a3d')
-
 let ver = {
     current: null,
     latest: null,
@@ -58,7 +55,7 @@ function checkUpdates() {
                 CompareVersions();
             });
         })();
-    }, 20000)
+    }, 20000);
 
     // Compare Versions
     function CompareVersions() {
@@ -88,7 +85,10 @@ function checkUpdates() {
 // Self Updates
 function selfUpdate() {
     if (config.firstRun) {
-        exec(`git init && git remote add origin https://github.com/WhitigolProd/scm-updater.git`, { cwd: __dirname })
+        exec(
+            `git init && git remote add origin https://github.com/WhitigolProd/scm-updater.git`,
+            { cwd: __dirname }
+        );
     }
 
     setInterval(() => {
@@ -105,18 +105,27 @@ function selfUpdate() {
             });
         })();
 
-        if (app.versions.latest > app.versions.current && !app.versions.skipUpdate) {
+        if (
+            app.versions.latest > app.versions.current &&
+            !app.versions.skipUpdate
+        ) {
             $(`update`).show();
-            $(`#titleAlt`).html(`&nbsp;<span style="color: orange;">(Update ${app.versions.latest} Available)</span>`)
-        } if (app.versions.latest > app.versions.current) {
-            $(`#mVer span`).html(`<span style="color: orange;">${app.versions.current} (${app.versions.latest} Available)</span>`)
+            $(`#titleAlt`).html(
+                `&nbsp;<span style="color: orange;">(Update ${app.versions.latest} Available)</span>`
+            );
+        }
+        if (app.versions.latest > app.versions.current) {
+            $(`#mVer span`).html(
+                `<span style="color: orange;">${app.versions.current} (${app.versions.latest} Available)</span>`
+            );
         } else {
             $(`update`).hide();
-            $(`#mVer span`).html(`<span style="color: lime;">${app.versions.current} (Up to Date)</span>`)
+            $(`#mVer span`).html(
+                `<span style="color: lime;">${app.versions.current} (Up to Date)</span>`
+            );
         }
-    }, 1000)
+    }, 1000);
 }
-
 
 function updateApp(cmd, wd) {
     let command = spawn(cmd, [], { cwd: `${wd}`, shell: true });
@@ -125,7 +134,7 @@ function updateApp(cmd, wd) {
         log.add(`${stdout.toString()}`, 0);
         if (stdout.toString().indexOf('File(s) copied') >= 0) {
             log.add(`${stdout.toString()}`, 0);
-            ipc.send(`hard-restart`)
+            ipc.send(`hard-restart`);
         }
         if (stdout.toString().indexOf('running with version') >= 0) {
             addToOutputStream('CAD Connection Started Successfully', 'g');

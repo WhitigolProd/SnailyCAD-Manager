@@ -1,9 +1,9 @@
 {
-    "name": "scv4-manager",
-    "productName": "SnailyCAD v4 - Manager",
-    "version": "0",
+    "name": "snailycad-manager",
+    "productName": "SnailyCAD - Manager",
+    "version": "0.0.1",
     "icon": "public/img/icon.png",
-    "description": "SnailyCAD - Manager | Manager app for SnailyCAD v4 | Made by Whitigol",
+    "description": "SnailyCAD - Manager | Made by Whitigol",
     "main": "src/index.js",
     "scripts": {
         "start": "electron-forge start",
@@ -11,7 +11,7 @@
         "make": "electron-forge make",
         "publish": "electron-forge publish",
         "lint": "npx prettier --write .",
-        "output": "npx electron-packager . \"SnailyCAD v4 - Manager\" --asar --overwrite --icon './src/img/icon.ico'"
+        "output": "npx electron-packager . \"SnailyCAD - Manager\" --asar --overwrite --icon './src/img/icon.ico'"
     },
     "keywords": [],
     "author": {
@@ -52,7 +52,7 @@
         "electron-squirrel-startup": "^1.0.0",
         "jquery": "^3.6.0",
         "kill-port": "^2.0.0",
-        "pastebin-js": "^1.0.6"
+        "parsenv": "^1.0.2"
     },
     "devDependencies": {
         "@electron-forge/cli": "^6.0.0-beta.61",

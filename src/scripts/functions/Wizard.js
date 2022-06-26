@@ -13,7 +13,7 @@ let wizard = {
         cadDir: null,
         cadPort: null,
         cadAPI: null,
-    }
+    },
 };
 
 //? Verify Requirements
@@ -42,13 +42,13 @@ function verifyReq() {
                 <span class="material-icons-outlined">refresh</span>
                 <span>Restart</span>
         </div>
-        `)
+        `);
 
         $('#rqLoad').hide();
     } else {
         $('.requirements').hide();
     }
-};
+}
 
 function requirements() {
     // GIT
@@ -88,18 +88,17 @@ function requirements() {
     try {
         if (fs.existsSync(`C:/Users/${uuid}/AppData/Roaming/pgadmin/`)) {
             wizard.requirements.psql = true;
-            log.add(`Req: PSQL Passed`, 0)
-        }
-        else {
+            log.add(`Req: PSQL Passed`, 0);
+        } else {
             wizard.requirements.psql = false;
-            log.add(`Req: PSQL Failed`, 1)
+            log.add(`Req: PSQL Failed`, 1);
         }
     } catch (err) {
-        console.error(err)
+        console.error(err);
     }
 
     waitForRequirements();
-};
+}
 
 $(() => {
     if (!config.firstRun || config.firstRun == 'true') {
@@ -129,49 +128,49 @@ $(`[data-step="start"] [data-btn="next"]`).on('click', () => {
 // Set Installation Directory
 $(`[data-step="install"] [data-btn="next"]`).on('click', () => {
     if ($(`#insdir`).val() == ``) {
-        alert(`Installation Directory can not be empty`)
+        alert(`Installation Directory can not be empty`);
     }
-    if ($(`#insdir`).val().indexOf('/') == -1 || $(`#insdir`).val().indexOf(';') >= 0) {
+    if (
+        $(`#insdir`).val().indexOf('/') == -1 ||
+        $(`#insdir`).val().indexOf(';') >= 0 ||
+        $(`#insdir`).val().indexOf('\\') >= 0
+    ) {
         alert(`
         The directory input is invalid\n
         • Make sure you have not accidentally included a semi-colon in your directory\n
         • Make sure your directory points to a Folder inside a Drive, and not just a Drive Directory\n
           (Can NOT be directly in the C:/ Drive!)
-        `)
-    }
-    else {
+        `);
+    } else {
         wizard.store.cadDir = $('#insdir').val();
-        $(`#insDirDis`).text($(`#insdir`).val())
+        $(`#insDirDis`).text($(`#insdir`).val());
 
         $(`[data-step="install"`).hide();
         $(`[data-step="ins"]`).show();
     }
-})
+});
 
 // Installation
 $(`[data-step="ins"] [data-btn="next"]`).on('click', () => {
     $(`[data-step="ins"] .inner h2`).hide();
     $(`[data-step="ins"] [data-btn="next"]`).hide();
     $(`[data-step="ins"] .inner #insinfo`).hide();
-    $(`[data-step="ins"] .inner`).append(`<p aria-busy="true">Installation In Progress - Installing to <code>${wizard.store.cadDir}</code></p>`)
-    $(`[data-step="ins"] .inner`).append(`<p><b>DO NOT</b> close or restart the app while the installation is in progress.</p>`)
-    $(`[data-step="ins"] .inner`).append(`<p>The manager will reset once installation is complete. View the log output by pressing <code>CTRL</code> + <code>L</code>.</p>`)
-    wz(`git clone https://github.com/SnailyCAD/snaily-cadv4.git && cd snaily-cadv4 && yarn && copy .env.example .env`, wizard.store.cadDir);
-})
+    $(`[data-step="ins"] .inner`).append(
+        `<p aria-busy="true">Installation In Progress - Installing to <code>${wizard.store.cadDir}</code></p>`
+    );
+    $(`[data-step="ins"] .inner`).append(
+        `<p><b>DO NOT</b> close or restart the app while the installation is in progress.</p>`
+    );
+    $(`[data-step="ins"] .inner`).append(
+        `<p>The manager will reset once installation is complete. View the log output by pressing <code>CTRL</code> + <code>L</code>.</p>`
+    );
+    wz(
+        `git clone https://github.com/SnailyCAD/snaily-cadv4.git && cd snaily-cadv4 && copy .env.example .env`,
+        wizard.store.cadDir
+    );
+});
 
 //! Existing Install Wizard
-
-
-
-
-
-
-
-
-
-
-
-
 
 function wz(cmd, wd) {
     let command = spawn(cmd, [], { cwd: `${wd}`, shell: true });
@@ -179,7 +178,12 @@ function wz(cmd, wd) {
     command.stdout.on('data', (stdout) => {
         log.add(stdout.toString(), 0);
         if (stdout.toString().indexOf('1 file(s) copied.') >= 0) {
-            console.log('1 file(s) copied')
+            $(`msg`).html(`
+            <h2>SnailyCAD Installed!</h2>
+            <p>SnailyCAD Has been successfully installed.</p>
+            <p>To continue, you <b>must</b> update your <code>.env</code> file</p>
+            `);
+            $(`msg`).show();
         }
     });
 
@@ -190,11 +194,15 @@ function wz(cmd, wd) {
 
 // Wait for requirements to be checked
 function waitForRequirements() {
-    if (wizard.requirements.git != null && wizard.requirements.node != null && wizard.requirements.psql != null && wizard.requirements.yarn != null) {
+    if (
+        wizard.requirements.git != null &&
+        wizard.requirements.node != null &&
+        wizard.requirements.psql != null &&
+        wizard.requirements.yarn != null
+    ) {
         log.add('Requirement Check Complete', 3);
         verifyReq();
-    }
-    else {
+    } else {
         setTimeout(waitForRequirements, 250);
     }
-};
+}

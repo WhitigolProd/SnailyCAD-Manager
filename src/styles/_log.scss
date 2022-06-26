@@ -31,9 +31,15 @@ log {
         }
     }
 
-    #closeLog {
-        position: absolute;
+    .closeLog {
         top: 10px;
         right: 0;
+        position: fixed;
+
+        #closeLog {
+            position: fixed;
+            top: 10px;
+            right: 0;
+        }
     }
 }

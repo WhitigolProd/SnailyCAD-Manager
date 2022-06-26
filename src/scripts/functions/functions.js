@@ -40,6 +40,8 @@ $(elements.main.buttons.update).on('click', () => {
     spw(
         `curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > script.js && node script.js`
     );
+    $(`#sc-update`).hide();
+    $(`#updateWrapper`).append(`<l id="updatingCAD" aria-busy="true">Updating SnailyCAD</l>`)
 });
 
 $(elements.main.buttons.dir).on('click', () => {
@@ -47,8 +49,8 @@ $(elements.main.buttons.dir).on('click', () => {
 });
 
 $(`#mg-docs`).on('click', () => {
-    cmd(`start ${app.links.manager.docs}`)
-})
+    cmd(`start ${app.links.manager.docs}`);
+});
 
 $(elements.main.buttons.github).on('click', () => {
     cmd(`start ${app.links.cad.github}`);
@@ -65,26 +67,47 @@ $('#clearCMD').on('click', () => {
 
 $(`.reportProblem`).on('click', () => {
     cmd(`start ${app.links.manager.report}`);
-})
+});
 
 $(`#closeLog`).on('click', () => {
     $(`log`).fadeOut();
-})
+});
 
 $(`#forceShutDown`).on('click', () => {
-    spw(`npx kill-port ${config.cadPort} && npx kill-port ${config.cadAPI}`);
-})
+    spw(`npx kill-port ${cad.env.PORT_CLIENT} && npx kill-port ${cad.env.PORT_API}`);
+});
 
 $(`#appUpdate`).on(`click`, () => {
     $(`#appNoUpdate`).hide();
     $(`#appUpdate`).hide();
-    $(`update`).append(`<p aria-busy="true">Updating SnailyCAD Manager, please wait...</p>`)
-    $(`update`).append(`<p>Please do <b>not</b> restart or close the app while the update is in progress.</p>`)
-    $(`update`).append(`<p>Once the update is complete, the app will restart automatically.</p>`)
-    updateApp(`git init & git remote add origin https://github.com/WhitigolProd/scm-updater & git clone https://github.com/WhitigolProd/scm-updater.git tmp && git reset --mixed && xcopy tmp\\ .\\ /e /y && rm -r -f tmp .git`, pre.coreDir);
-})
+    $(`update`).append(
+        `<p aria-busy="true">Updating SnailyCAD Manager, please wait...</p>`
+    );
+    $(`update`).append(
+        `<p>Please do <b>not</b> restart or close the app while the update is in progress.</p>`
+    );
+    $(`update`).append(
+        `<p>Once the update is complete, the app will restart automatically.</p>`
+    );
+    updateApp(
+        `git init & git remote add origin https://github.com/WhitigolProd/scm-updater & git clone https://github.com/WhitigolProd/scm-updater.git tmp && git reset --mixed && xcopy tmp\\ .\\ /e /y && rm -r -f tmp .git`,
+        pre.coreDir
+    );
+});
 
 $(`#appNoUpdate`).on(`click`, () => {
     $(`update`).fadeOut();
     app.versions.skipUpdate = true;
-})
+});
+
+
+function str(length) {
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
