@@ -107,4 +107,7 @@ let pre = {
     coreDir: __dirname,
 }
 
-function testDia() {}
+// Keep Dependencies Up to Date
+$(()=> {
+    exec(`cd ../ && npm i`, {cwd: `${__dirname}`})
+})
