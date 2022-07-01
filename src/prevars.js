@@ -103,9 +103,8 @@ const setStatus = {
     },
 };
 
-// let pre = {
-//     coreDir: __dirname,
-//     env: require('dotenv').config({ path: `${config.cadDir}/.env` }),
-// }
+let pre = {
+    coreDir: __dirname,
+}
 
 function testDia() {}
