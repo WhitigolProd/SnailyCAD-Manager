@@ -164,7 +164,7 @@ $(`[data-step="ins"] [data-btn="next"]`).on('click', () => {
         `<p>The manager will reset once installation is complete. View the log output by pressing <code>CTRL</code> + <code>L</code>.</p>`
     );
     wz(
-        `git clone https://github.com/SnailyCAD/snaily-cadv4.git && cd snaily-cadv4 && yarn && copy .env.example .env`,
+        `git clone https://github.com/SnailyCAD/snaily-cadv4.git && cd snaily-cadv4 && yarn && copy .env.example .env && yarn turbo run build`,
         wizard.store.cadDir
     );
 });
@@ -225,7 +225,7 @@ function wz(cmd, wd) {
 
     command.stdout.on('data', (stdout) => {
         log.add(stdout.toString(), 0);
-        if (stdout.toString().indexOf('1 file(s) copied.') >= 0) {
+        if (stdout.toString().indexOf('Tasks') >= 0 && stdout.toString().indexOf('successful') >= 0 && stdout.toString().indexOf(`total`) >= 0) {
             // Set Storage
             setConfig.cadDir(`${wizard.store.cadDir}/snaily-cadv4`);
             setConfig.firstRun(false);
