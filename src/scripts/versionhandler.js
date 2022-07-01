@@ -4,33 +4,12 @@ let ver = {
 };
 
 function checkUpdates() {
-    //Current Version Check
-    (function () {
-        let user = require('os').userInfo().username;
-        let snailyjson = require(`${config.cadDir}/package.json`);
+    if (localStorage.length == 0) {
+        $(`load`).hide();
+        $(`.wizard`).show();
+    }
 
-        elements.versions.current.text(`${snailyjson.version}`);
-        ver.current = `${snailyjson.version}`;
-    })();
-
-    // Latest Version Check
-    (function () {
-        let ghpath = 'SnailyCAD/snaily-cadv4';
-        let api = `https://api.github.com/repos/${ghpath}/tags`;
-
-        $.get(api).done(function (data) {
-            var versions = data.sort(function (v1, v2) {
-                return semver.compare(v2.name, v1.name);
-            });
-            elements.versions.latest.text(versions[0].name);
-            ver.latest = `${versions[0].name}`;
-
-            CompareVersions();
-        });
-    })();
-
-    // Version Check every 20 seconds.
-    setInterval(() => {
+    if (localStorage.length > 0) {
         //Current Version Check
         (function () {
             let user = require('os').userInfo().username;
@@ -55,30 +34,58 @@ function checkUpdates() {
                 CompareVersions();
             });
         })();
-    }, 20000);
 
-    // Compare Versions
-    function CompareVersions() {
-        if (ver.current != ver.latest) {
-            elements.versions.current
-                .css('color', '#ffa600')
-                .append(` (Update <u>${ver.latest}</u> Available)`);
-            log.add(
-                `%cVersion Mismatch - Update Available`,
-                `background: red; font-weight: bold; padding: 2px 5px;`
-            );
-        } else {
-            elements.versions.current
-                .css('color', 'lime')
-                .append(' (Up to Date)');
-            log.add(
-                `%cVersion Match - No Updates Available`,
-                `background: green; font-weight: bold; padding: 2px 5px;`
-            );
+        // Version Check every 20 seconds.
+        setInterval(() => {
+            //Current Version Check
+            (function () {
+                let user = require('os').userInfo().username;
+                let snailyjson = require(`${config.cadDir}/package.json`);
+
+                elements.versions.current.text(`${snailyjson.version}`);
+                ver.current = `${snailyjson.version}`;
+            })();
+
+            // Latest Version Check
+            (function () {
+                let ghpath = 'SnailyCAD/snaily-cadv4';
+                let api = `https://api.github.com/repos/${ghpath}/tags`;
+
+                $.get(api).done(function (data) {
+                    var versions = data.sort(function (v1, v2) {
+                        return semver.compare(v2.name, v1.name);
+                    });
+                    elements.versions.latest.text(versions[0].name);
+                    ver.latest = `${versions[0].name}`;
+
+                    CompareVersions();
+                });
+            })();
+        }, 20000);
+
+        // Compare Versions
+        function CompareVersions() {
+            if (ver.current != ver.latest) {
+                elements.versions.current
+                    .css('color', '#ffa600')
+                    .append(` (Update <u>${ver.latest}</u> Available)`);
+                log.add(
+                    `%cVersion Mismatch - Update Available`,
+                    `background: red; font-weight: bold; padding: 2px 5px;`
+                );
+            } else {
+                elements.versions.current
+                    .css('color', 'lime')
+                    .append(' (Up to Date)');
+                log.add(
+                    `%cVersion Match - No Updates Available`,
+                    `background: green; font-weight: bold; padding: 2px 5px;`
+                );
+            }
+            HandleUpdateButton();
+
+            $(`#loadScreen`).fadeOut();
         }
-        HandleUpdateButton();
-
-        $(`#loadScreen`).fadeOut();
     }
 }
 

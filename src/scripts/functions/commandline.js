@@ -76,36 +76,45 @@ function spw(cmd, args) {
         ) {
             addToOutputStream('<b>CAD Connection Closed</b>', 'b');
             setStatus.cad(false);
-            toast.success(`SnailyCAD Shutdown.`)
+            toast.success(`SnailyCAD Shutdown.`);
         }
-        if (stdout.toString().indexOf('SnailyCADv4 was successfully updated') >= 0) {
-            addToOutputStream(`CAD Updated to ${ver.latest}`, 'g')
+        if (
+            stdout.toString().indexOf('SnailyCADv4 was successfully updated') >=
+            0
+        ) {
+            addToOutputStream(`CAD Updated to ${ver.latest}`, 'g');
             ver.current = ver.latest;
             location.reload();
         }
         if (stdout.toString().indexOf('Already up to date.') >= 0) {
-            addToOutputStream('CAD Already Up to Date', 'b')
+            addToOutputStream('CAD Already Up to Date', 'b');
             $(`#updatingCAD`).hide();
         }
-        else if (stdout.toString().indexOf('exited with code 0') >= 0) {
+        if (stdout.toString().indexOf('exited with code 0') >= 0) {
             addToOutputStream(
                 '<b>CAD Error<br>Check Logs for Error Output</b>',
                 'c'
             );
-            toast.error(`SnailyCAD Error - Check Log Output`)
+            toast.error(`SnailyCAD Error - Check Log Output`);
             setStatus.cad(false);
         }
         if (stdout.toString().indexOf('running with version') >= 0) {
             addToOutputStream('CAD Connection Started Successfully', 'g');
             setStatus.cad(true);
-            toast.success(`SnailyCAD Started!`)
+            toast.success(`SnailyCAD Started!`);
         }
         addToOutputStream(stdout.toString(), 'a');
-        log.add(stdout.toString());
     });
 
     command.stderr.on('data', (stderr) => {
         addToOutputStream(stderr.toString(), 'b');
-        log.add(stderr.toString(), 1);
+
+        if (
+            stderr
+                .toString()
+                .indexOf('Could not automatically update SnailyCADv4') >= 0
+        ) {
+            $(`#updatingCAD`).hide();
+        }
     });
 }

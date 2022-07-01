@@ -103,27 +103,17 @@
                 <step data-step="install" style="display: none">
                     <div class="inner">
                         <label for="insdir">
-                            Input Installation Directory
-                            <span
-                                >(e.g.<code>C:/Users/Username/Documents</code>)<br />The
-                                <code>snaily-cadv4</code> folder will be added
-                                upon installation.
-                            </span>
-                            <input
-                                type="text"
+                            Select Installation Directory
+                            <div
                                 id="insdir"
-                                name="insdir"
-                                placeholder="Installation Directory"
-                                required
-                            />
-                            <span style="color: rgba(255, 166, 0, 0.75)"
-                                >Do NOT include
-                                <code
-                                    style="color: var(--code-color); opacity: 1"
-                                    >snaily-cadv4</code
-                                >
-                                inside the installation directory.</span
+                                class="main-btn lnk raise"
+                                style="margin: 10px 0"
                             >
+                                <span class="material-icons-outlined"
+                                    >folder</span
+                                >
+                                <span id="insRes">Select</span>
+                            </div>
                         </label>
                     </div>
 
@@ -147,9 +137,13 @@
                                 <code id="insDirDis"></code></span
                             ><br />
                             <span style="color: orange; font-weight: bolder"
-                                >If your installation directory is NOT in proper
-                                format, your installation will fail *WITHOUT A
-                                DISPLAYED ERROR*</span
+                                >If the installation directory above is
+                                incorrect, please
+                                <a href="#" onclick="location.reload();"
+                                    >restart</a
+                                >
+                                the application, and correct the installation
+                                directory.</span
                             >
                         </div>
                     </div>
@@ -169,17 +163,21 @@
                 <step data-step="exist" style="display: none">
                     <div class="inner">
                         <label for="existdir">
-                            Input Existing Installation Directory
-                            <span
-                                >(e.g.<code>C:/Users/Username/Documents/snaily-cadv4</code>)
-                            </span>
-                            <input
-                                type="text"
+                            Select Existing SnailyCAD Installation
+                            <div
                                 id="existdir"
-                                name="existdir"
-                                placeholder="Existing Installation Directory"
-                                required
-                            />
+                                class="main-btn lnk raise"
+                                style="margin: 10px 0"
+                            >
+                                <span class="material-icons-outlined"
+                                    >folder</span
+                                >
+                                <span id="exRes">Select</span>
+                            </div>
+                            <span style="color: orange"
+                                >Installation <b>MUST</b> be
+                                <code>standalone</code></span
+                            >
                         </label>
                     </div>
 
@@ -189,6 +187,33 @@
                             <span class="material-icons-outlined"
                                 >arrow_forward</span
                             >
+                        </span>
+                    </div>
+                </step>
+
+                <step data-step="ex" style="display: none">
+                    <div class="inner">
+                        <h2>Ready to set up!</h2>
+                        <div id="insinfo">
+                            <span
+                                >Existing Directory:
+                                <code id="exDirDis"></code></span
+                            ><br />
+                            <span style="color: orange; font-weight: bolder"
+                                >If the directory above is incorrect, please
+                                <a href="#" onclick="location.reload();"
+                                    >restart</a
+                                >
+                                the application, and correct the
+                                directory.</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        <span class="main-btn success raise" data-btn="next">
+                            <span class="material-icons-outlined">build</span>
+                            <span>Setup</span>
                         </span>
                     </div>
                 </step>
@@ -207,7 +232,11 @@
                         <span class="material-icons-outlined">play_arrow</span>
                         <span>Start SnailyCAD</span>
                     </span>
-                    <span class="main-btn error raise" id="sc-stop">
+                    <span
+                        class="main-btn error raise"
+                        id="sc-stop"
+                        style="display: none"
+                    >
                         <span class="material-icons-outlined">stop</span>
                         <span>Stop SnailyCAD</span>
                     </span>
@@ -306,6 +335,13 @@
                     <div class="md-btn warn raise" id="forceShutDown">
                         <span class="material-icons-outlined">warning</span>
                         <span>Force Shutdown CAD</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="md-btn error raise" onclick="core.reset();">
+                        <span class="material-icons-outlined">error</span>
+                        <span>Reset Manager (Erase All Data)</span>
                     </div>
                 </div>
 
@@ -540,11 +576,13 @@
         </app>
 
         <scripts>
+            <!-- Toast Notifications -->
             <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+            <!-- In-App Scripts -->
+            <script src="scripts/functions/ipc.js"></script>
             <script src="./prevars.js"></script>
             <script src="scripts/script.js"></script>
             <script src="scripts/elements.js"></script>
-            <script src="scripts/functions/ipc.js"></script>
             <script src="storage/StorageManager.js"></script>
             <script src="scripts/functions/Wizard.js"></script>
             <script src="scripts/VersionHandler.js"></script>

@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 const electron = require('electron');
-require('electron-reload');
+const { dialog } = require('electron');
 
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
@@ -24,9 +24,13 @@ const createWindow = () => {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true,
-            devTools: require('dotenv').config({ path: `${__dirname}/.env` }).parsed.MANAGER_ENV === "development",
+            devTools:
+                require('dotenv').config({ path: `${__dirname}/.env` }).parsed
+                    .MANAGER_ENV === 'development',
         },
     });
+
+    const render = mainWindow.webContents;
 
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
@@ -43,6 +47,21 @@ const createWindow = () => {
     ipc.on('hard-restart', () => {
         app.relaunch({ args: process.argv.slice(1).concat(['--relaunch']) });
         app.exit(0);
+    });
+
+    ipc.on('selectDir', (e, arg) => {
+        dialog
+            .showOpenDialog(mainWindow, {
+                properties: ['openDirectory'],
+                title: `${arg}`,
+                defaultPath: ``,
+            })
+            .then((result) => {
+                render.send('callback', `${result.filePaths}`);
+            })
+            .catch((err) => {
+                alert(err);
+            });
     });
 };
 

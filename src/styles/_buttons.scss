@@ -54,6 +54,10 @@ $lnk: lightblue;
     &.blue {
         border-color: $blue;
     }
+
+    &.lnk {
+        border-color: $lnk;
+    }
 }
 
 .md-btn {

@@ -33,7 +33,9 @@ $(elements.main.buttons.start).on('click', () => {
 });
 
 $(elements.main.buttons.stop).on('click', () => {
-    spw(`npx kill-port ${config.cadPort} && npx kill-port ${config.cadAPI}`);
+    spw(
+        `npx kill-port ${cad.env.PORT_CLIENT} && npx kill-port ${cad.env.PORT_API}`
+    );
 });
 
 $(elements.main.buttons.update).on('click', () => {
@@ -41,7 +43,9 @@ $(elements.main.buttons.update).on('click', () => {
         `curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > script.js && node script.js`
     );
     $(`#sc-update`).hide();
-    $(`#updateWrapper`).append(`<l id="updatingCAD" aria-busy="true">Updating SnailyCAD</l>`)
+    $(`#updateWrapper`).append(
+        `<l id="updatingCAD" aria-busy="true">Updating SnailyCAD</l>`
+    );
 });
 
 $(elements.main.buttons.dir).on('click', () => {
@@ -60,6 +64,14 @@ $(elements.main.buttons.docs).on('click', () => {
     cmd(`start ${app.links.cad.docs}`);
 });
 
+$(elements.titlebar.buttons.close).on('click', () => {
+    ipc.send('close-app');
+});
+
+$(elements.titlebar.buttons.minimize).on('click', () => {
+    ipc.send('minimize-app');
+});
+
 $('#clearCMD').on('click', () => {
     $('.cmd').html('');
     addToOutputStream('Command View Cleared', 'f');
@@ -74,7 +86,9 @@ $(`#closeLog`).on('click', () => {
 });
 
 $(`#forceShutDown`).on('click', () => {
-    spw(`npx kill-port ${cad.env.PORT_CLIENT} && npx kill-port ${cad.env.PORT_API}`);
+    spw(
+        `npx kill-port ${cad.env.PORT_CLIENT} && npx kill-port ${cad.env.PORT_API}`
+    );
 });
 
 $(`#appUpdate`).on(`click`, () => {
@@ -100,14 +114,15 @@ $(`#appNoUpdate`).on(`click`, () => {
     app.versions.skipUpdate = true;
 });
 
-
 function str(length) {
     let result = '';
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let characters =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        );
     }
     return result;
 }
-

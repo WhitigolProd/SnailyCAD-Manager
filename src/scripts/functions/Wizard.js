@@ -125,27 +125,26 @@ $(`[data-step="start"] [data-btn="next"]`).on('click', () => {
 });
 
 //! New Install Wizard
+// Handle Retrieving Install Directory
+$(`#insdir`).on('click', () => {
+    ipc.send('selectDir', 'Select Installation Directory');
+    ipc.on('callback', (e, arg) => {
+        if (arg == '') {
+            $(`#insRes`).text(`ERROR: Canceled.`).css('color', 'red');
+        } else if (arg != ``) {
+            $(`#insRes`).text(arg).css('color', 'lime');
+            wizard.store.cadDir = `${arg}`;
+        }
+    });
+});
+
 // Set Installation Directory
 $(`[data-step="install"] [data-btn="next"]`).on('click', () => {
-    if ($(`#insdir`).val() == ``) {
-        alert(`Installation Directory can not be empty`);
-    }
-    if (
-        $(`#insdir`).val().indexOf('/') == -1 ||
-        $(`#insdir`).val().indexOf(';') >= 0 ||
-        $(`#insdir`).val().indexOf('\\') >= 0
-    ) {
-        alert(`
-        The directory input is invalid\n
-        • Make sure you have not accidentally included a semi-colon in your directory\n
-        • Make sure your directory points to a Folder inside a Drive, and not just a Drive Directory\n
-          (Can NOT be directly in the C:/ Drive!)
-        `);
-    } else {
-        wizard.store.cadDir = $('#insdir').val();
-        $(`#insDirDis`).text($(`#insdir`).val());
-
-        $(`[data-step="install"`).hide();
+    if (!wizard.store.cadDir) {
+        toast.error('ERROR: Installation Directory must be specified.');
+    } else if (wizard.store.cadDir) {
+        $(`[data-step="install"]`).hide();
+        $(`#insDirDis`).text(`${wizard.store.cadDir}`);
         $(`[data-step="ins"]`).show();
     }
 });
@@ -165,23 +164,78 @@ $(`[data-step="ins"] [data-btn="next"]`).on('click', () => {
         `<p>The manager will reset once installation is complete. View the log output by pressing <code>CTRL</code> + <code>L</code>.</p>`
     );
     wz(
-        `git clone https://github.com/SnailyCAD/snaily-cadv4.git && cd snaily-cadv4 && copy .env.example .env`,
+        `git clone https://github.com/SnailyCAD/snaily-cadv4.git && cd snaily-cadv4 && yarn && copy .env.example .env`,
         wizard.store.cadDir
     );
 });
 
 //! Existing Install Wizard
+$(`#existdir`).on('click', () => {
+    ipc.send('selectDir', 'Select Existing SnailyCAD Installation');
+    ipc.on('callback', (e, arg) => {
+        if (arg == '') {
+            $(`#exRes`).text(`ERROR: Canceled.`).css('color', 'red');
+        } else if (arg != ``) {
+            $(`#exRes`).text(arg).css('color', 'lime');
+            wizard.store.cadDir = `${arg}`;
+        }
+    });
+});
 
+$(`[data-step="exist"] [data-btn="next"]`).on('click', () => {
+    try {
+        if (fs.existsSync(`${wizard.store.cadDir}/package.json`)) {
+            if (!wizard.store.cadDir) {
+                toast.error('ERROR: Installation Directory must be specified.');
+            } else if (wizard.store.cadDir) {
+                $(`[data-step="exist"]`).hide();
+                $(`#exDirDis`).text(`${wizard.store.cadDir}`);
+                $(`[data-step="ex"]`).show();
+            }
+        } else {
+            toast.error(
+                `Selected Directory does not contain a <code>package.json</code> file`
+            );
+        }
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+$(`[data-step="ex"] [data-btn="next"]`).on('click', () => {
+    $(`[data-step="ex"] .inner`).html(`
+    <h2 aria-busy="true">Setup in Progress</h2>
+    <p><b>DO NOT</b> close or restart the app while the installation is in progress.</p>
+    <p>The manager will prompt to restart when setup is complete.</p>
+    `);
+
+    setConfig.cadDir(`${wizard.store.cadDir}`);
+    setConfig.firstRun(false);
+    localStorage.setItem(`envPending`, true);
+
+    core.restart(
+        `The setup has completed. Please restart the app to continue.`,
+        false
+    );
+});
+
+//? Wizard Functions
 function wz(cmd, wd) {
     let command = spawn(cmd, [], { cwd: `${wd}`, shell: true });
 
     command.stdout.on('data', (stdout) => {
         log.add(stdout.toString(), 0);
         if (stdout.toString().indexOf('1 file(s) copied.') >= 0) {
+            // Set Storage
+            setConfig.cadDir(`${wizard.store.cadDir}/snaily-cadv4`);
+            setConfig.firstRun(false);
+            localStorage.setItem(`envPending`, true);
+
             $(`msg`).html(`
             <h2>SnailyCAD Installed!</h2>
             <p>SnailyCAD Has been successfully installed.</p>
-            <p>To continue, you <b>must</b> update your <code>.env</code> file</p>
+            <p>To continue, you <b>must</b> restart the app.</p>
+            <div class="md-btn blue raise" onclick="location.reload();"><span class="material-icons-outlined">refresh</span><span>Restart Manager</span></div>
             `);
             $(`msg`).show();
         }
