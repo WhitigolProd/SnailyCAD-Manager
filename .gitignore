@@ -42,8 +42,12 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Build Directory
+# Build Directory(s)
+build/
 SnailyCAD Manager-win32-x64/
+
+# Development Directory's an Files
+src/server/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/

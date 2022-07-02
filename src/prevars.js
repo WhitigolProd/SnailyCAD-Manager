@@ -109,6 +109,6 @@ let pre = {
 }
 
 // Keep Dependencies Up to Date
-$(()=> {
-    exec(`cd ../ && npm i`, {cwd: `${__dirname}`})
+$(() => {
+    exec(`cd ../ && npm i`, { cwd: `${__dirname}` })
 })

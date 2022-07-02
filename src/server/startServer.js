@@ -1,7 +1,8 @@
 const express = require('express')
+const config = require(`./config.json`)
 
 const app = express()
-const port = 5000
+const serverConfig = config.express;
 
 app.use(express.static(`${__dirname}../../`))
 
@@ -10,7 +11,7 @@ app.get('/', (req, res) => {
 })
 
 module.exports = function () {
-    app.listen(port, function () {
+    app.listen(serverConfig.port, function () {
     })
 }
 
