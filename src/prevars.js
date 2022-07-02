@@ -25,6 +25,7 @@ let config = {
     autoStart: localStorage.getItem('autoStart'),
     openOnStartup: localStorage.getItem('openOnStartup'),
     firstRun: localStorage.getItem('firstRun'),
+    enableWebServer: localStorage.getItem('enableWebServer'),
 };
 
 if (localStorage.length > 0) {
