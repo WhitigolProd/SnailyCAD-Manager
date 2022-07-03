@@ -2,11 +2,8 @@
 
 # Welcome to SnailyCAD v4 - Manager App!
 
-## This app is not ready for download, and is still in development.
-
-You are welcome to contribute to the project by submitting a Pull Request with your contributions!
-
-Learn more about SnailyCAD at the [SnailyCAD Website](https://snailycad.caspertheghost.me/)!
+## Public Release available **now!**
+[Download Here](https://github.com/WhitigolProd/SnailyCAD-Manager/releases/latest)
 
 _All stars/forks are appreciated!_
 
