@@ -126,3 +126,46 @@ function str(length) {
     }
     return result;
 }
+
+
+let exported = {
+    config: config,
+    wizard: wizard,
+}
+
+//? Export to Express Server
+$(() => {
+    fs.writeFile('./src/serverManager/appStorage.json', JSON.stringify(exported, null, 2), (err) => {
+        if (err) console.error(err)
+    })
+})
+
+//? Display App Updates
+$(() => {
+    notes.check()
+})
+let notes = {
+    check: () => {
+        if (wizard.requirements.ready != null) {
+            console.log(`%cRELEASE: %c${update.version} notes available`, 'color: lime;', '')
+            if (update.dismissed != true) {
+                $(`msg`).html(`${update.html}`).show()
+            }
+        } else {
+            setTimeout(notes.check, 250)
+        }
+    },
+    dismiss: () => {
+        $(`msg`).html(``).hide();
+
+        let updateNotes = {
+            version: update.version,
+            html: update.html,
+            script: update.script,
+            dismissed: true,
+        }
+        fs.writeFile(`${__dirname}/update.json`, JSON.stringify(updateNotes, null, 2), (err) => {
+            if (err) console.error(err)
+        })
+    }
+}

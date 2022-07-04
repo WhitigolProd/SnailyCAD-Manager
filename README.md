@@ -3,6 +3,7 @@
 # Welcome to SnailyCAD v4 - Manager App!
 
 ## Public Release available **now!**
+
 [Download Here](https://github.com/WhitigolProd/SnailyCAD-Manager/releases/latest)
 
 _All stars/forks are appreciated!_

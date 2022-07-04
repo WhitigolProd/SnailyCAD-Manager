@@ -47,7 +47,7 @@ build/
 SnailyCAD Manager-win32-x64/
 
 # Development Directory's an Files
-src/server/
+src/serverManager/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -133,3 +133,5 @@ dist
 .pnp.*
 
 .DS_Store
+
+APP.TODO

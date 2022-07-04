@@ -12,6 +12,8 @@ const fs = require('fs');
 let notif = new Notyf();
 const parsenv = require('parsenv');
 const { ipcMain } = require('electron');
+const updateFile = './update.json';
+const update = require('./update.json');
 //! ------------ !//
 
 // Get Initial Configuration
@@ -27,6 +29,7 @@ let config = {
     firstRun: localStorage.getItem('firstRun'),
     enableWebServer: localStorage.getItem('enableWebServer'),
 };
+
 
 if (localStorage.length > 0) {
     appenv = require('dotenv').config({ path: `${__dirname}/.env` });
@@ -68,7 +71,7 @@ let app = {
     env: null,
 
     versions: {
-        current: '1.0.1', // Must be set before releasing each update.
+        current: '1.0.2', // Must be set before releasing each update.
         latest: null, // Sets Dynamically
         skipUpdate: false, // Whether to skip updating the latest version (Updates Dynamically).
     },

@@ -2,17 +2,14 @@
   "name": "snailycad-manager",
   "productName": "SnailyCAD - Manager",
   "version": "0.0.1",
-  "icon": "public/img/icon.png",
   "description": "SnailyCAD - Manager | Made by Whitigol",
   "main": "src/index.js",
+  "icon": "public/img/icon.png",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "devExpress": "nodemon ./src/server/startServer.js",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
+    "start": "electron .",
+    "startServer": "nodemon ./src/serverManager/startServer.js",
     "lint": "npx prettier --write .",
-    "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon './src/img/icon.ico'"
+    "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon './src/img/icon.png' --out 'E:\\_Web_Development_\\.electron\\[BUILDS]\\SnailyCADManager\\[1.0.2]'"
   },
   "keywords": [],
   "author": {
@@ -27,7 +24,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "scm_test"
+            "name": "sm"
           }
         },
         {
@@ -50,12 +47,13 @@
   "dependencies": {
     "command-exists": "^1.2.9",
     "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.18.1",
     "jquery": "^3.6.0",
-    "kill-port": "^2.0.0",
+    "kill-port": "^2.0.1",
     "parsenv": "^1.0.2",
-    "sweetalert2": "^11.4.18"
+    "sweetalert2": "^11.4.19"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
@@ -64,9 +62,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "electron": "^19.0.7",
-    "electron-is-dev": "^2.0.0",
     "electron-prebuilt-compile": "8.2.0",
-    "electron-reload": "^2.0.0-alpha.1",
     "nodemon": "^2.0.18"
   }
 }

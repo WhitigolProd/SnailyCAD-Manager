@@ -1,0 +1,6 @@
+{
+  "version": "1.0.2",
+  "html": "<h2>Update <code>1.0.2</code></h2><h3>What's Changed?</h3><ul><li>🔨FIX: Installation Fail (Directory Exists)</li></ul><div onclick=\"notes.dismiss();\" class=\"md-btn warn raise btm\"><span class=\"material-icons-outlined\">close</span><span>Close</span></div>",
+  "script": "",
+  "dismissed": false
+}

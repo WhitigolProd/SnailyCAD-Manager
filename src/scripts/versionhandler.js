@@ -3,6 +3,8 @@ let ver = {
     latest: null,
 };
 
+
+
 function checkUpdates() {
     if (localStorage.length == 0) {
         $(`load`).hide();

@@ -7,6 +7,7 @@ let wizard = {
         node: null,
         yarn: null,
         psql: null,
+        ready: null,
     },
 
     store: {
@@ -143,9 +144,19 @@ $(`[data-step="install"] [data-btn="next"]`).on('click', () => {
     if (!wizard.store.cadDir) {
         toast.error('ERROR: Installation Directory must be specified.');
     } else if (wizard.store.cadDir) {
-        $(`[data-step="install"]`).hide();
-        $(`#insDirDis`).text(`${wizard.store.cadDir}`);
-        $(`[data-step="ins"]`).show();
+        if (fs.existsSync(`${wizard.store.cadDir}/snaily-cadv4`)) {
+            toast.error('ERROR: Directory Already Exists!')
+            return;
+        }
+        if (fs.existsSync(`${wizard.store.cadDir}/package.json`)) {
+            toast.error('ERROR: Directory already has SnailyCAD or another app installed.')
+            return;
+        }
+        else {
+            $(`[data-step="install"]`).hide();
+            $(`#insDirDis`).text(`${wizard.store.cadDir}`);
+            $(`[data-step="ins"]`).show();
+        }
     }
 });
 
@@ -255,6 +266,7 @@ function waitForRequirements() {
         wizard.requirements.yarn != null
     ) {
         log.add('Requirement Check Complete', 3);
+        wizard.requirements.ready = true;
         verifyReq();
     } else {
         setTimeout(waitForRequirements, 250);
