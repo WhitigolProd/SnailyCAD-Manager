@@ -10,4 +10,6 @@ _All stars/forks are appreciated!_
 
 ## Current Contributors:
 
--   [sharki](https://github.com/subtosharki)
+-   [subtosharki](https://github.com/subtosharki)
+
+-   [CasperTheGhost](https://github.com/Dev-CasperTheGhost)
