@@ -145,14 +145,15 @@ $(`[data-step="install"] [data-btn="next"]`).on('click', () => {
         toast.error('ERROR: Installation Directory must be specified.');
     } else if (wizard.store.cadDir) {
         if (fs.existsSync(`${wizard.store.cadDir}/snaily-cadv4`)) {
-            toast.error('ERROR: Directory Already Exists!')
+            toast.error('ERROR: Directory Already Exists!');
             return;
         }
         if (fs.existsSync(`${wizard.store.cadDir}/package.json`)) {
-            toast.error('ERROR: Directory already has SnailyCAD or another app installed.')
+            toast.error(
+                'ERROR: Directory already has SnailyCAD or another app installed.'
+            );
             return;
-        }
-        else {
+        } else {
             $(`[data-step="install"]`).hide();
             $(`#insDirDis`).text(`${wizard.store.cadDir}`);
             $(`[data-step="ins"]`).show();
@@ -236,7 +237,11 @@ function wz(cmd, wd) {
 
     command.stdout.on('data', (stdout) => {
         log.add(stdout.toString(), 0);
-        if (stdout.toString().indexOf('Tasks') >= 0 && stdout.toString().indexOf('successful') >= 0 && stdout.toString().indexOf(`total`) >= 0) {
+        if (
+            stdout.toString().indexOf('Tasks') >= 0 &&
+            stdout.toString().indexOf('successful') >= 0 &&
+            stdout.toString().indexOf(`total`) >= 0
+        ) {
             // Set Storage
             setConfig.cadDir(`${wizard.store.cadDir}/snaily-cadv4`);
             setConfig.firstRun(false);

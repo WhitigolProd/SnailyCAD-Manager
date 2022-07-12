@@ -25,6 +25,12 @@ $(`#editEnv`).on('click', () => {
         $(`#env14`).prop('checked', false);
     }
 
+    $(`#env-DISCORD_BOT_TOKEN`).val(`${cad.env.DISCORD_BOT_TOKEN}`);
+    $(`#env-DISCORD_SERVER_ID`).val(`${cad.env.DISCORD_SERVER_ID}`);
+    $(`#env-DISCORD_CLIENT_ID`).val(`${cad.env.DISCORD_CLIENT_ID}`);
+    $(`#env-DISCORD_CLIENT_SECRET`).val(`${cad.env.DISCORD_CLIENT_SECRET}`);
+    $(`#env-STEAM_API_KEY`).val(`${cad.env.STEAM_API_KEY}`);
+
     $(`env`).show();
 });
 $(`#openEnvFile`).on('click', () => {
@@ -127,6 +133,31 @@ let setEnv = {
         parsenv.edit({ TELEMETRY_ENABLED: `${data}` });
         writeEnv();
     },
+    DISCORD_BOT_TOKEN: (data) => {
+        cad.env.DISCORD_BOT_TOKEN = data;
+        parsenv.edit({ DISCORD_BOT_TOKEN: `${data}` });
+        writeEnv();
+    },
+    DISCORD_SERVER_ID: (data) => {
+        cad.env.DISCORD_SERVER_ID = data;
+        parsenv.edit({ DISCORD_SERVER_ID: `${data}` });
+        writeEnv();
+    },
+    DISCORD_CLIENT_ID: (data) => {
+        cad.env.DISCORD_CLIENT_ID = data;
+        parsenv.edit({ DISCORD_CLIENT_ID: `${data}` });
+        writeEnv();
+    },
+    DISCORD_CLIENT_SECRET: (data) => {
+        cad.env.DISCORD_CLIENT_SECRET = data;
+        parsenv.edit({ DISCORD_CLIENT_SECRET: `${data}` });
+        writeEnv();
+    },
+    STEAM_API_KEY: (data) => {
+        cad.env.STEAM_API_KEY = data;
+        parsenv.edit({ STEAM_API_KEY: `${data}` });
+        writeEnv();
+    },
 };
 
 $(`#saveEnv`).on('click', () => {
@@ -160,6 +191,16 @@ $(`#saveEnv`).on('click', () => {
     setEnv.SECURE_COOKIES_FOR_IFRAME(`${$(`#env11`).prop('checked')}`);
     // TELEMETRY_ENABLED
     setEnv.TELEMETRY_ENABLED(`${$(`#env14`).prop('checked')}`);
+    // DISCORD_BOT_TOKEN
+    setEnv.DISCORD_BOT_TOKEN(`${$(`#env-DISCORD_BOT_TOKEN`).val()}`);
+    // DISCORD_SERVER_ID
+    setEnv.DISCORD_SERVER_ID(`${$(`#env-DISCORD_SERVER_ID`).val()}`);
+    // DISCORD_CLIENT_ID
+    setEnv.DISCORD_CLIENT_ID(`${$(`#env-DISCORD_CLIENT_ID`).val()}`);
+    // DISCORD_CLIENT_SECRET
+    setEnv.DISCORD_CLIENT_SECRET(`${$(`#env-DISCORD_CLIENT_SECRET`).val()}`);
+    // STEAM_API_KEY
+    setEnv.STEAM_API_KEY(`${$(`#env-STEAM_API_KEY`).val()}`);
     // TOAST
     toast.success(`Environment Variables Saved!`);
 

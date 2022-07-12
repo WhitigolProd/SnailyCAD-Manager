@@ -27,9 +27,15 @@ setInterval(() => {
 }, 1000);
 
 $(elements.main.buttons.start).on('click', () => {
-    spw(
-        `node scripts/copy-env.mjs --client --api && yarn workspace @snailycad/client build && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`
-    );
+    if (shiftKeyPressed == true) {
+        spw(
+            `yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`
+        );
+    } else {
+        spw(
+            `node scripts/copy-env.mjs --client --api && yarn workspace @snailycad/client build && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`
+        );
+    }
 });
 
 $(elements.main.buttons.stop).on('click', () => {
@@ -40,7 +46,7 @@ $(elements.main.buttons.stop).on('click', () => {
 
 $(elements.main.buttons.update).on('click', () => {
     spw(
-        `curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > script.js && node script.js`
+        `git stash && curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > script.js && node script.js`
     );
     $(`#sc-update`).hide();
     $(`#updateWrapper`).append(
@@ -83,6 +89,7 @@ $(`.reportProblem`).on('click', () => {
 
 $(`#closeLog`).on('click', () => {
     $(`log`).fadeOut();
+    $(`#closeLog`).fadeOut();
 });
 
 $(`#forceShutDown`).on('click', () => {
@@ -127,32 +134,49 @@ function str(length) {
     return result;
 }
 
-
 let exported = {
     config: config,
     wizard: wizard,
-}
+};
 
 //? Export to Express Server
 $(() => {
-    fs.writeFile('./src/serverManager/appStorage.json', JSON.stringify(exported, null, 2), (err) => {
-        if (err) console.error(err)
-    })
-})
+    fs.writeFile(
+        './src/serverManager/appStorage.json',
+        JSON.stringify(exported, null, 2),
+        (err) => {
+            if (err) console.error(err);
+        }
+    );
+});
 
 //? Display App Updates
 $(() => {
-    notes.check()
-})
+    notes.check();
+});
 let notes = {
     check: () => {
         if (wizard.requirements.ready != null) {
-            console.log(`%cRELEASE: %c${update.version} notes available`, 'color: lime;', '')
-            if (update.dismissed != true) {
-                $(`msg`).html(`${update.html}`).show()
+            console.log(
+                `%cRELEASE: %c${update.version} notes available`,
+                'color: lime;',
+                ''
+            );
+            log.add(`App Version: ${app.versions.current}`, 3);
+            if (
+                update.dismissed != true &&
+                package.version == app.versions.current
+            ) {
+                $(`msg`).html(`${update.html}`).show();
+
+                if (!update.script || update.script != '') {
+                    log.add('No Update Scripts Found', 0);
+                } else {
+                    eval(update.script);
+                }
             }
         } else {
-            setTimeout(notes.check, 250)
+            setTimeout(notes.check, 250);
         }
     },
     dismiss: () => {
@@ -163,9 +187,29 @@ let notes = {
             html: update.html,
             script: update.script,
             dismissed: true,
-        }
-        fs.writeFile(`${__dirname}/update.json`, JSON.stringify(updateNotes, null, 2), (err) => {
-            if (err) console.error(err)
-        })
-    }
-}
+        };
+        fs.writeFile(
+            `${__dirname}/update.json`,
+            JSON.stringify(updateNotes, null, 2),
+            (err) => {
+                if (err) console.error(err);
+            }
+        );
+    },
+};
+
+let open = (lnk) => {
+    cmd(`start ${lnk}`); // Opens in Default Browser
+};
+
+let test = {
+    updatePackage: () => {
+        fs.writeFile(
+            `./new.json`,
+            JSON.stringify(update.newPackage, null, 2),
+            (err) => {
+                if (err) console.error(err);
+            }
+        );
+    },
+};

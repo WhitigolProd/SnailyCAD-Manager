@@ -1,6 +1,74 @@
 {
-  "version": "1.0.2",
-  "html": "<h2>Update <code>1.0.2</code></h2><h3>What's Changed?</h3><ul><li>🔨FIX: Installation Fail (Directory Exists)</li></ul><div onclick=\"notes.dismiss();\" class=\"md-btn warn raise btm\"><span class=\"material-icons-outlined\">close</span><span>Close</span></div>",
-  "script": "",
-  "dismissed": false
+    "version": "1.0.3",
+    "html": "<h2 id=\"update-1-0-3-\">Update <code>1.0.3</code></h2><h3 id=\"what-s-changed-\">What&#39;s Changed?</h3><ul><li>🔨FIX: Manager Update Silent Fail</li><li>🔨FIX: CAD Update Conflicts - Added <code>git stash</code> to update function.</li><li>🔨FIX: Removed triple notification when stopping the CAD.</li><li>🎉NEW: Update Scripts (Adds the ability to run scripts upon update)</li><li>🎉NEW: Auto Package Updates (Automatically updates packages after app update)</li><li>🎉NEW: Added <code>Shift</code> + <code>Click</code> to skip compiling <code>.env</code> when starting the CAD</li><li>🎉NEW: Added <code>DISCORD_BOT_TOKEN, DISCORD_SERVER_ID, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, STEAM_API_KEY</code> to the ENV Config</li></ul><div onclick=\"notes.dismiss()\" class=\"md-btn warn raise btm\"><span class=\"material-icons-outlined\">close</span><span>Close</span></div>",
+    "script": "",
+    "newPackage": {
+        "name": "snailycad-manager",
+        "productName": "SnailyCAD - Manager",
+        "version": "1.0.3",
+        "description": "SnailyCAD - Manager | Made by Whitigol",
+        "main": "src/index.js",
+        "icon": "public/img/icon.png",
+        "scripts": {
+            "start": "electron .",
+            "startServer": "nodemon ./src/serverManager/startServer.js",
+            "lint": "npx prettier --write .",
+            "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon './src/img/icon.png' --out 'E:\\_Web_Development_\\.electron\\[BUILDS]\\SnailyCADManager\\[1.0.2]'"
+        },
+        "keywords": [],
+        "author": {
+            "name": "WhitigolProd",
+            "email": "36452182+WhitigolProd@users.noreply.github.com"
+        },
+        "license": "MIT",
+        "config": {
+            "forge": {
+                "packagerConfig": {},
+                "makers": [
+                    {
+                        "name": "@electron-forge/maker-squirrel",
+                        "config": {
+                            "name": "sm"
+                        }
+                    },
+                    {
+                        "name": "@electron-forge/maker-zip",
+                        "platforms": ["darwin"]
+                    },
+                    {
+                        "name": "@electron-forge/maker-deb",
+                        "config": {}
+                    },
+                    {
+                        "name": "@electron-forge/maker-rpm",
+                        "config": {}
+                    }
+                ]
+            }
+        },
+        "dependencies": {
+            "command-exists": "^1.2.9",
+            "dotenv": "^16.0.1",
+            "ejs": "^3.1.8",
+            "electron-squirrel-startup": "^1.0.0",
+            "express": "^4.18.1",
+            "jquery": "^3.6.0",
+            "kill-port": "^2.0.1",
+            "parsenv": "^1.0.2",
+            "sweetalert2": "^11.4.19"
+        },
+        "devDependencies": {
+            "@electron-forge/cli": "^6.0.0-beta.61",
+            "@electron-forge/maker-deb": "^6.0.0-beta.61",
+            "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+            "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+            "@electron-forge/maker-zip": "^6.0.0-beta.61",
+            "electron": ">=19.0.7",
+            "nodemon": "^2.0.19"
+        }
+    },
+
+    "//END New Package": "\\",
+
+    "dismissed": false
 }

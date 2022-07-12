@@ -228,7 +228,11 @@
                     <span id="sc-status" data-status="offline"></span>
                 </span>
                 <div class="row">
-                    <span class="main-btn success raise" id="sc-start">
+                    <span
+                        class="main-btn success raise"
+                        id="sc-start"
+                        data-tooltip="Shift + Click to skip Compiling ENV"
+                    >
                         <span class="material-icons-outlined">play_arrow</span>
                         <span>Start SnailyCAD</span>
                     </span>
@@ -280,7 +284,9 @@
                     SnailyCAD Version: <span>Not Installed</span>
                 </div>
                 <div id="mVer">Manager Version: <span>ERROR</span></div>
-                <div id="directory">CAD Directory: <span></span></div>
+                <div id="directory" style="margin-top: 5px">
+                    <code><span></span></code>
+                </div>
             </div>
             <!-- End Version Display -->
 
@@ -385,13 +391,23 @@
                 </div>
             </update>
 
+            <!-- Log Close Button -->
+            <div
+                class="sm-btn error raise"
+                id="closeLog"
+                style="
+                    display: none;
+                    position: fixed;
+                    top: 40px;
+                    right: 20px;
+                    z-index: 10000;
+                "
+            >
+                <span class="material-icons-outlined">close</span>
+                <span>Close</span>
+            </div>
             <log style="display: none">
-                <div class="closeLog">
-                    <div class="sm-btn error raise" id="closeLog">
-                        <span class="material-icons-outlined">close</span>
-                        <span>Close</span>
-                    </div>
-                </div>
+                <!-- Log Output -->
             </log>
 
             <msg style="display: none"> </msg>
@@ -534,6 +550,62 @@
                     </label>
                 </div>
                 <div class="row">
+                    <label for="envBotToken" data-tooltip="Discord Bot Token">
+                        DISCORD_BOT_TOKEN
+                        <input
+                            type="text"
+                            name="env-DISCORD_BOT_TOKEN"
+                            id="env-DISCORD_BOT_TOKEN"
+                            placeholder="DISCORD_BOT_TOKEN"
+                        />
+                    </label>
+                    <label
+                        for="env-DISCORD_SERVER_ID"
+                        data-tooltip="Discord Server ID"
+                    >
+                        DISCORD_SERVER_ID
+                        <input
+                            type="text"
+                            name="env-DISCORD_SERVER_ID"
+                            id="env-DISCORD_SERVER_ID"
+                            placeholder="DISCORD_SERVER_ID"
+                        />
+                    </label>
+                    <label
+                        for="env-DISCORD_CLIENT_ID"
+                        data-tooltip="Discord Client ID"
+                    >
+                        DISCORD_CLIENT_ID
+                        <input
+                            type="text"
+                            name="env-DISCORD_CLIENT_ID"
+                            id="env-DISCORD_CLIENT_ID"
+                            placeholder="DISCORD_CLIENT_ID"
+                        />
+                    </label>
+                    <label
+                        for="env-DISCORD_CLIENT_SECRET"
+                        data-tooltip="Discord Client Secret"
+                    >
+                        DISCORD_CLIENT_SECRET
+                        <input
+                            type="text"
+                            name="env-DISCORD_CLIENT_SECRET"
+                            id="env-DISCORD_CLIENT_SECRET"
+                            placeholder="DISCORD_CLIENT_SECRET"
+                        />
+                    </label>
+                </div>
+                <div class="row">
+                    <label for="env-STEAM_API_KEY" data-tooltip="Steam API Key">
+                        STEAM_API_KEY
+                        <input
+                            type="text"
+                            name="env-STEAM_API_KEY"
+                            id="env-STEAM_API_KEY"
+                            placeholder="STEAM_API_KEY"
+                        />
+                    </label>
                     <label
                         for="env11"
                         data-tooltip="Only Valid when Using Domain AND SSL"
@@ -546,10 +618,7 @@
                             placeholder="SECURE_COOKIES_FOR_IFRAME"
                         />
                     </label>
-                    <label
-                        for="env14"
-                        data-tooltip="Report Errors to SnailyCAD Project Manager"
-                    >
+                    <label for="env14" data-tooltip="Report SnailyCAD Errors">
                         TELEMETRY_ENABLED
                         <input
                             type="checkbox"
@@ -568,9 +637,16 @@
                 <a
                     href="#"
                     class="bottom"
+                    style="left: 10px !important; font-size: 12px !important"
+                    onclick="cmd(`start ${app.links.manager.env}`)"
+                    >Go to .env Docs</a
+                >
+                <a
+                    href="#"
+                    class="bottom"
+                    style="right: 10px !important; font-size: 12px !important"
                     id="openEnvFile"
-                    style="font-size: 12px"
-                    >Open File</a
+                    >Open ENV File</a
                 >
             </env>
         </app>

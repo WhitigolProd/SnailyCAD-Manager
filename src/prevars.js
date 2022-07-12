@@ -5,6 +5,7 @@ window.$ = window.jQuery = require('jquery');
 //! All Requires !//
 // Add Powershell Support - DO NOT TOUCH THIS SECTION
 const { exec, spawn } = require('child_process');
+const package = require(`../package.json`);
 const popup = require('sweetalert2');
 const os = require('os');
 const uuid = os.userInfo().username;
@@ -14,6 +15,7 @@ const parsenv = require('parsenv');
 const { ipcMain } = require('electron');
 const updateFile = './update.json';
 const update = require('./update.json');
+const path = require('path');
 //! ------------ !//
 
 // Get Initial Configuration
@@ -29,7 +31,6 @@ let config = {
     firstRun: localStorage.getItem('firstRun'),
     enableWebServer: localStorage.getItem('enableWebServer'),
 };
-
 
 if (localStorage.length > 0) {
     appenv = require('dotenv').config({ path: `${__dirname}/.env` });
@@ -58,6 +59,11 @@ if (localStorage.length > 0) {
             NODE_ENV: cadenv.parsed.NODE_ENV,
             DATABASE_URL: cadenv.parsed.DATABASE_URL,
             TELEMETRY_ENABLED: cadenv.parsed.TELEMETRY_ENABLED,
+            DISCORD_BOT_TOKEN: cadenv.parsed.DISCORD_BOT_TOKEN,
+            DISCORD_SERVER_ID: cadenv.parsed.DISCORD_SERVER_ID,
+            DISCORD_CLIENT_ID: cadenv.parsed.DISCORD_CLIENT_ID,
+            DISCORD_CLIENT_SECRET: cadenv.parsed.DISCORD_CLIENT_SECRET,
+            STEAM_API_KEY: cadenv.parsed.STEAM_API_KEY,
         },
     };
 }
@@ -79,7 +85,8 @@ let app = {
         manager: {
             docs: `https://cad-manager.cossys.tk/`,
             download: `https://github.com/WhitigolProd/SnailyCAD-Manager/releases/latest`,
-            report: `https://github.com/WhitigolProd/SnailyCAD-Manager/issues/new/choose`,
+            report: `https://app.bluecatforms.com/rhLYqQQ9/bug-report`,
+            env: `https://cad-manager.cossys.tk/guides/.env-file`,
         },
         cad: {
             github: 'https://github.com/SnailyCAD/snaily-cadv4',
@@ -109,9 +116,32 @@ const setStatus = {
 
 let pre = {
     coreDir: __dirname,
-}
+};
 
-// Keep Dependencies Up to Date
+// Update package.json
 $(() => {
-    exec(`cd ../ && npm i`, { cwd: `${__dirname}` })
-})
+    if (package.version < app.versions.current) {
+        $(`msg`)
+            .html(
+                `<h2 aria-busy="true">Updating Packages</h2><p>The app will restart automatically once complete.</p>`
+            )
+            .show();
+        fs.writeFile(
+            path.join(__dirname, '../package.json'),
+            JSON.stringify(update.newPackage, null, 2),
+            (err) => {
+                if (err) console.error(err);
+            }
+        );
+
+        exec(
+            `cd ../ && npm i`,
+            { cwd: `${__dirname}` },
+            (err, stdout, stderr) => {
+                if (err) alert(err);
+                if (stdout) location.reload();
+                if (stderr) alert(stderr);
+            }
+        ); // Install/Update Dependencies
+    }
+});

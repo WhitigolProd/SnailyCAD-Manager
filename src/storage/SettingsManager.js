@@ -4,8 +4,11 @@ $(document).on('keydown', (e) => {
     if (e.ctrlKey && e.key == 'l') {
         if ($(`log`).is(':visible')) {
             $(`log`).fadeOut();
+            $(`#closeLog`).fadeOut().css('z-index', '0').css('display', 'none');
         } else {
             $(`log`).fadeIn();
+            $(`#closeLog`).fadeIn();
+            $(`#closeLog`).fadeIn().css('z-index', '10000000000000');
         }
     }
 
@@ -16,6 +19,16 @@ $(document).on('keydown', (e) => {
             $(`.settings-container`).fadeIn();
         }
     }
+});
+
+// Handle Shift Key
+$(document).on('keydown', (e) => {
+    if (e.shiftKey) {
+        shiftKeyPressed = true;
+    }
+});
+$(document).on('keyup', (e) => {
+    shiftKeyPressed = false;
 });
 
 $(`#openSettings`).on(`click`, () => {

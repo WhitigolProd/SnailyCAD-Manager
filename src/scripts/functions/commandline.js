@@ -70,13 +70,13 @@ function spw(cmd, args) {
     let command = spawn(cmd, args, { cwd: `${config.cadDir}`, shell: true });
 
     command.stdout.on('data', (stdout) => {
-        if (
-            stdout.toString().indexOf('exited with code 1') >= 0 ||
-            stdout.toString().indexOf(`port ${cad.env.PORT_API} killed`) >= 0
-        ) {
-            addToOutputStream('<b>CAD Connection Closed</b>', 'b');
+        if (stdout.toString().indexOf(`port ${cad.env.PORT_API} killed`) >= 0) {
             setStatus.cad(false);
             toast.success(`SnailyCAD Shutdown.`);
+        }
+        if (stdout.toString().indexOf('exited with code 1') >= 0) {
+            setStatus.cad(false);
+            addToOutputStream('<b>CAD Connection Closed</b>', 'b');
         }
         if (
             stdout.toString().indexOf('SnailyCADv4 was successfully updated') >=

@@ -158,7 +158,7 @@ msg {
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     inset: 0;
     width: 100%;
@@ -166,6 +166,11 @@ msg {
     background-color: $mainBG;
     z-index: 5;
     border-radius: $border;
+    padding: 15px;
+
+    * {
+        font-size: 75%;
+    }
 
     label {
         font-size: 12px;
@@ -197,7 +202,7 @@ env {
     border-radius: $border;
 
     .row {
-        margin-top: 3vh !important;
+        margin-top: 0.8vh !important;
     }
 
     label {
@@ -219,4 +224,8 @@ env {
 .btm {
     position: absolute;
     bottom: 15px;
+}
+
+[data-tooltip] {
+    cursor: auto !important;
 }

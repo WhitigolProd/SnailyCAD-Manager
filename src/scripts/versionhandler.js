@@ -3,8 +3,6 @@ let ver = {
     latest: null,
 };
 
-
-
 function checkUpdates() {
     if (localStorage.length == 0) {
         $(`load`).hide();
@@ -145,9 +143,9 @@ function updateApp(cmd, wd) {
             log.add(`${stdout.toString()}`, 0);
             ipc.send(`hard-restart`);
         }
-        if (stdout.toString().indexOf('running with version') >= 0) {
-            addToOutputStream('CAD Connection Started Successfully', 'g');
-            setStatus.cad(true);
+        if (stdout.toString().indexOf('fatal:') >= 0) {
+            log.add(`Fatal Error: ${stdout.toString()}`, 2);
+            toast.error(`Fatal Error on Update\n Check Logs`);
         }
     });
 

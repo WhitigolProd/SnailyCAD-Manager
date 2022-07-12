@@ -12,9 +12,9 @@ $lnk: lightblue;
     margin: 0 10px;
     font-size: 17px;
     padding: 10px 20px;
-    border-width: 2px;
-    border-radius: 5px;
-    border-style: solid;
+    border-width: 2px !important;
+    border-radius: 5px !important;
+    border-style: solid !important;
     cursor: pointer;
     box-shadow: 0 5px 0.5em 0px rgba(0, 0, 0, 0.8);
 
@@ -40,7 +40,7 @@ $lnk: lightblue;
     }
 
     &.success {
-        border-color: $success;
+        border-color: $success !important;
     }
 
     &.warn {
