@@ -25,11 +25,11 @@ $(`#editEnv`).on('click', () => {
         $(`#env14`).prop('checked', false);
     }
 
-    $(`#env-DISCORD_BOT_TOKEN`).val(`${cad.env.DISCORD_BOT_TOKEN}`);
-    $(`#env-DISCORD_SERVER_ID`).val(`${cad.env.DISCORD_SERVER_ID}`);
-    $(`#env-DISCORD_CLIENT_ID`).val(`${cad.env.DISCORD_CLIENT_ID}`);
-    $(`#env-DISCORD_CLIENT_SECRET`).val(`${cad.env.DISCORD_CLIENT_SECRET}`);
-    $(`#env-STEAM_API_KEY`).val(`${cad.env.STEAM_API_KEY}`);
+    $(`#env-DISCORD_BOT_TOKEN`).val(`${cad.env.DISCORD_BOT_TOKEN || ""}`);
+    $(`#env-DISCORD_SERVER_ID`).val(`${cad.env.DISCORD_SERVER_ID || ""}`);
+    $(`#env-DISCORD_CLIENT_ID`).val(`${cad.env.DISCORD_CLIENT_ID || ""}`);
+    $(`#env-DISCORD_CLIENT_SECRET`).val(`${cad.env.DISCORD_CLIENT_SECRET || ""}`);
+    $(`#env-STEAM_API_KEY`).val(`${cad.env.STEAM_API_KEY || ""}`);
 
     $(`env`).show();
 });
