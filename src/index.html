@@ -19,6 +19,12 @@
             href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
         />
         <title>SnailyCAD - Manager</title>
+
+        <!-- Convert Markdown to HTML -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"
+            defer
+        ></script>
     </head>
     <body>
         <!-- Set Background Color (In a DIV for rounded corners) -->
@@ -221,15 +227,135 @@
             </div>
             <!-- End Wizard -->
 
+            <!-- Settings Display -->
+            <dialog class="settings-container" style="display: none">
+                <article style="width: 100%">
+                    <header>
+                        SnailyCAD Manager
+                        <a
+                            aria-label="Close"
+                            href="#"
+                            class="close"
+                            id="closeSettings"
+                        >
+                        </a>
+                    </header>
+
+                    <div class="row">
+                        <div class="md-btn blue raise" id="editEnv">
+                            <span class="material-icons-outlined">edit</span>
+                            <span>Edit <code>.env</code> file</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div
+                            class="md-btn warn raise"
+                            id="start-server"
+                            onclick="toast.error('Server not Ready');"
+                            aria-busy="true"
+                        >
+                            <span class="material-icons-outlined"
+                                >play_arrow</span
+                            >
+                            <span>Start Remote Server</span>
+                        </div>
+
+                        <div
+                            class="md-btn error raise"
+                            id="stop-server"
+                            style="display: none"
+                            onclick="serverManager.stop();"
+                        >
+                            <span class="material-icons-outlined">stop</span>
+                            <span>Stop Remote Server</span>
+                        </div>
+
+                        <div
+                            class="md-btn lnk raise"
+                            id="rm-server"
+                            onclick="serverManager.dialog.open();"
+                        >
+                            <span class="material-icons-outlined">dns</span>
+                            <span>Manage Remote Server</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div
+                            class="md-btn lnk raise"
+                            onclick="windows.output.open();"
+                            id="openLog"
+                        >
+                            <span class="material-icons-outlined"
+                                >terminal</span
+                            >
+                            <span>Open Output Log</span>
+                        </div>
+
+                        <div
+                            class="md-btn lnk raise"
+                            onclick="log.openFile();"
+                            id="openLog"
+                        >
+                            <span class="material-icons-outlined">launch</span>
+                            <span>Open Log File(s)</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div
+                            class="md-btn lnk raise"
+                            onclick="cadSettings.dialog.open();"
+                        >
+                            <span class="material-icons-outlined"
+                                >settings</span
+                            >
+                            <span>CAD Settings</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div
+                            class="md-btn warn raise"
+                            onclick="settings.func.restart();"
+                        >
+                            <span class="material-icons-outlined">refresh</span>
+                            <span>Restart App</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="md-btn error raise" onclick="core.reset();">
+                            <span class="material-icons-outlined">error</span>
+                            <span>Reset Manager (Erase All Data)</span>
+                        </div>
+                    </div>
+
+                    <footer>
+                        <a href="#" onclick="settings.close();" role="button"
+                            >Close</a
+                        >
+                    </footer>
+                </article>
+            </dialog>
+            <!-- End Settings Display -->
+            <!-- End Settings -->
+
             <!-- Main Display -->
             <div class="main">
                 <span class="status">
                     CAD Status:
                     <span id="sc-status" data-status="offline"></span>
                 </span>
+                <span class="status">
+                    Server Status:
+                    <span data-status="offline"></span>
+                </span>
                 <div class="row">
                     <span
                         class="main-btn success raise"
+                        style="cursor: pointer !important"
                         id="sc-start"
                         data-tooltip="Shift + Click to skip Compiling ENV"
                     >
@@ -283,10 +409,11 @@
                 <div id="current">
                     SnailyCAD Version: <span>Not Installed</span>
                 </div>
-                <div id="mVer">Manager Version: <span>ERROR</span></div>
-                <div id="directory" style="margin-top: 5px">
-                    <code><span></span></code>
+                <div id="mVer">
+                    Manager Version: <span>ERROR</span>
+                    <a href="#" onclick="updateDialog.open();">Update Notes</a>
                 </div>
+                <code id="directory" style="margin-top: 5px"></code>
             </div>
             <!-- End Version Display -->
 
@@ -305,59 +432,6 @@
                 <span class="material-icons-outlined">settings</span>
                 <span>Settings</span>
             </div>
-
-            <!-- Settings Display -->
-            <div class="settings-container" style="display: none">
-                <div class="sm-btn error raise settingsBtn" id="closeSettings">
-                    <span class="material-icons-outlined">close</span>
-                    <span>Close</span>
-                </div>
-                <div class="header">
-                    <h2>SnailyCAD Settings</h2>
-                    <span style="margin-top: 10px"
-                        >Manage your SnailyCAD Manager settings!</span
-                    >
-                </div>
-
-                <div class="row">
-                    <div class="md-btn blue raise" id="editEnv">
-                        <span class="material-icons-outlined">edit</span>
-                        <span>Edit <code>.env</code> file</span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div
-                        class="md-btn lnk raise"
-                        onclick="$(`log`).fadeIn();"
-                        id="openLog"
-                    >
-                        <span class="material-icons-outlined">terminal</span>
-                        <span>Open Output Log</span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="md-btn warn raise" id="forceShutDown">
-                        <span class="material-icons-outlined">warning</span>
-                        <span>Force Shutdown CAD</span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="md-btn error raise" onclick="core.reset();">
-                        <span class="material-icons-outlined">error</span>
-                        <span>Reset Manager (Erase All Data)</span>
-                    </div>
-                </div>
-
-                <!-- <div class="md-btn blue raise" id="saveSettings">
-                    <span class="material-icons-outlined">save</span>
-                    <span>Save Settings</span>
-                </div> -->
-            </div>
-            <!-- End Settings Display -->
-            <!-- End Settings -->
 
             <!-- Loading Screen -->
             <load id="loadScreen" style="padding: 30px">
@@ -412,9 +486,36 @@
 
             <msg style="display: none"> </msg>
 
-            <env style="display: none">
-                <p style="margin: 0">Edit <code>.env</code></p>
-                <div class="row">
+            <dialog id="updateDialog" style="display: none">
+                <article>
+                    <header>
+                        <a
+                            href="#"
+                            aria-label="Close"
+                            class="close"
+                            onclick="updateDialog.close();"
+                        ></a>
+                        Release Notes
+                    </header>
+                    <div id="updateNotes"></div>
+                    <footer>
+                        <a
+                            href="#"
+                            onclick="updateDialog.close();"
+                            role="button"
+                            >Close</a
+                        >
+                    </footer>
+                </article>
+            </dialog>
+
+            <dialog id="envEditor" open style="display: none">
+                <article>
+                    <header>
+                        Environment Editor
+                        <code>Save at Bottom</code>
+                    </header>
+
                     <label
                         for="env1"
                         data-tooltip="Postgress Database Password."
@@ -460,8 +561,6 @@
                             placeholder="DB_PORT"
                         />
                     </label>
-                </div>
-                <div class="row">
                     <label for="env5" data-tooltip="The database name.">
                         POSTGRES_DB
                         <input
@@ -504,8 +603,6 @@
                             placeholder="CORS_ORIGIN_URL"
                         />
                     </label>
-                </div>
-                <div class="row">
                     <label
                         for="env9"
                         data-tooltip="URL/IP of the CAD API Host."
@@ -548,8 +645,6 @@
                             placeholder="PORT_API"
                         />
                     </label>
-                </div>
-                <div class="row">
                     <label for="envBotToken" data-tooltip="Discord Bot Token">
                         DISCORD_BOT_TOKEN
                         <input
@@ -595,8 +690,6 @@
                             placeholder="DISCORD_CLIENT_SECRET"
                         />
                     </label>
-                </div>
-                <div class="row">
                     <label for="env-STEAM_API_KEY" data-tooltip="Steam API Key">
                         STEAM_API_KEY
                         <input
@@ -627,28 +720,135 @@
                             placeholder="TELEMETRY_ENABLED"
                         />
                     </label>
-                </div>
-                <div class="row">
-                    <div class="md-btn blue raise" id="saveEnv">
-                        <span class="material-icons-outlined">save</span>
-                        <span>Save Changes</span>
+
+                    <footer>
+                        <a
+                            href="#"
+                            class="bottom"
+                            style="
+                                left: 10px !important;
+                                font-size: 12px !important;
+                            "
+                            onclick="cmd(`start ${app.links.manager.env}`)"
+                            >Go to .env Docs</a
+                        >
+                        <a
+                            href="#"
+                            class="bottom"
+                            style="
+                                right: 10px !important;
+                                font-size: 12px !important;
+                            "
+                            id="openEnvFile"
+                            >Open ENV File</a
+                        >
+                        <a href="#" role="button" id="saveEnv"
+                            >Save Environment Variables</a
+                        >
+                    </footer>
+                </article>
+            </dialog>
+
+            <dialog id="remoteServer">
+                <article>
+                    <header>
+                        Remote Server
+                        <a
+                            href="#"
+                            onclick="$(`#remoteServer`).removeAttr('open');"
+                            aria-label="Close"
+                            class="close"
+                        ></a>
+                    </header>
+
+                    <label
+                        for="serverIP"
+                        data-tooltip="IP Address that the server will run on. (Set to '0.0.0.0' for all available IP's)"
+                    >
+                        Server IP Address
+                        <input
+                            id="serverIP"
+                            name="serverIP"
+                            type="text"
+                            minlength="7"
+                            maxlength="15"
+                            size="15"
+                            pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
+                        />
+                    </label>
+
+                    <label
+                        for="serverPort"
+                        data-tooltip="The port that the server will run on"
+                    >
+                        Server Port
+                        <input
+                            type="number"
+                            name="serverPort"
+                            id="serverPort"
+                            min="0"
+                            minlength="4"
+                        />
+                    </label>
+
+                    <label
+                        for="serverPassword"
+                        data-tooltip="The password used to remotely manage SnailyCAD"
+                    >
+                        Server Password (Remote Access Password)
+                        <input
+                            type="text"
+                            name="serverPassword"
+                            id="serverPassword"
+                        />
+                    </label>
+
+                    <footer>
+                        <a
+                            href="#"
+                            onclick="serverManager.settings.save();"
+                            role="button"
+                            >Save</a
+                        >
+                    </footer>
+                </article>
+            </dialog>
+
+            <dialog id="cadSettings" open="false">
+                <article>
+                    <header>
+                        SnailyCAD Settings
+                        <a
+                            href="#"
+                            onclick="cadSettings.dialog.close();"
+                            class="close"
+                        ></a>
+                    </header>
+                    <div class="row">
+                        <div class="md-btn warn raise" id="forceShutDown">
+                            <span class="material-icons-outlined">warning</span>
+                            <span>Force Shutdown CAD</span>
+                        </div>
                     </div>
-                </div>
-                <a
-                    href="#"
-                    class="bottom"
-                    style="left: 10px !important; font-size: 12px !important"
-                    onclick="cmd(`start ${app.links.manager.env}`)"
-                    >Go to .env Docs</a
-                >
-                <a
-                    href="#"
-                    class="bottom"
-                    style="right: 10px !important; font-size: 12px !important"
-                    id="openEnvFile"
-                    >Open ENV File</a
-                >
-            </env>
+                    <div class="row">
+                        <div
+                            class="md-btn warn raise"
+                            onclick="cadSettings.commands.reset_node_modules();"
+                        >
+                            <span class="material-icons-outlined">warning</span>
+                            <span>Reset <code>node_modules</code></span>
+                        </div>
+                    </div>
+                    <footer>
+                        <a
+                            href="#"
+                            role="button"
+                            onclick="cadSettings.dialog.close();"
+                            >Close</a
+                        >
+                    </footer>
+                </article>
+            </dialog>
         </app>
 
         <scripts>
@@ -660,7 +860,7 @@
             <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
             <!-- In-App Scripts -->
             <script src="scripts/functions/ipc.js"></script>
-            <script src="./prevars.js"></script>
+            <script src="prevars.js"></script>
             <script src="scripts/script.js"></script>
             <script src="scripts/elements.js"></script>
             <script src="storage/StorageManager.js"></script>
@@ -670,6 +870,7 @@
             <script src="scripts/functions/commandline.js"></script>
             <script src="storage/SettingsManager.js"></script>
             <script src="scripts/functions/functions.js"></script>
+            <script src="./serverManager/api/api.js"></script>
         </scripts>
     </body>
 </html>

@@ -6,6 +6,16 @@ $(function () {
     checkUpdates();
     selfUpdate();
     $('scripts').remove(); //? Remove Scripts Tag
+    updateDialog.close();
+    fs.writeFile(
+        `${__dirname}../../logs/${new Date()
+            .toLocaleDateString()
+            .replaceAll('/', '-')}.log`,
+        '',
+        (err) => {
+            if (err) throw err;
+        }
+    ); //? Remove log file by default.
 });
 
 // Core App Functions
@@ -86,10 +96,63 @@ const log = {
             );
             console.log(`%c${data}`, style);
         }
+        // ${new Date().toLocaleDateString().replaceAll('/', '-')}
+
+        let time = new Date().toLocaleTimeString();
+        let runVersionLog = true;
+        if (
+            data.indexOf('Version Mismatch - Update Available') >= 0 ||
+            data.indexOf('Version Match - No Updates Available') >= 0
+        ) {
+            return;
+        }
+        if (
+            data.indexOf('Version Mismatch - Update Available') >= 0 ||
+            (data.indexOf('Version Match - No Updates Available') >= 0 &&
+                runVersionLog)
+        ) {
+            runVersionLog = false;
+            fs.appendFileSync(
+                `${__dirname}../../logs/${new Date()
+                    .toLocaleDateString()
+                    .replaceAll('/', '-')}.log`,
+                `${time
+                    .replaceAll(' PM', '')
+                    .replaceAll(' AM', '')}> ${data.replaceAll('%c', '')}\n`,
+                (err) => {
+                    console.error('METHOD: Append', `${err}`);
+                }
+            );
+        } else {
+            fs.appendFileSync(
+                `${__dirname}../../logs/${new Date()
+                    .toLocaleDateString()
+                    .replaceAll('/', '-')}.log`,
+                `${time
+                    .replaceAll(' PM', '')
+                    .replaceAll(' AM', '')}> ${data.replaceAll('%c', '')}\n`,
+                (err) => {
+                    console.error('METHOD: Append', `${err}`);
+                }
+            );
+        }
     },
 
     clear: () => {
         $(`log`).html(``);
+    },
+
+    openFile: () => {
+        const exec = require('child_process').exec;
+        exec(
+            'start .',
+            { cwd: `${__dirname}../../logs` },
+            (err, stdout, stderr) => {
+                if (err) throw err;
+                if (stdout) console.log(stdout);
+                if (stderr) console.log(stderr);
+            }
+        );
     },
 };
 
@@ -104,30 +167,32 @@ const toast = {
 
 // Warn of Errors on Extended Loading Times
 setTimeout(() => {
-    $(`load`).html(`
-    <h4 style="color: red;">SnailyCAD Manager Encountered an uncaught error.</h4>
-    <p>Below are likely reasons for encountering an uncaught error.</p>
-
-    <ul>
-        <li>Incorrect SnailyCAD Directory
-            <ul>
-                <li>(Installation or Pre-Existing Directory)</li>
-            </ul>
-        </li>
-        <li>Error upon SnailyCAD Installation</li>
-        <li>Deleted/Moved SnailyCAD Directory</li>
-    </ul>
-    <hr>
-    <span>You can <a href="#" onclick="core.reset();">reset</a> SnailyCAD Manager to repair errors.</span>
-    `);
+    if (!versionError) {
+        $(`load`).html(`
+        <h4 style="color: red;">SnailyCAD Manager Encountered an uncaught error.</h4>
+        <p>Below are likely reasons for encountering an uncaught error.</p>
+    
+        <ul>
+            <li>Incorrect SnailyCAD Directory
+                <ul>
+                    <li>(Installation or Pre-Existing Directory)</li>
+                </ul>
+            </li>
+            <li>Error upon SnailyCAD Installation</li>
+            <li>Deleted/Moved SnailyCAD Directory</li>
+        </ul>
+        <hr>
+        <span>You can <a href="#" onclick="core.reset();">reset</a> SnailyCAD Manager to repair errors.</span>
+        `);
+    }
 }, 5000);
 
 const preload = {
     checkEnvStatus: () => {
         if (localStorage.envPending == `true`) {
             log.add(`ENV is pending`, 1);
-            $(`env`).prepend(
-                `<p style="color: orange">You must fill out the ENV file for first run!</p>`
+            $(`#envEditor header`).append(
+                `<p style="color: orange" id="mustFilleOutEnv">You must fill out the ENV file for first run!</p>`
             );
             $(`#editEnv`).click();
         }

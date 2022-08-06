@@ -229,3 +229,51 @@ env {
 [data-tooltip] {
     cursor: auto !important;
 }
+
+#updateDialog {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px !important;
+    padding-top: 15px;
+
+    #updateNotes {
+        text-align: start;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+#envEditor {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px !important;
+    padding-top: 15px;
+
+    label {
+        border-bottom: solid 1px rgba(255, 255, 255, 0.25) !important;
+    }
+}
+
+dialog {
+    display: flex;
+    text-align: start;
+    flex-direction: column;
+    border-radius: 15px !important;
+    padding-top: 15px;
+
+    article {
+        width: 100%;
+
+        [data-tooltip] {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}

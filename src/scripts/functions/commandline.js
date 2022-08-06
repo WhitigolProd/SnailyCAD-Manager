@@ -68,6 +68,8 @@ function spw(cmd, args) {
     }
 
     let command = spawn(cmd, args, { cwd: `${config.cadDir}`, shell: true });
+    startBusy = true;
+    $(`#sc-start`).removeClass('success').addClass('warn');
 
     command.stdout.on('data', (stdout) => {
         if (stdout.toString().indexOf(`port ${cad.env.PORT_API} killed`) >= 0) {
@@ -88,7 +90,9 @@ function spw(cmd, args) {
         }
         if (stdout.toString().indexOf('Already up to date.') >= 0) {
             addToOutputStream('CAD Already Up to Date', 'b');
-            $(`#updatingCAD`).hide();
+            $(`#sc-update`).hide();
+            updateError = true;
+            $(`#current span`).text(`${ver.latest} (Up to Date Error)`);
         }
         if (stdout.toString().indexOf('exited with code 0') >= 0) {
             addToOutputStream(
@@ -116,5 +120,11 @@ function spw(cmd, args) {
         ) {
             $(`#updatingCAD`).hide();
         }
+    });
+
+    command.on('close', (code) => {
+        $(`#sc-start`).removeClass('warn').addClass('success');
+        startBusy = false;
+        toast.success(`Operation closed with code ${code}`);
     });
 }

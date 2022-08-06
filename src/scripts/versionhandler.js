@@ -24,34 +24,15 @@ function checkUpdates() {
             let ghpath = 'SnailyCAD/snaily-cadv4';
             let api = `https://api.github.com/repos/${ghpath}/tags`;
 
-            $.get(api).done(function (data) {
-                var versions = data.sort(function (v1, v2) {
-                    return semver.compare(v2.name, v1.name);
-                });
-                elements.versions.latest.text(versions[0].name);
-                ver.latest = `${versions[0].name}`;
-
-                CompareVersions();
-            });
-        })();
-
-        // Version Check every 20 seconds.
-        setInterval(() => {
-            //Current Version Check
-            (function () {
-                let user = require('os').userInfo().username;
-                let snailyjson = require(`${config.cadDir}/package.json`);
-
-                elements.versions.current.text(`${snailyjson.version}`);
-                ver.current = `${snailyjson.version}`;
-            })();
-
-            // Latest Version Check
-            (function () {
-                let ghpath = 'SnailyCAD/snaily-cadv4';
-                let api = `https://api.github.com/repos/${ghpath}/tags`;
-
-                $.get(api).done(function (data) {
+            $.get(api)
+                .fail(data => {
+                    versionError = true;
+                    toast.error(`SnailyCAD Version Check Failed. Code: ${data.status}`);
+                    log.add(`SnailyCAD Version Check Failed. Code: ${data.status}`, 2);
+                    CompareVersions(versionError);
+                })
+                .done(function (data) {
+                    versionError = false;
                     var versions = data.sort(function (v1, v2) {
                         return semver.compare(v2.name, v1.name);
                     });
@@ -60,29 +41,34 @@ function checkUpdates() {
 
                     CompareVersions();
                 });
-            })();
-        }, 20000);
+        })();
 
         // Compare Versions
         function CompareVersions() {
-            if (ver.current != ver.latest) {
-                elements.versions.current
-                    .css('color', '#ffa600')
-                    .append(` (Update <u>${ver.latest}</u> Available)`);
-                log.add(
-                    `%cVersion Mismatch - Update Available`,
-                    `background: red; font-weight: bold; padding: 2px 5px;`
-                );
-            } else {
-                elements.versions.current
-                    .css('color', 'lime')
-                    .append(' (Up to Date)');
-                log.add(
-                    `%cVersion Match - No Updates Available`,
-                    `background: green; font-weight: bold; padding: 2px 5px;`
-                );
+            if (!versionError) {
+                if (updateError) {
+                    elements.versions.current.append(' (Uncaught Update Error)');
+                    return;
+                }
+                if (ver.current != ver.latest) {
+                    elements.versions.current
+                        .css('color', '#ffa600')
+                        .append(` (Update <u>${ver.latest}</u> Available)`);
+                    log.add(
+                        `%cVersion Mismatch - Update Available`,
+                        `background: red; font-weight: bold; padding: 2px 5px;`
+                    );
+                } else {
+                    elements.versions.current
+                        .css('color', 'lime')
+                        .append(' (Up to Date)');
+                    log.add(
+                        `%cVersion Match - No Updates Available`,
+                        `background: green; font-weight: bold; padding: 2px 5px;`
+                    );
+                }
+                HandleUpdateButton();
             }
-            HandleUpdateButton();
 
             $(`#loadScreen`).fadeOut();
         }
@@ -98,40 +84,45 @@ function selfUpdate() {
         );
     }
 
-    setInterval(() => {
-        (function () {
-            let ghpath = 'WhitigolProd/scm-updater';
-            let api = `https://api.github.com/repos/${ghpath}/tags`;
+    (function () {
+        let ghpath = 'WhitigolProd/scm-updater';
+        let api = `https://api.github.com/repos/${ghpath}/tags`;
 
-            $.get(api).done(function (data) {
+        $.get(api)
+            .fail(data => {
+                versionError = true;
+                toast.error(`App Version Check Failed. Code: ${data.status}`);
+                log.add(`App Version Check Failed. Code: ${data.status}`, 2);
+            })
+            .done(function (data) {
+                versionError = false;
                 var versions = data.sort(function (v1, v2) {
                     return semver.compare(v2.name, v1.name);
                 });
                 elements.versions.latest.text(versions[0].name);
                 app.versions.latest = `${versions[0].name}`;
             });
-        })();
+    })();
 
-        if (
-            app.versions.latest > app.versions.current &&
-            !app.versions.skipUpdate
-        ) {
-            $(`update`).show();
-            $(`#titleAlt`).html(
-                `&nbsp;<span style="color: orange;">(Update ${app.versions.latest} Available)</span>`
-            );
-        }
-        if (app.versions.latest > app.versions.current) {
-            $(`#mVer span`).html(
-                `<span style="color: orange;">${app.versions.current} (${app.versions.latest} Available)</span>`
-            );
-        } else {
-            $(`update`).hide();
-            $(`#mVer span`).html(
-                `<span style="color: lime;">${app.versions.current} (Up to Date)</span>`
-            );
-        }
-    }, 1000);
+    if (
+        app.versions.latest > app.versions.current &&
+        !app.versions.skipUpdate
+    ) {
+        $(`update`).show();
+        $(`#titleAlt`).html(
+            `&nbsp;<span style="color: orange;">(Update ${app.versions.latest} Available)</span>`
+        );
+    }
+    if (app.versions.latest > app.versions.current) {
+        $(`#mVer span`).html(
+            `<span style="color: orange;">${app.versions.current} (${app.versions.latest} Available)</span>`
+        );
+    } else {
+        $(`update`).hide();
+        $(`#mVer span`).html(
+            `<span style="color: lime;">${app.versions.current} (Up to Date)</span>`
+        );
+    }
 }
 
 function updateApp(cmd, wd) {

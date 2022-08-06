@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SnailyCAD Remote Manager</title>
+        <link rel="shortcut icon" href="icon.png" type="image/png" />
+        <link rel="stylesheet" href="/index.css" />
+        <link rel="stylesheet" href="/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"
+        />
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+            rel="stylesheet"
+        />
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"
+        ></script>
+        <!-- Toasts -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
+        <style>
+            button {
+                all: unset;
+            }
+
+            [data-status='online']::after {
+                content: 'Online';
+                color: lime;
+            }
+            [data-status='offline']::after {
+                content: 'Offline';
+                color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <dialog id="access-dialog" open>
+            <form id="access-form">
+                <article>
+                    <header>Password Protected</header>
+                    <label
+                        for="access"
+                        data-tooltip="The remote access password - set inside SnailyCAD Manager"
+                    >
+                        Enter Remote Access Password
+                        <input type="password" name="access" id="access" />
+                    </label>
+                    If you are unable to manage SnailyCAD - Please check the
+                    configuration inside SnailyCAD Manager
+                    <footer>
+                        <button role="button" type="submit">Enter</button>
+                    </footer>
+                </article>
+            </form>
+        </dialog>
+
+        <div class="container container-fluid">
+            <h2>SnailyCAD Manager - Remote Access</h2>
+            <p>
+                CAD Status:
+                <code aria-busy="true" id="cadStatus">Fetching</code>
+            </p>
+            <p>Remote Directory: <code><%= exp.config.cadDir %></code></p>
+            <div
+                class="main-btn success raise"
+                onclick="vars.cad.start();"
+                style="margin-top: 30px; display: none"
+                id="startButton"
+            >
+                <span class="material-icons-outlined">play_arrow</span>
+                <span>Start SnailyCAD</span>
+            </div>
+
+            <div
+                class="main-btn error raise"
+                onclick="vars.cad.stop();"
+                style="margin-top: 30px; display: none"
+                id="stopButton"
+            >
+                <span class="material-icons-outlined">stop</span>
+                <span>Stop SnailyCAD</span>
+            </div>
+
+            <input
+                type="text"
+                id="loadPass"
+                value="<%= config.express.password %>"
+            />
+
+            <p aria-busy="true" id="buttonFetch">Fetching CAD Status</p>
+
+            <p class="bottom" id="ip">
+                For security, your IP address <code></code> is logged.
+            </p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <script src="/vars.js"></script>
+        <script src="/script.js"></script>
+    </body>
+</html>

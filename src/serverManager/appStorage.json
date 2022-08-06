@@ -1,0 +1,27 @@
+{
+  "config": {
+    "cadDir": "C:\\Users\\Whitigol\\Desktop\\CAD\\snaily-cadv4",
+    "cadPort": "3000",
+    "cadAPI": "8080",
+    "nodeEnv": "production",
+    "firstRun": "false",
+    "enableWebServer": null
+  },
+  "wizard": {
+    "requirements": {
+      "git": true,
+      "node": true,
+      "yarn": true,
+      "psql": true,
+      "ready": true
+    },
+    "store": {
+      "cadDir": null,
+      "cadPort": null,
+      "cadAPI": null
+    }
+  },
+  "cad": {
+    "cad": "false"
+  }
+}

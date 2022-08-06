@@ -263,13 +263,16 @@ function wz(cmd, wd) {
 }
 
 // Wait for requirements to be checked
+let ranRequirements = false;
 function waitForRequirements() {
     if (
         wizard.requirements.git != null &&
         wizard.requirements.node != null &&
         wizard.requirements.psql != null &&
-        wizard.requirements.yarn != null
+        wizard.requirements.yarn != null &&
+        ranRequirements == false
     ) {
+        ranRequirements = true;
         log.add('Requirement Check Complete', 3);
         wizard.requirements.ready = true;
         verifyReq();

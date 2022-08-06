@@ -40,6 +40,20 @@ const createWindow = () => {
         mainWindow.close();
     });
 
+    ipc.on('status', (e, arg) => {
+        if (arg == true) {
+            mainWindow.setOverlayIcon(
+                path.join(__dirname, '../public/img/online.png'),
+                'SnailyCAD Online'
+            );
+        } else {
+            mainWindow.setOverlayIcon(
+                path.join(__dirname, '../public/img/offline.png'),
+                'SnailyCAD Offline'
+            );
+        }
+    });
+
     ipc.on('minimize-app', () => {
         mainWindow.minimize();
     });
@@ -62,6 +76,10 @@ const createWindow = () => {
             .catch((err) => {
                 alert(err);
             });
+    });
+
+    ipc.on('startCad', () => {
+        render.send('api-startCad');
     });
 };
 

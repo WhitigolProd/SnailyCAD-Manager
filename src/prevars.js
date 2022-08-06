@@ -12,10 +12,14 @@ const uuid = os.userInfo().username;
 const fs = require('fs');
 let notif = new Notyf();
 const parsenv = require('parsenv');
-const { ipcMain } = require('electron');
+const { ipcMain, ipcRenderer } = require('electron');
+const ipc = ipcRenderer;
 const updateFile = './update.json';
 const update = require('./update.json');
 const path = require('path');
+const showdown = require(`showdown`);
+const convert = new showdown.Converter();
+const pm2 = require('pm2');
 //! ------------ !//
 
 // Get Initial Configuration
@@ -25,9 +29,6 @@ let config = {
     cadPort: localStorage.getItem('cadPort'),
     cadAPI: localStorage.getItem('cadAPI'),
     nodeEnv: 'production',
-    color: localStorage.getItem('color'),
-    autoStart: localStorage.getItem('autoStart'),
-    openOnStartup: localStorage.getItem('openOnStartup'),
     firstRun: localStorage.getItem('firstRun'),
     enableWebServer: localStorage.getItem('enableWebServer'),
 };
@@ -73,11 +74,12 @@ let links = {
     node: ``,
 };
 
+let updateError = false;
 let app = {
     env: null,
 
     versions: {
-        current: '1.0.2', // Must be set before releasing each update.
+        current: '1.0.3', // Must be set before releasing each update.
         latest: null, // Sets Dynamically
         skipUpdate: false, // Whether to skip updating the latest version (Updates Dynamically).
     },
@@ -102,8 +104,8 @@ let st = {
 
 //? Display CAD Directory
 $(() => {
-    $(`.versions #directory span`)
-        .css('opacity', '.5')
+    $(`#directory`)
+        // .css('opacity', '.5')
         .text(`${config.cadDir}`);
 });
 
@@ -145,3 +147,5 @@ $(() => {
         ); // Install/Update Dependencies
     }
 });
+
+let startBusy = false; // Tells the app if the start button can't be pressed.
