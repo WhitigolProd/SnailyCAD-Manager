@@ -169,9 +169,11 @@ setInterval(() => {
                 if (element.name === 'scm-remote') {
                     if (element.pid != 0) {
                         serverManager.status = true;
+                        $(`#serverStatus span`).attr('data-status', 'online');
                     }
                     if (element.pid == 0) {
                         serverManager.status = false;
+                        $(`#serverStatus span`).attr('data-status', 'offline');
                     }
                 }
             });
