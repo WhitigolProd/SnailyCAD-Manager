@@ -1,7 +1,7 @@
 {
   "version": "1.0.3",
-  "md": "Update `v1.0.3` hotfix `1`\r\n----------\r\n\r\n### What's Changed?\r\n\r\n-   🔨FIX: Downloading `1.0.3` as a fresh installation would result in the app detecting `v1.0.2` as it's current version.",
+  "md": "Release | `v1.0.4`\r\n-------\r\n\r\n### What's Changed?\r\n[GitHub Release `v1.0.4`](https://github.com/WhitigolProd/SnailyCAD-Manager/releases/tags/1.0.4/)\r\n\r\n### Fixed\r\n---\r\n- 🔨 Shift Key variable not set to `false` by default.\r\n- 🔨 #6 Some `.env` inputs displayed `undefined` by default. Changed `undefined` to empty string. Fix by @Dev-CasperTheGhost \r\n- 🔨 App Restart Method (Added hard-reload)\r\n- 🔨 Output Log open function updated to fit with new Settings Window style\r\n- 🔨 Removed Interval for Version Checks (Results in exceeded GitHub API Rate Limit)\r\n\r\n### New\r\n---\r\n- 🎉 New Settings Window (Changed to modal-style window)\r\n- 🎉 New Update Notes Style (Changed to modal-style window)\r\n- 🎉 New Update Notes Display Method (Uses markdown converted to HTML)\r\n- 🎉 Added Output Log File (File format will follow `MM-DD-YYYY.log`)\r\n- 🎉 Added handling for uncaught CAD update errors\r\n- 🎉 Closing SnailyCAD Manager will dock it in your taskbar instead of actually closing the app.\r\n- 🎉 Added ability to reset `node_modules` in SnailyCAD",
   "script": "",
   "newPackage": {},
-  "dismissed": true
+  "dismissed": false
 }
