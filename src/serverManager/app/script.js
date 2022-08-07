@@ -6,7 +6,6 @@ setInterval(() => {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.clear();
             vars.console.log(`API Fetched`);
             vars.api.result = data;
 
@@ -30,24 +29,9 @@ setInterval(() => {
         });
 }, 1500);
 
-let password = [[[[[[[[[[[[[[[[$(`#loadPass`).val()]]]]]]]]]]]]]]]];
-
 $(`#loadPass`).remove();
 
 let passwordCorrect = false;
-let checkpass = () => {
-    if (
-        $(`#access`).val() ===
-        password[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0]
-    ) {
-        $(`#access-dialog`).attr('open', false);
-        passwordCorrect = true;
-        vars.toast.success(`Welcome to SnailyCAD Remote Manager!`);
-        return true;
-    } else {
-        vars.toast.error(`Incorrect Password - Please try again.`);
-    }
-};
 
 let tamperErrorShown = false;
 setInterval(() => {
@@ -95,5 +79,15 @@ $.getJSON('https://api.ipify.org?format=json', function (data) {
 
 $(`#access-form`).on('submit', (e) => {
     e.preventDefault();
-    checkpass();
+    $.post('/api/login', {
+        password: $(`#access`).val()
+    }, (data) => {
+        if (data.access === true) {
+            passwordCorrect = true;
+            $(`#access-dialog`).attr('open', false);
+            vars.toast.success(`Welcome to SnailyCAD Remote Manager!`);
+        } else {
+            vars.toast.error(`Incorrect Password - Please try again.`);
+        }
+    })
 });

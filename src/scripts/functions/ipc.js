@@ -1,7 +1,27 @@
 const control = {
     app: {
-        close: function () {
-            ipc.send('close-app');
+        close: function (cb) {
+            pm2.stop('scm-remote');
+            setInterval(() => {
+                pm2.list((err, desc) => {
+                    if (err) {
+                        throw err;
+                    }
+                    if (desc) {
+                        desc.forEach(element => {
+                            if (element.name === 'scm-remote') {
+                                if (element.pid == 0) {
+                                    if (typeof cb == "function") {
+                                        cb();
+                                    }
+                                } else {
+                                    console.log('PID Not Zero');
+                                }
+                            }
+                        });
+                    }
+                })
+            }, 200)
         },
 
         minimize: function () {

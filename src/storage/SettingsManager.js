@@ -59,11 +59,10 @@ let settings = {
             popup
                 .fire({
                     title: 'App Restart',
-                    html: `<p style="color: red; font-weight: bold;">Please select a restart method.</p>`,
-                    icon: 'error',
+                    html: `Please select a restart method.`,
                     showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d35',
                     confirmButtonText: 'Normal Restart (Refresh)',
                     cancelButtonText: 'Hard Restart',
                 })

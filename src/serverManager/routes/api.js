@@ -4,6 +4,7 @@ const router = express.Router();
 require(`../exports`); // Require Exported Variables
 const path = require(`path`);
 const fs = require('fs');
+const config = require('../config.json')
 
 let remote = {
     json: {
@@ -28,8 +29,21 @@ let remote = {
 };
 
 router.get('/', (req, res) => {
-    res.render('denied');
+    res.send('Access Denied - This is an API route, and can only be accessed by the app.');
 });
+
+router.post('/login', (req, res) => {
+    let password = req.body.password;
+    if (password === config.express.password) {
+        res.json({
+            access: true
+        })
+    } else {
+        res.json({
+            access: false
+        })
+    }
+})
 
 router.post('/start', (req, res) => {
     remote.json.cad.start = true;
