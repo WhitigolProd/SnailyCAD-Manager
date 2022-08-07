@@ -42,12 +42,12 @@ const createWindow = () => {
     ipc.on('status', (e, arg) => {
         if (arg == true) {
             mainWindow.setOverlayIcon(
-                path.join(__dirname, '../public/img/online.png'),
+                path.join(__dirname, '../src/img/online.png'),
                 'SnailyCAD Online'
             );
         } else {
             mainWindow.setOverlayIcon(
-                path.join(__dirname, '../public/img/offline.png'),
+                path.join(__dirname, '../src/img/offline.png'),
                 'SnailyCAD Offline'
             );
         }

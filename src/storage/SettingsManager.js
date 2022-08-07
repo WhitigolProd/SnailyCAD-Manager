@@ -111,7 +111,7 @@ let serverManager = {
             };
 
             fs.writeFile(
-                './src/serverManager/config.json',
+                path.join(__dirname, './serverManager/config.json'),
                 JSON.stringify(newServerSettings, null, 2),
                 (err) => {
                     if (err) {

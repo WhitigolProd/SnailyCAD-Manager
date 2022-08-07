@@ -15,7 +15,7 @@ const control = {
                                         cb();
                                     }
                                 } else {
-                                    console.log('PID Not Zero');
+                                    console.log('Server Not Closed');
                                 }
                             }
                         });
