@@ -9,7 +9,7 @@
         "start": "electron .",
         "startServer": "nodemon ./src/serverManager/startServer.js",
         "lint": "npx prettier --write .",
-        "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon './src/img/icon.png' --out 'E:\\_Web_Development_\\.electron\\[BUILDS]\\SnailyCADManager\\[1.0.3]'"
+        "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon './src/img/icon.png' --out 'E:\\_Web_Development_\\.electron\\[BUILDS]\\SnailyCADManager\\[1.0.4]'"
     },
     "keywords": [],
     "author": {

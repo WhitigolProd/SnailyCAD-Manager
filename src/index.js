@@ -1,7 +1,6 @@
 const { exec } = require('child_process');
 const electron = require('electron');
 const { dialog } = require('electron');
-const pm2 = require('pm2')
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const ipc = ipcMain;
@@ -37,7 +36,6 @@ const createWindow = () => {
 
     // Main Window Functions
     ipc.on('close-app', () => {
-        pm2.stop('scm-remote');
         mainWindow.close();
     });
 
