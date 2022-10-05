@@ -6,9 +6,9 @@
 >
 > And a thank you to all who have used SnailyCAD Manager along it's development process.
 
-| Resource                     | Link           |
-| ---------------------------- | -------------- |
-| SnailyCAD Manager v1         | Download (exe) |
-| SnailyCAD Manager v1 Archive | Soon™          |
-| SnailyCAD Manager v2         | Soon™          |
-| --                           | --             |
+| Resource                     | Link                                         |
+| ---------------------------- | -------------------------------------------- |
+| SnailyCAD Manager v1         | [Download (exe)](https://manager.cossys.tk/) |
+| SnailyCAD Manager v1 Archive | Soon™                                        |
+| SnailyCAD Manager v2         | Soon™                                        |
+| --                           | --                                           |
