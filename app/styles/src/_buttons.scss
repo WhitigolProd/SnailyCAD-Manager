@@ -1,0 +1,52 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid;
+    border-radius: 5px;
+    transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
+
+    * {
+        margin-right: 5px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &.success {
+        background-color: rgba($color: lime, $alpha: 0.05);
+        border-color: rgba($color: lime, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: lime, $alpha: 0.3);
+            border-color: rgba($color: lime, $alpha: 1);
+        }
+    }
+    &.info {
+        background-color: rgba($color: cornflowerblue, $alpha: 0.05);
+        border-color: rgba($color: cornflowerblue, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: cornflowerblue, $alpha: 0.3);
+            border-color: rgba($color: cornflowerblue, $alpha: 1);
+        }
+    }
+    &.warning {
+        background-color: rgba($color: orange, $alpha: 0.05);
+        border-color: rgba($color: orange, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: orange, $alpha: 0.3);
+            border-color: rgba($color: orange, $alpha: 1);
+        }
+    }
+    &.error {
+        background-color: rgba($color: red, $alpha: 0.05);
+        border-color: rgba($color: red, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: red, $alpha: 0.3);
+            border-color: rgba($color: red, $alpha: 1);
+        }
+    }
+}

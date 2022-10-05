@@ -1,0 +1,33 @@
+{
+  "name": "snailycad-manager-v2",
+  "version": "0.0.1",
+  "description": "Easily manage SnailyCAD v4 with an easy-to-understand GUI.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WhitigolProd/SnailyCAD-Manager.git"
+  },
+  "keywords": [
+    "SnailyCAD",
+    "SnailyCAD-v4",
+    "SnailyCAD-Manager",
+    "Snaily",
+    "CAD",
+    "MDT",
+    "CAD/MDT"
+  ],
+  "author": "Whitigol Web Design",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WhitigolProd/SnailyCAD-Manager/issues"
+  },
+  "homepage": "https://github.com/WhitigolProd/SnailyCAD-Manager#readme",
+  "dependencies": {
+    "electron": "^21.0.1",
+    "jquery": "^3.6.1"
+  }
+}

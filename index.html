@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./app/styles/dist/index.min.css" />
+    <title>Document</title>
+
+    <script src="./app/pre.js" defer"></script>
+    <script src="./app/main.js" defer></script>
+  </head>
+  <body>
+    <div class="titlebar">
+      SnailyCAD Manager
+      <div class="appButtons">
+        <i class="mio" id="tb_min">remove</i>
+        <i class="mio" id="tb_fs">square</i>
+        <i class="mio" id="tb_cls">close</i>
+      </div>
+    </div>
+
+    <div class="main">
+      <article>
+        <header>SnailyCAD Manager</header>
+        <div class="btn success">
+          <i class="mio">check</i>
+          <span>Success Button</span>
+        </div>
+        <div class="btn info">
+          <i class="mio">info</i>
+          <span>Info Button</span>
+        </div>
+        <div class="btn warning">
+          <i class="mio">warning</i>
+          <span>Warning Button</span>
+        </div>
+        <div class="btn error">
+          <i class="mio">error</i>
+          <span>Error Button</span>
+        </div>
+      </article>
+
+      <article>
+        <header>Additional Tools</header>
+      </article>
+    </div>
+
+    <script defer>
+      window.$ = window.jQuery = require("jquery");
+    </script>
+  </body>
+</html>
