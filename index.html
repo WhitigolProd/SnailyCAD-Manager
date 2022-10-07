@@ -7,46 +7,44 @@
     <link rel="stylesheet" href="./app/styles/dist/index.min.css" />
     <title>Document</title>
 
-    <script src="./app/pre.js" defer"></script>
-    <script src="./app/main.js" defer></script>
+    <script src="./app/scripts/load.js" defer></script>
   </head>
   <body>
+    <div class="bg"><!-- Set Bakcground --></div>
     <div class="titlebar">
       SnailyCAD Manager
       <div class="appButtons">
-        <i class="mio" id="tb_min">remove</i>
-        <i class="mio" id="tb_fs">square</i>
-        <i class="mio" id="tb_cls">close</i>
+        <i class="mio" id="tb_min" onclick="app.minimize();">remove</i>
+        <i class="mio" id="tb_fs" onclick="app.maximize();">square</i>
+        <i class="mio" id="tb_cls" onclick="app.close();">close</i>
       </div>
     </div>
 
     <div class="main">
-      <article>
+      <article class="scm">
         <header>SnailyCAD Manager</header>
-        <div class="btn success">
-          <i class="mio">check</i>
-          <span>Success Button</span>
+        <div class="row center-itms center-justify">
+          <div id="snailyStatus">SnailyCAD Status: <code>LOADING</code></div>
         </div>
-        <div class="btn info">
-          <i class="mio">info</i>
-          <span>Info Button</span>
-        </div>
-        <div class="btn warning">
-          <i class="mio">warning</i>
-          <span>Warning Button</span>
-        </div>
-        <div class="btn error">
-          <i class="mio">error</i>
-          <span>Error Button</span>
-        </div>
-      </article>
 
-      <article>
-        <header>Additional Tools</header>
+        <div class="row center-itms space-even-justify">
+          <div class="btn success">
+            <i class="mio">play_arrow</i>
+            <span>Start SnailyCAD</span>
+          </div>
+        </div>
       </article>
     </div>
 
+    <!-- Partials -->
+    <div
+      class="fullscreen requirements"
+      partial="./src/partials/requirements.html"
+    ></div>
+    <!-- End Partials -->
+
     <script defer>
+      let exports = {};
       window.$ = window.jQuery = require("jquery");
     </script>
   </body>

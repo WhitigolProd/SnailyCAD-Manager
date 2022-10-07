@@ -1,0 +1,31 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.center-itms {
+  align-items: center;
+}
+
+.center-justify {
+  justify-content: center;
+}
+
+.space-even-justify {
+  justify-content: space-evenly;
+}
+
+.fullscreen {
+  border-radius: var(--fs-border);
+  height: calc(100vh - 30px);
+}
