@@ -130,4 +130,5 @@ dist
 .pnp.*
 
 # Compiled from Typescript
-# app/**/*.js
+app/**/*.js
+!app/styles/dist/
