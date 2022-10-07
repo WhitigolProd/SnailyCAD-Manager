@@ -12,6 +12,7 @@ let scriptImports = [
   "/app/scripts/utils/utils.js",
   "/app/scripts/utils/storage.js",
   "/app/scripts/utils/requirements.js",
+  "/app/scripts/utils/versions.js",
 ];
 
 scriptImports.forEach((script) => {

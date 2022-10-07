@@ -9,6 +9,7 @@
   border: 1px solid;
   border-radius: 5px;
   transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
+  color: hsl(205deg, 16%, 77%);
 
   * {
     margin-right: 5px;
@@ -50,4 +51,31 @@
       border-color: rgba($color: red, $alpha: 1);
     }
   }
+
+  &.sm {
+    padding: 4px 8px;
+    font-size: 14px;
+    .material-symbols-outlined {
+      font-size: 14px !important;
+    }
+  }
+  &.md {
+    padding: 6px 10px;
+    font-size: 16px;
+    .material-symbols-outlined {
+      font-size: 14px !important;
+    }
+  }
+  &.lg {
+    padding: 8px 12px;
+    font-size: 18px;
+    .material-symbols-outlined {
+      font-size: 14px !important;
+    }
+  }
+}
+
+// Reset Pico Margin for <button> tag
+button {
+  margin: 0;
 }

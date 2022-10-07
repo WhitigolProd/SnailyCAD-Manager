@@ -29,3 +29,18 @@
   border-radius: var(--fs-border);
   height: calc(100vh - 30px);
 }
+
+dialog {
+  border-radius: 15px;
+
+  article > footer {
+    display: flex;
+    flex-direction: row-reverse;
+    > * {
+      margin-right: 10px;
+      &:first-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
