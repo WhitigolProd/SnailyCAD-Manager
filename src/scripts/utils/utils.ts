@@ -3,6 +3,7 @@ const path = require("path");
 const { spawn, exec } = require("child_process");
 const commandExists = require("command-exists");
 const findProcess = require("find-process");
+require("whit-toasts");
 
 const app = {
   close: () => {
@@ -35,4 +36,13 @@ const log = (
 const launchURL = (url: string) => {
   log(`Launching URL: ${url}`, "info");
   return ipc.send("url", url);
+};
+
+const modal = {
+  show: (querySelector: string) => {
+    $(querySelector).attr("open", "");
+  },
+  hide: (querySelector: string) => {
+    $(querySelector).attr("open", "false");
+  },
 };

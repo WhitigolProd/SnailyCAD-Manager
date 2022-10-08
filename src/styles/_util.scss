@@ -32,6 +32,7 @@
 
 dialog {
   border-radius: 15px;
+  padding-top: 30px;
 
   article > footer {
     display: flex;
@@ -43,4 +44,8 @@ dialog {
       }
     }
   }
+}
+
+.material-symbols-outlined {
+  font-size: inherit !important;
 }

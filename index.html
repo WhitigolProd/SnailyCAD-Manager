@@ -11,32 +11,10 @@
   </head>
   <body>
     <div class="bg"><!-- Set Bakcground --></div>
-    <div class="titlebar">
-      SnailyCAD Manager
-      <div class="appButtons">
-        <i class="mio" id="tb_min" onclick="app.minimize();">remove</i>
-        <i class="mio" id="tb_fs" onclick="app.maximize();">square</i>
-        <i class="mio" id="tb_cls" onclick="app.close();">close</i>
-      </div>
-    </div>
-
-    <div class="main">
-      <article class="scm">
-        <header>SnailyCAD Manager</header>
-        <div class="row center-itms center-justify">
-          <div id="snailyStatus">SnailyCAD Status: <code>LOADING</code></div>
-        </div>
-
-        <div class="row center-itms space-even-justify">
-          <div class="btn success">
-            <i class="mio">play_arrow</i>
-            <span>Start SnailyCAD</span>
-          </div>
-        </div>
-      </article>
-    </div>
+    <div class="titlebar" partial="./src/partials/titlebar.html"></div>
 
     <!-- Partials -->
+    <div class="main" partial="./src/partials/main.html"></div>
     <div
       class="fullscreen requirements"
       partial="./src/partials/requirements.html"

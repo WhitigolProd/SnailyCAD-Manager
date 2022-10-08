@@ -1,6 +1,6 @@
 {
   "name": "snailycad-manager-v2",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-dev.0",
   "description": "Easily manage SnailyCAD v4 with an easy-to-understand GUI.",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,8 @@
     "electron": "^21.0.1",
     "find-process": "^1.4.7",
     "jquery": "^3.6.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "whit-toasts": "^1.2.0"
   },
   "devDependencies": {
     "@types/glob": "^8.0.0",

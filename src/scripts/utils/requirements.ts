@@ -71,6 +71,7 @@ const checkRequirements = async () => {
   });
 
   log("Requirement Tests Complete — Checking Status", "info");
+  checkAppVersion();
 
   if (
     requirements.git &&

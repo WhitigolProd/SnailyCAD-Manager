@@ -36,10 +36,10 @@ const createWindow = () => {
         mainWindow.minimize();
     })
     ipcMain.on('maximize', () => {
-        if (mainWindow.isMaximized()) {
-            return mainWindow.restore();
+        if (mainWindow.isFullScreen()) {
+            return mainWindow.setFullScreen(false);
         }
-        return mainWindow.maximize();
+        return mainWindow.setFullScreen(true);
     })
     ipcMain.on('url', (e, arg) => {
         shell.openExternal(arg)

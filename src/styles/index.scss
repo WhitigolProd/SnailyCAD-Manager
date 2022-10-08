@@ -1,3 +1,4 @@
+@import "./layers";
 @import url("https://unpkg.com/@picocss/pico@latest/css/pico.min.css");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
@@ -33,7 +34,6 @@ body {
 }
 
 .bg {
-  z-index: -1;
   position: fixed;
   height: 100vh;
   width: 100vw;

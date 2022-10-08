@@ -1,0 +1,6 @@
+.bg {
+  z-index: -1;
+}
+.titlebar {
+  z-index: 10000000; // Always on top. Why? Because it's the damn titlebar!
+}
