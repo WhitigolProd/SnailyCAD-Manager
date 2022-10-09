@@ -4,6 +4,7 @@ const { app, ipcMain, BrowserWindow, shell } = require('electron');
 
 const createWindow = () => {
     let mainWindow = new BrowserWindow({
+        title: 'SnailyCAD Manager',
         height: 600,
         minHeight: 600,
         width: 700,
@@ -11,6 +12,7 @@ const createWindow = () => {
         transparent: true,
         alwaysOnTop: true, // To prevent focus-loss on startup.
         titleBarStyle: 'hidden',
+        icon: __dirname + '/public/icon-white-bg.png',
         show: false,
         webPreferences: {
             nodeIntegration: true,

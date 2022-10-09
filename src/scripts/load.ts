@@ -13,6 +13,7 @@ let scriptImports = [
   "/app/scripts/utils/storage.js",
   "/app/scripts/utils/requirements.js",
   "/app/scripts/utils/versions.js",
+  "/app/scripts/utils/wizard.js",
 ];
 
 scriptImports.forEach((script) => {
@@ -26,6 +27,9 @@ $(async () => {
   }, 150);
   ipcRenderer.send("focus");
   await checkRequirements();
+  console.log(
+    `Okay... But why Snaily? Hmm.. Probably FiveM's mascot Snail.. Or maybe not 🤔👀`
+  );
 });
 
 // * Import HTML Partials

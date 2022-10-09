@@ -4,3 +4,11 @@
 .titlebar {
   z-index: 10000000; // Always on top. Why? Because it's the damn titlebar!
 }
+
+.requirements {
+  z-index: 100;
+}
+
+.wizard {
+  z-index: 1;
+}

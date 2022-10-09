@@ -5,10 +5,17 @@ const storage = {
   read: (key: string) => {
     return localStorage.getItem(key);
   },
+  delete: (key: string) => {
+    return localStorage.removeItem(key);
+  },
+  drop: () => {
+    return localStorage.clear();
+  },
 };
 
 // ! Current Storage Keys
 /*
 runWizard
- 
+cadDir
 */
+let appStorage = localStorage;

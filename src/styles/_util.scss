@@ -26,26 +26,29 @@
 }
 
 .fullscreen {
+  position: absolute;
   border-radius: var(--fs-border);
   height: calc(100vh - 30px);
+  width: 100vw;
+  margin-top: 30px;
+  background-color: var(--background-color);
 }
 
-dialog {
-  border-radius: 15px;
-  padding-top: 30px;
-
-  article > footer {
-    display: flex;
-    flex-direction: row-reverse;
-    > * {
-      margin-right: 10px;
-      &:first-child {
-        margin-right: 0;
-      }
+article > footer {
+  display: flex;
+  flex-direction: row-reverse;
+  > * {
+    margin-right: 10px;
+    &:first-child {
+      margin-right: 0;
     }
   }
 }
 
 .material-symbols-outlined {
   font-size: inherit !important;
+}
+
+.text-muted {
+  color: hsla(0, 0%, 100%, 0.215);
 }
