@@ -15,10 +15,10 @@
 
 ## Contributors
 
-| Contributor                                     | Version |
-| ----------------------------------------------- | ------- |
-| [Casper](https://github.com/Dev-CasperTheGhost) | v1      |
-| [sharki](https://github.com/subtosharki)        | v1      |
-| --                                              | --      |
+| Contributor                                     | Contribution(s)                                                                                           |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [Casper](https://github.com/Dev-CasperTheGhost) | [View Contributions](https://github.com/WhitigolProd/SnailyCAD-Manager/commits?author=Dev-CasperTheGhost) |
+| [sharki](https://github.com/subtosharki)        | [View Contributions](https://github.com/WhitigolProd/SnailyCAD-Manager/commits?author=subtosharki)        |
+| --                                              | --                                                                                                        |
 
 If you would like to contribute to the development of SnailyCAD Manager v2, feel free to fork the code and open a Pull Request!
