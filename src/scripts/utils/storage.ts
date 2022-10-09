@@ -1,5 +1,5 @@
 // ! Current Storage Keys
-type storageKeys = "wizardComplete" | "cadDir";
+type storageKeys = "wizardComplete" | "cadDir" | "dismissedUpdate";
 
 // * Storage Class
 const storeClass = class {
