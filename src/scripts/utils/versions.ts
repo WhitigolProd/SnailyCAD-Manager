@@ -22,7 +22,7 @@ const checkAppVersion = async () => {
           .css("color", "orange")
           .append(`<i class="mio">warning</i>`);
         $("#app_latest_version").text(latest);
-        modal.show("#d-app-version");
+        modal("#d-app-version").open();
       }
 
       if (current > latest) {

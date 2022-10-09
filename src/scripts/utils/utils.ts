@@ -38,11 +38,23 @@ const launchURL = (url: string) => {
   return ipc.send("url", url);
 };
 
-const modal = {
-  show: (querySelector: string) => {
-    $(querySelector).attr("open", "");
-  },
-  hide: (querySelector: string) => {
-    $(querySelector).attr("open", "false");
-  },
+const modalClass = class {
+  selector;
+
+  constructor(selector: string) {
+    this.selector = selector;
+  }
+
+  open() {
+    $(this.selector).attr("open", "");
+  }
+  close() {
+    $(this.selector).removeAttr("open");
+  }
 };
+
+const modal = (querySelector: string) => {
+  return new modalClass(querySelector);
+};
+
+const elements = {};

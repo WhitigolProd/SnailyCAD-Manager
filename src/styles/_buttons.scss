@@ -75,6 +75,15 @@
   }
 }
 
+* {
+  > .btn {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 // Reset Pico Margin for <button> tag
 button {
   margin: 0;
