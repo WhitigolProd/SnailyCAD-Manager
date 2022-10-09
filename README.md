@@ -12,3 +12,13 @@
 | SnailyCAD Manager v1 Archive | [Visit Archive](https://github.com/WhitigolProd/SnailyCAD-Manager/tree/v1-archive) |
 | SnailyCAD Manager v2         | Soon™                                                                              |
 | --                           | --                                                                                 |
+
+## Contributors
+
+| Contributor                                     | Version |
+| ----------------------------------------------- | ------- |
+| [Casper](https://github.com/Dev-CasperTheGhost) | v1      |
+| [sharki](https://github.com/subtosharki)        | v1      |
+| --                                              | --      |
+
+If you would like to contribute to the development of SnailyCAD Manager v2, feel free to fork the code and open a Pull Request!
