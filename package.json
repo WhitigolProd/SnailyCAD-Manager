@@ -29,12 +29,14 @@
   "dependencies": {
     "command-exists": "^1.2.9",
     "electron": "^21.0.1",
+    "express": "^4.18.2",
     "find-process": "^1.4.7",
     "jquery": "^3.6.1",
     "typescript": "^4.8.4",
     "whit-toasts": "^1.2.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.14",
     "@types/glob": "^8.0.0",
     "@types/jquery": "^3.5.14"
   }
