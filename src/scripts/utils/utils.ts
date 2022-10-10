@@ -1,19 +1,19 @@
-const ipc = require("electron").ipcRenderer;
-const path = require("path");
-const { spawn, exec } = require("child_process");
-const commandExists = require("command-exists");
-const findProcess = require("find-process");
-require("whit-toasts");
+const ipc = require('electron').ipcRenderer;
+const path = require('path');
+const { spawn, exec } = require('child_process');
+const commandExists = require('command-exists');
+const findProcess = require('find-process');
+require('whit-toasts');
 
 const app = {
   close: () => {
-    return ipc.send("close");
+    return ipc.send('close');
   },
   minimize: () => {
-    return ipc.send("minimize");
+    return ipc.send('minimize');
   },
   maximize: () => {
-    return ipc.send("maximize");
+    return ipc.send('maximize');
   },
 };
 
@@ -23,19 +23,19 @@ const fromRoot = (query: string) => {
 
 const log = (
   string: string,
-  type: "success" | "info" | "warning" | "error" | "neutral"
+  type: 'success' | 'info' | 'warning' | 'error' | 'neutral'
 ) => {
-  if (type === "success") return console.log("%c" + string, "color: lime;");
-  if (type === "info") return console.log("%c" + string, "color: lightblue;");
-  if (type === "warning") return console.log("%c" + string, "color: orange;");
-  if (type === "error") return console.log("%c" + string, "color: red;");
-  if (type === "neutral") return console.log(string);
+  if (type === 'success') return console.log('%c' + string, 'color: lime;');
+  if (type === 'info') return console.log('%c' + string, 'color: lightblue;');
+  if (type === 'warning') return console.log('%c' + string, 'color: orange;');
+  if (type === 'error') return console.log('%c' + string, 'color: red;');
+  if (type === 'neutral') return console.log(string);
   console.log(string);
 };
 
 const launchURL = (url: string) => {
-  log(`Launching URL: ${url}`, "info");
-  return ipc.send("url", url);
+  log(`Launching URL: ${url}`, 'info');
+  return ipc.send('url', url);
 };
 
 const modalClass = class {
@@ -46,10 +46,10 @@ const modalClass = class {
   }
 
   open() {
-    $(this.selector).attr("open", "");
+    $(this.selector).attr('open', '');
   }
   close() {
-    $(this.selector).removeAttr("open");
+    $(this.selector).removeAttr('open');
   }
 };
 
