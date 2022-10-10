@@ -80,5 +80,6 @@ const checkRequirements = async () => {
     requirements.yarn
   ) {
     $(".requirements").hide();
+    await cadCheck();
   }
 };

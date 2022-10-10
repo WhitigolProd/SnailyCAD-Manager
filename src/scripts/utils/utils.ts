@@ -57,4 +57,17 @@ const modal = (querySelector: string) => {
   return new modalClass(querySelector);
 };
 
+const utilsClass = class {
+  query: any;
+
+  constructor(query: any) {
+    this.query = query;
+  }
+
+  toString() {
+    // * Convert query to string
+    return `${this.query}`;
+  }
+};
+
 const elements = {};

@@ -36,3 +36,43 @@ const checkAppVersion = async () => {
 
   setTimeout(checkAppVersion, 1800000); // Check every 30 minutes for a new version.
 };
+
+// * Get SnailyCAD Version
+
+let cad = {
+  version: {
+    current: "",
+    latest: "",
+  },
+};
+
+const cadCheck = async () => {
+  if (storage("cadDir").read()) {
+    $.get(storage("cadDir").read() + "\\package.json").then(async (data) => {
+      let v = data.version;
+      cad.version.current = v;
+      $("#sc_version").text("v" + v);
+      await checkLatest();
+    });
+    const checkLatest = async () => {
+      await $.get(
+        "https://api.github.com/repos/SnailyCAD/snaily-cadv4/releases"
+      ).then(async (data) => {
+        let v = data[0].tag_name;
+        cad.version.latest = v;
+
+        await compare();
+      });
+    };
+
+    const compare = async () => {
+      if (cad.version.current < cad.version.latest) {
+        $("#sc_latest")
+          .text(`(v${cad.version.latest} available)`)
+          .css("color", "orange");
+        log("CAD Versions out of Sync — Update Available", "warning");
+      }
+    };
+  }
+  return;
+};

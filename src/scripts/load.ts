@@ -18,6 +18,7 @@ let scriptImports = [
 
 scriptImports.forEach((script) => {
   $(`head`).append(`<script src=".${script}" defer></script>`);
+  console.log(`${script} — Applied to Head`);
 });
 
 // * On page load
