@@ -1,23 +1,51 @@
 .scm {
-  width: 80vw;
+    width: 80vw;
 }
 
 .requirements {
-  position: absolute;
-  margin-top: var(--fs-margin-top);
-  width: 100vw;
-  background-color: var(--background-color);
+    position: absolute;
+    margin-top: var(--fs-margin-top);
+    width: 100vw;
+    background-color: var(--background-color);
 }
 
 .tools {
-  width: 80vw;
+    width: 80vw;
 }
 
 .wizard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  article {
-    width: 80vw;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    article {
+        width: 80vw;
+    }
+}
+
+#log_output {
+    > article {
+        width: 80vw;
+
+        > .logs {
+            padding: 10px;
+            border-radius: 5px;
+            height: 250px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            background-color: hsla(0, 0, 0, 50%);
+            font-size: 14px;
+            * {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                &::before {
+                    content: 'LOG>';
+                    margin-right: 5px;
+                    font-size: 12px;
+                    color: hsla(0, 0%, 100%, 0.2);
+                }
+            }
+        }
+    }
 }

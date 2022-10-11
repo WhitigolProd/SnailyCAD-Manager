@@ -5,9 +5,13 @@
   </div>
 
   <div class="row center-itms space-even-justify">
-    <div class="btn success">
+    <div class="btn success" id="start_cad" data-tooltip="Shift + Click to skip build">
       <i class="mio">play_arrow</i>
       <span>Start SnailyCAD</span>
+    </div>
+    <div class="btn error hidden">
+      <i class="mio">stop</i>
+      <span>Stop SnailyCAD</span>
     </div>
     <div class="btn info">
       <i class="mio">download</i>
@@ -19,7 +23,7 @@
 <article class="tools">
   <header>Additional Tools</header>
   <div class="row center-itms space-even-justify">
-    <div class="btn md info" onclick="modal('#d-app-settings').open();">
+    <div class="btn md info" onclick="modal('#app_settings').open();">
       <i class="mio">settings</i>
       <span>App Settings</span>
     </div>

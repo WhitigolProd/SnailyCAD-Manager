@@ -1,27 +1,31 @@
-<dialog id="d-app-settings">
-  <article>
-    <header>
-      App Settings
-      <span class="muted sm">Modify app Settings</span>
-      <a href="#" class="close"></a>
-    </header>
+<dialog id="app_settings">
+    <article>
+        <header>
+            App Settings
+            <span class="muted sm">Modify app Settings</span>
+            <a
+                href="#"
+                class="close"
+                onclick="modal('#app_settings').open();"
+            ></a>
+        </header>
 
-    <div class="row">
-      <div class="btn md success">
-        <i class="mio">play_arrow</i>
-        <span>Start Remote Server</span>
-      </div>
-      <div class="btn md info">
-        <i class="mio">settings_remote</i>
-        <span>Server Settings</span>
-      </div>
-    </div>
+        <div class="row">
+            <div class="btn md success">
+                <i class="mio">play_arrow</i>
+                <span>Start Remote Server</span>
+            </div>
+            <div class="btn md info">
+                <i class="mio">settings_remote</i>
+                <span>Server Settings</span>
+            </div>
+        </div>
 
-    <footer>
-      <div class="btn md error">
-        <i class="mio">close</i>
-        <span>Close Settings</span>
-      </div>
-    </footer>
-  </article>
+        <footer>
+            <div class="btn md error" onclick="modal('#app_settings').close();">
+                <i class="mio">close</i>
+                <span>Close Settings</span>
+            </div>
+        </footer>
+    </article>
 </dialog>

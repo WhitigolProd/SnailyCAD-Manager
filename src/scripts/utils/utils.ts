@@ -6,68 +6,94 @@ const findProcess = require('find-process');
 require('whit-toasts');
 
 const app = {
-  close: () => {
-    return ipc.send('close');
-  },
-  minimize: () => {
-    return ipc.send('minimize');
-  },
-  maximize: () => {
-    return ipc.send('maximize');
-  },
+    close: () => {
+        return ipc.send('close');
+    },
+    minimize: () => {
+        return ipc.send('minimize');
+    },
+    maximize: () => {
+        return ipc.send('maximize');
+    },
 };
 
 const fromRoot = (query: string) => {
-  return path.join(__dirname, query);
+    return path.join(__dirname, query);
 };
 
 const log = (
-  string: string,
-  type: 'success' | 'info' | 'warning' | 'error' | 'neutral'
+    string: string,
+    type: 'success' | 'info' | 'warning' | 'error' | 'neutral'
 ) => {
-  if (type === 'success') return console.log('%c' + string, 'color: lime;');
-  if (type === 'info') return console.log('%c' + string, 'color: lightblue;');
-  if (type === 'warning') return console.log('%c' + string, 'color: orange;');
-  if (type === 'error') return console.log('%c' + string, 'color: red;');
-  if (type === 'neutral') return console.log(string);
-  console.log(string);
+    const scrollBottom = () => {
+        return $('.logs').scrollTop($('.logs').prop('scrollHeight'));
+    };
+
+    if (type === 'success') {
+        $('.logs').append(`<span style="color: lime;">${string}</span>`);
+        scrollBottom();
+        return console.log('%c' + string, 'color: lime;');
+    }
+    if (type === 'info') {
+        $('.logs').append(`<span style="color: lightblue;">${string}</span>`);
+        scrollBottom();
+        return console.log('%c' + string, 'color: lightblue;');
+    }
+    if (type === 'warning') {
+        $('.logs').append(`<span style="color: orange;">${string}</span>`);
+        scrollBottom();
+        return console.log('%c' + string, 'color: orange;');
+    }
+    if (type === 'error') {
+        $('.logs').append(`<span style="color: red;">${string}</span>`);
+        scrollBottom();
+        return console.log('%c' + string, 'color: red;');
+    }
+    if (type === 'neutral') {
+        $('.logs').append(`<span>${string}</span>`);
+        scrollBottom();
+        return console.log(string);
+    }
+    $('.logs').append(`<span>${string}</span>`);
+    scrollBottom();
+    console.log(string);
 };
 
 const launchURL = (url: string) => {
-  log(`Launching URL: ${url}`, 'info');
-  return ipc.send('url', url);
+    log(`Launching URL: ${url}`, 'info');
+    return ipc.send('url', url);
 };
 
 const modalClass = class {
-  selector;
+    selector;
 
-  constructor(selector: string) {
-    this.selector = selector;
-  }
+    constructor(selector: string) {
+        this.selector = selector;
+    }
 
-  open() {
-    $(this.selector).attr('open', '');
-  }
-  close() {
-    $(this.selector).removeAttr('open');
-  }
+    open() {
+        $(this.selector).attr('open', '');
+    }
+    close() {
+        $(this.selector).removeAttr('open');
+    }
 };
 
 const modal = (querySelector: string) => {
-  return new modalClass(querySelector);
+    return new modalClass(querySelector);
 };
 
 const utilsClass = class {
-  query: any;
+    query: any;
 
-  constructor(query: any) {
-    this.query = query;
-  }
+    constructor(query: any) {
+        this.query = query;
+    }
 
-  toString() {
-    // * Convert query to string
-    return `${this.query}`;
-  }
+    toString() {
+        // * Convert query to string
+        return `${this.query}`;
+    }
 };
 
 const elements = {};
