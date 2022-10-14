@@ -27,6 +27,8 @@
         width: 80vw;
 
         > .logs {
+            position: relative;
+            scroll-behavior: smooth;
             padding: 10px;
             border-radius: 5px;
             height: 250px;

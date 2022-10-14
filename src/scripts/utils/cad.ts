@@ -1,3 +1,5 @@
+const checkStatus = async () => {};
+
 const checkOutput = async (data: string) => {
     if (data.indexOf('SnailyCADv4 is running') >= 1) {
         $('#start_cad').hide();

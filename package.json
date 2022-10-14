@@ -1,43 +1,83 @@
 {
-  "name": "snailycad-manager-v2",
-  "version": "2.0.0-dev.0",
-  "description": "Easily manage SnailyCAD v4 with an easy-to-understand GUI.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WhitigolProd/SnailyCAD-Manager.git"
-  },
-  "keywords": [
-    "SnailyCAD",
-    "SnailyCAD-v4",
-    "SnailyCAD-Manager",
-    "Snaily",
-    "CAD",
-    "MDT",
-    "CAD/MDT"
-  ],
-  "author": "Whitigol Web Design",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/WhitigolProd/SnailyCAD-Manager/issues"
-  },
-  "homepage": "https://github.com/WhitigolProd/SnailyCAD-Manager#readme",
-  "dependencies": {
-    "command-exists": "^1.2.9",
-    "electron": "^21.0.1",
-    "express": "^4.18.2",
-    "find-process": "^1.4.7",
-    "jquery": "^3.6.1",
-    "typescript": "^4.8.4",
-    "whit-toasts": "^1.2.0"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.14",
-    "@types/glob": "^8.0.0",
-    "@types/jquery": "^3.5.14"
-  }
+    "name": "snailycad-manager-v2",
+    "version": "2.0.0-dev.0",
+    "description": "Easily manage SnailyCAD v4 with an easy-to-understand GUI.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "electron-forge start",
+        "compile": "tsc",
+        "watch": "tsc --watch",
+        "build": "electron-packager . \"SnailyCAD Manager\" --overwrite --icon 'public/icon-white-bg.png' --ignore \".*\\.\\(tx\\|tsx\\)\" --out 'E:/_Web_Development_/.electron/BUILDS/SnailyCADManager/[2.0.0]'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/WhitigolProd/SnailyCAD-Manager.git"
+    },
+    "keywords": [
+        "SnailyCAD",
+        "SnailyCAD-v4",
+        "SnailyCAD-Manager",
+        "Snaily",
+        "CAD",
+        "MDT",
+        "CAD/MDT"
+    ],
+    "author": "Whitigol Web Design",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/WhitigolProd/SnailyCAD-Manager/issues"
+    },
+    "homepage": "https://github.com/WhitigolProd/SnailyCAD-Manager#readme",
+    "config": {
+        "forge": {
+            "packagerConfig": {},
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": {
+                        "name": "snailycad_manager"
+                    }
+                },
+                {
+                    "name": "@electron-forge/maker-zip",
+                    "platforms": [
+                        "darwin"
+                    ]
+                },
+                {
+                    "name": "@electron-forge/maker-deb",
+                    "config": {}
+                },
+                {
+                    "name": "@electron-forge/maker-rpm",
+                    "config": {}
+                }
+            ]
+        }
+    },
+    "dependencies": {
+        "command-exists": "^1.2.9",
+        "dotenv": "^16.0.3",
+        "electron-squirrel-startup": "^1.0.0",
+        "express": "^4.18.2",
+        "find-process": "^1.4.7",
+        "jquery": "^3.6.1",
+        "parsenv": "^1.0.2",
+        "pm2": "^5.2.0",
+        "typescript": "^4.8.4",
+        "whit-toasts": "^1.2.0"
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "^6.0.0-beta.61",
+        "@electron-forge/maker-deb": "^6.0.0-beta.61",
+        "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+        "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+        "@electron-forge/maker-zip": "^6.0.0-beta.61",
+        "@types/express": "^4.17.14",
+        "@types/glob": "^8.0.0",
+        "@types/jquery": "^3.5.14",
+        "electron": "^21.1.0",
+        "electron-packager": "^16.0.0"
+    }
 }

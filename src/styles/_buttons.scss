@@ -1,87 +1,89 @@
 .btn {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-  width: fit-content;
-  height: fit-content;
-  border: 1px solid;
-  border-radius: 5px;
-  transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out;
-  color: hsl(205deg, 16%, 77%);
+    cursor: pointer !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    width: fit-content;
+    height: fit-content;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-radius: 5px;
+    transition: background-color 200ms ease-in-out,
+        border-color 200ms ease-in-out;
+    color: hsl(205deg, 16%, 77%);
 
-  * {
-    margin-right: 5px;
+    * {
+        margin-right: 5px;
 
-    &:last-child {
-      margin-right: 0;
+        &:last-child {
+            margin-right: 0;
+        }
     }
-  }
 
-  &.success {
-    background-color: rgba($color: lime, $alpha: 0.05);
-    border-color: rgba($color: lime, $alpha: 0.5);
-    &:hover {
-      background-color: rgba($color: lime, $alpha: 0.3);
-      border-color: rgba($color: lime, $alpha: 1);
+    &.success {
+        background-color: rgba($color: lime, $alpha: 0.05);
+        border-color: rgba($color: lime, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: lime, $alpha: 0.3);
+            border-color: rgba($color: lime, $alpha: 1);
+        }
     }
-  }
-  &.info {
-    background-color: rgba($color: cornflowerblue, $alpha: 0.05);
-    border-color: rgba($color: cornflowerblue, $alpha: 0.5);
-    &:hover {
-      background-color: rgba($color: cornflowerblue, $alpha: 0.3);
-      border-color: rgba($color: cornflowerblue, $alpha: 1);
+    &.info {
+        background-color: rgba($color: cornflowerblue, $alpha: 0.05);
+        border-color: rgba($color: cornflowerblue, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: cornflowerblue, $alpha: 0.3);
+            border-color: rgba($color: cornflowerblue, $alpha: 1);
+        }
     }
-  }
-  &.warning {
-    background-color: rgba($color: orange, $alpha: 0.05);
-    border-color: rgba($color: orange, $alpha: 0.5);
-    &:hover {
-      background-color: rgba($color: orange, $alpha: 0.3);
-      border-color: rgba($color: orange, $alpha: 1);
+    &.warning {
+        background-color: rgba($color: orange, $alpha: 0.05);
+        border-color: rgba($color: orange, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: orange, $alpha: 0.3);
+            border-color: rgba($color: orange, $alpha: 1);
+        }
     }
-  }
-  &.error {
-    background-color: rgba($color: red, $alpha: 0.05);
-    border-color: rgba($color: red, $alpha: 0.5);
-    &:hover {
-      background-color: rgba($color: red, $alpha: 0.3);
-      border-color: rgba($color: red, $alpha: 1);
+    &.error {
+        background-color: rgba($color: red, $alpha: 0.05);
+        border-color: rgba($color: red, $alpha: 0.5);
+        &:hover {
+            background-color: rgba($color: red, $alpha: 0.3);
+            border-color: rgba($color: red, $alpha: 1);
+        }
     }
-  }
 
-  &.sm {
-    padding: 4px 8px;
-    font-size: 14px;
-    .material-symbols-outlined {
-      font-size: 14px !important;
+    &.sm {
+        padding: 4px 8px;
+        font-size: 14px;
+        .material-symbols-outlined {
+            font-size: 14px !important;
+        }
     }
-  }
-  &.md {
-    padding: 6px 10px;
-    font-size: 16px;
-    .material-symbols-outlined {
-      font-size: 14px !important;
+    &.md {
+        padding: 6px 10px;
+        font-size: 16px;
+        .material-symbols-outlined {
+            font-size: 14px !important;
+        }
     }
-  }
-  &.lg {
-    padding: 8px 12px;
-    font-size: 18px;
-    .material-symbols-outlined {
-      font-size: 14px !important;
+    &.lg {
+        padding: 8px 12px;
+        font-size: 18px;
+        .material-symbols-outlined {
+            font-size: 14px !important;
+        }
     }
-  }
 }
 
 * {
-  > .btn {
-    margin: 0 5px;
-  }
+    > .btn {
+        margin: 0 5px;
+    }
 }
 
 // Reset Pico Margin for <button> tag
 button {
-  margin: 0;
+    margin: 0;
 }

@@ -3,7 +3,9 @@ const path = require('path');
 const { spawn, exec } = require('child_process');
 const commandExists = require('command-exists');
 const findProcess = require('find-process');
+let toast: any;
 require('whit-toasts');
+const pm2 = require('pm2'); // * For Remote Server
 
 const app = {
     close: () => {
@@ -45,9 +47,9 @@ const log = (
         return console.log('%c' + string, 'color: orange;');
     }
     if (type === 'error') {
-        $('.logs').append(`<span style="color: red;">${string}</span>`);
+        $('.logs').append(`<span style="color: #ff5757;">${string}</span>`);
         scrollBottom();
-        return console.log('%c' + string, 'color: red;');
+        return console.log('%c' + string, 'color: #ff5757;');
     }
     if (type === 'neutral') {
         $('.logs').append(`<span>${string}</span>`);
@@ -72,6 +74,10 @@ const modalClass = class {
     }
 
     open() {
+        if (this.selector == 'output_log') {
+            $('.logs').scrollTop($('.logs').prop('scrollHeight'));
+        }
+
         $(this.selector).attr('open', '');
     }
     close() {
