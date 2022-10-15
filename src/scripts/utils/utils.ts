@@ -6,6 +6,7 @@ const findProcess = require('find-process');
 let toast: any;
 require('whit-toasts');
 const pm2 = require('pm2'); // * For Remote Server
+const express = require('express');
 
 const app = {
     close: () => {
@@ -100,6 +101,29 @@ const utilsClass = class {
         // * Convert query to string
         return `${this.query}`;
     }
+};
+
+let cadProcess: any;
+
+const api = {
+    get: (query: string, cb: (data: any, err: any) => void) => {
+        $.get(`http://localhost:30789${query}`)
+            .then((data) => {
+                return cb(data, undefined);
+            })
+            .catch((err) => {
+                return cb(undefined, err);
+            });
+    },
+    post: (query: string, data: object, cb: (data: any, err: any) => void) => {
+        $.post(`http://localhost:30789${query}`, data)
+            .then((data) => {
+                return cb(data, undefined);
+            })
+            .catch((err) => {
+                return cb(undefined, err);
+            });
+    },
 };
 
 const elements = {};
