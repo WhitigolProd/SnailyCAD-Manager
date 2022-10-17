@@ -68,11 +68,13 @@ const cadCheck = async () => {
                     .text(`(v${cad.version.latest} available)`)
                     .css('color', 'orange');
                 log('CAD Versions out of Sync — Update Available', 'warning');
+                return;
             }
         };
+    } else {
+        return log(
+            'CAD Version Error: Could not check CAD Version since a CAD Directory was not specified.',
+            'error'
+        );
     }
-    return log(
-        'CAD Version Error: Could not check CAD Version since a CAD Directory was not specified.',
-        'error'
-    );
 };
