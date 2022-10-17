@@ -1,9 +1,15 @@
+let cadLoading: boolean = false;
 const getCadStatus = async () => {
     let client_status: boolean = false;
     let api_status: boolean = false;
 
     const updateButtons = async () => {
-        if (!client_status && !api_status) {
+        if (cadLoading) {
+            $('#starting_cad').hide();
+            $('#start_cad').show();
+            $('#stop_cad').hide();
+        }
+        if (!client_status && !api_status && !cadLoading) {
             $('#starting_cad').hide();
             $('#start_cad').show();
             $('#stop_cad').hide();

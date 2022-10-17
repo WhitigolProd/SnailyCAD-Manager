@@ -1,11 +1,18 @@
-// @ts-nocheck beacuse typescript doesn't seem to know how tf express works :)
-import express, { Application, Request, Response } from 'express';
-const app: Application = express();
+const remApp = express();
 
-app.listen(3000);
+remApp.set('view engine', 'ejs');
+remApp.set('views', fromRoot('/src/scripts/utils/remote/views'));
+remApp.use(express.static(fromRoot('/app/styles/dist/')));
 
-app.get('/', (req, res) => {
-    res.status(200).send({
-        message: 'SnailyCAD Manager Remote Server Boilerplate Created!',
-    });
+remApp.listen(storage('remPort').read() || '4000', () => {
+    log(
+        `Remote Server running @ 0.0.0.0:${
+            storage('remPort').read() || '4000'
+        }`,
+        'success'
+    );
+});
+
+remApp.get('/', (req: any, res: any) => {
+    res.render('index');
 });

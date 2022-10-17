@@ -54,7 +54,7 @@ const checkRequirements = async () => {
             .css('color', 'orange');
         log('Requirement YARN Failed', 'warning');
     });
-    await findProcess('name', 'postgres.exe').then((list: []) => {
+    await findProcess('name', 'postgres0.exe').then((list: []) => {
         if (list.length >= 1) {
             $('.rqPsql')
                 .text('PASSED')
@@ -64,14 +64,14 @@ const checkRequirements = async () => {
             return (requirements.psql = true);
         }
         $('.rqPsql')
-            .html('FAILED<br>(Make sure the service is running on your system)')
+            .html('FAILED (Make sure the service is installed & running)')
             .attr('aria-busy', 'false')
             .css('color', 'orange');
         log('Requirement PSQL Failed', 'warning');
     });
 
-    log('Requirement Tests Complete — Checking Status', 'info');
-    checkAppVersion();
+    log('Requirement Tests Complete — Checking Versions', 'info');
+    await checkAppVersion();
 
     if (
         requirements.git &&

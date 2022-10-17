@@ -99,8 +99,8 @@ const envClass = class {
                 return currentenv.parsed.STEAM_API_KEY;
             }
         }
-        toast.warning('ENV Error: NO_CAD_DIRECTORY');
         log('ENV Warning: NO_CAD_DIRECTORY', 'warning');
+        return null;
     }
 };
 

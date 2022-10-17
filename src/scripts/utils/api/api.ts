@@ -2,12 +2,16 @@ const appAPI = express();
 const bodyParser = require('body-parser');
 
 const getStatus = (port: any) => {
-    findProcess('port', port).then((list: any) => {
-        if (list.length >= 0) {
-            return true;
-        }
+    if (port) {
+        findProcess('port', port).then((list: any) => {
+            if (list.length >= 0) {
+                return true;
+            }
+            return false;
+        });
+    } else {
         return false;
-    });
+    }
 };
 
 appAPI.use(bodyParser.urlencoded({ extended: true }));
@@ -30,6 +34,10 @@ appAPI.get('/', async (req: any, res: any) => {
 });
 
 appAPI.post('/start', async (req: any, res: any) => {
+    cadLoading = true;
+    setTimeout(() => {
+        cadLoading = false;
+    }, 10000);
     if (req.body.keys.shift) {
         cadProcess = spawn(
             `yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
