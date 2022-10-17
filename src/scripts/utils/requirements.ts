@@ -54,7 +54,7 @@ const checkRequirements = async () => {
             .css('color', 'orange');
         log('Requirement YARN Failed', 'warning');
     });
-    await findProcess('name', 'postgres0.exe').then((list: []) => {
+    await findProcess('name', 'postgres.exe').then((list: []) => {
         if (list.length >= 1) {
             $('.rqPsql')
                 .text('PASSED')
