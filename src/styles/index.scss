@@ -25,6 +25,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     overflow-x: hidden;
+    user-select: none;
 }
 
 .main {

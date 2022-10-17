@@ -10,7 +10,6 @@ $(document).on('keydown', async (e) => {
 
     // * Toggle Shift Key
     if (e.shiftKey) {
-        log('Shift Down', 'info');
         return (keys.shift = true);
     }
 
@@ -28,7 +27,6 @@ $(document).on('keydown', async (e) => {
 // * Key Releases
 $(document).on('keyup', (e) => {
     if (e.key == 'Shift') {
-        log('Shift Up', 'info');
         return (keys.shift = false);
     }
 });
