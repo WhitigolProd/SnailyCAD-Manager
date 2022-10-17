@@ -1,15 +1,19 @@
 <article class="scm">
   <header><span>SnailyCAD <span id="sc_version" class="muted"></span> <span id="sc_latest"></span></span></header>
   <div class="row center-itms center-justify">
-    <div id="snailyStatus">SnailyCAD Status: <code>LOADING</code></div>
+    <div id="snailyStatus">SnailyCAD Status: <code><span id="status_loading">LOADING</span><span id="status_client"></span>&nbsp;|&nbsp;<span id="status_api"></span></code></div>
   </div>
 
   <div class="row center-itms space-even-justify">
-    <div class="btn success" id="start_cad" data-tooltip="Shift + Click to skip build">
+    <div class="btn success" id="start_cad" onclick="startCad();" data-tooltip="Shift + Click to skip build" style="display: none;">
       <i class="mio">play_arrow</i>
       <span>Start SnailyCAD</span>
     </div>
-    <div class="btn error hidden">
+    <div class="btn warning" id="starting_cad" onclick="toast.warning('Please Wait...')">
+      <span aria-busy="true"></span>
+      <span>Loading</span>
+    </div>
+    <div class="btn error hidden" id="stop_cad" onclick="stopCad();" style="display: none;">
       <i class="mio">stop</i>
       <span>Stop SnailyCAD</span>
     </div>
@@ -28,7 +32,7 @@
       <span>App Settings</span>
     </div>
   <div class="row center-itms space-even-justify">
-    <div class="btn md info">
+    <div class="btn md info" onclick="modal('#toolbox').open();">
       <i class="mio">construction</i>
       <span>Open Additional Tools</span>
     </div>

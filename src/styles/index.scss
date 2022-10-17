@@ -1,42 +1,47 @@
-@import "./layers";
-@import url("https://unpkg.com/@picocss/pico@latest/css/pico.min.css");
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
-@import "./util";
-@import "./titlebar";
-@import "./buttons";
-@import "./sections";
+@import './layers';
+@import url('https://unpkg.com/@picocss/pico@latest/css/pico.min.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+@import './util';
+@import './titlebar';
+@import './buttons';
+@import './sections';
+@font-face {
+    font-family: 'CascadiaCode';
+    src: url('./../../../public/fonts/CascadiaCode.ttf') format('truetype'),
+        url('./../../../public/fonts/CascadiaCode.woff2') format('woff2');
+}
 
 :root {
-  --fs-border: 0 0 15px 15px;
-  --fs-margin-top: 30px;
+    --fs-border: 0 0 15px 15px;
+    --fs-margin-top: 30px;
 }
 
 html,
 body {
-  background-color: transparent;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow-x: hidden;
+    background-color: transparent;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-x: hidden;
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 30px;
-  width: 100vw;
-  background-color: var(--background-color);
-  border-radius: 0 0 15px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+    width: 100vw;
+    background-color: var(--background-color);
+    border-radius: 0 0 15px 15px;
 }
 
 .bg {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--background-color);
-  border-radius: 15px;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--background-color);
+    border-radius: 15px;
 }
