@@ -3,6 +3,7 @@ let requirements = {
     node: false,
     yarn: false,
     psql: false,
+    complete: false,
 };
 
 const checkRequirements = async () => {
@@ -80,6 +81,7 @@ const checkRequirements = async () => {
         requirements.yarn
     ) {
         $('.requirements').hide();
+        await loadWizard();
         await cadCheck();
     }
 };

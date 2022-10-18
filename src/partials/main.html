@@ -1,39 +1,67 @@
 <article class="scm">
-  <header><span>SnailyCAD <span id="sc_version" class="muted"></span> <span id="sc_latest"></span></span></header>
-  <div class="row center-itms center-justify">
-    <div id="snailyStatus">SnailyCAD Status: <code><span id="status_loading">LOADING</span><span id="status_client"></span>&nbsp;|&nbsp;<span id="status_api"></span></code></div>
-  </div>
+    <header>
+        <span
+            >SnailyCAD <span id="sc_version" class="muted"></span>
+            <span id="sc_latest"></span
+        ></span>
+    </header>
+    <div class="row center-itms center-justify">
+        <div id="snailyStatus">
+            SnailyCAD Status:
+            <code
+                ><span id="status_loading">LOADING</span
+                ><span id="status_client"></span>&nbsp;|&nbsp;<span
+                    id="status_api"
+                ></span
+            ></code>
+        </div>
+    </div>
 
-  <div class="row center-itms space-even-justify">
-    <div class="btn success" id="start_cad" onclick="startCad();" data-tooltip="Shift + Click to skip build" style="display: none;">
-      <i class="mio">play_arrow</i>
-      <span>Start SnailyCAD</span>
+    <div class="row center-itms space-even-justify">
+        <div
+            class="btn success"
+            id="start_cad"
+            onclick="startCad();"
+            data-tooltip="Shift + Click to skip build"
+            style="display: none"
+        >
+            <i class="mio">play_arrow</i>
+            <span>Start SnailyCAD</span>
+        </div>
+        <div
+            class="btn warning"
+            id="starting_cad"
+            onclick="toast.warning('Please Wait...')"
+        >
+            <span aria-busy="true"></span>
+            <span>Loading</span>
+        </div>
+        <div
+            class="btn error hidden"
+            id="stop_cad"
+            onclick="stopCad();"
+            style="display: none"
+        >
+            <i class="mio">stop</i>
+            <span>Stop SnailyCAD</span>
+        </div>
+        <div class="btn info">
+            <i class="mio">download</i>
+            <span>Update SnailyCAD</span>
+        </div>
     </div>
-    <div class="btn warning" id="starting_cad" onclick="toast.warning('Please Wait...')">
-      <span aria-busy="true"></span>
-      <span>Loading</span>
-    </div>
-    <div class="btn error hidden" id="stop_cad" onclick="stopCad();" style="display: none;">
-      <i class="mio">stop</i>
-      <span>Stop SnailyCAD</span>
-    </div>
-    <div class="btn info">
-      <i class="mio">download</i>
-      <span>Update SnailyCAD</span>
-    </div>
-  </div>
 </article>
 
 <article class="tools">
-  <header>Additional Tools</header>
-  <div class="row center-itms space-even-justify">
-    <div class="btn md info" onclick="modal('#app_settings').open();">
-      <i class="mio">settings</i>
-      <span>App Settings</span>
-    </div>
-  <div class="row center-itms space-even-justify">
-    <div class="btn md info" onclick="modal('#toolbox').open();">
-      <i class="mio">construction</i>
-      <span>Open Additional Tools</span>
+    <header>Additional Tools</header>
+    <div class="row center-itms space-even-justify">
+        <div class="btn md info" onclick="modal('#app_settings').open();">
+            <i class="mio">settings</i>
+            <span>App Settings</span>
+        </div>
+        <div class="btn md info" onclick="modal('#toolbox').open();">
+            <i class="mio">construction</i>
+            <span>Open Additional Tools</span>
+        </div>
     </div>
 </article>

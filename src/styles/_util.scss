@@ -53,6 +53,13 @@ article {
     }
 }
 
+.inner {
+    overflow-y: auto;
+    max-height: 45vh;
+    background-color: var(--card-sectionning-background-color);
+    border-radius: 5px;
+}
+
 .material-symbols-outlined {
     font-size: inherit !important;
 }
@@ -68,6 +75,10 @@ article {
 dialog {
     border-radius: 15px;
     padding-top: 47px;
+
+    article {
+        max-height: 90vh;
+    }
 }
 
 .tag {

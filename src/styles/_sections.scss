@@ -13,12 +13,9 @@
     width: 80vw;
 }
 
-.wizard {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    article {
-        width: 80vw;
+.wizard_steps {
+    > article {
+        width: 90vw;
     }
 }
 

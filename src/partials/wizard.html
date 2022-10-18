@@ -1,29 +1,75 @@
 <div class="wizard_steps">
-    <form id="wizard_1">
-        <article>
-            <header>
-                Welcome to the Setup Wizard!
-                <span class="text-muted"
-                    >Your Snaily experience starts here!</span
-                >
-            </header>
+    <article>
+        <header>
+            Welcome to the Setup Wizard!
+            <span class="muted">It all starts here!</span>
+        </header>
 
-            <p>
-                SnailyCAD Manager is built to ease the setup and use of
-                SnailyCAD v4.
-            </p>
-            <p>
-                Please follow the wizard instructions to set up your SnailyCAD
-                Manager!
-            </p>
-            <span>Click "Next" to continue</span>
+        <p>
+            SnailyCAD Manager is built to ease the setup and use of SnailyCAD
+            v4.
+        </p>
+        <p>
+            Please follow the wizard instructions to set up your SnailyCAD
+            Manager!
+        </p>
+        <span>Click "Next" to continue</span>
 
-            <footer>
-                <div class="btn md success">
-                    <span>Next</span>
-                    <i class="mio">east</i>
-                </div>
-            </footer>
-        </article>
-    </form>
+        <input type="text" hidden />
+
+        <footer>
+            <button class="btn md info wizard_next">
+                <span>Next</span>
+                <i class="mio">east</i>
+            </button>
+        </footer>
+    </article>
+
+    <article style="display: none">
+        <header>Set CAD Directory</header>
+
+        <label for="install_type"> Select Setup Type </label>
+        <select name="install_type" id="install_type">
+            <option value="null" hidden diabled selected>
+                Select Installation Type...
+            </option>
+            <option value="new">New CAD Installation</option>
+            <option value="existing">Existing CAD Installation</option>
+        </select>
+
+        <footer>
+            <button class="btn md info wizard_next">
+                <span>Next</span>
+                <i class="mio">east</i>
+            </button>
+            <button class="btn md info wizard_prev">
+                <i class="mio">refresh</i>
+                <span>Restart Wizard</span>
+            </button>
+        </footer>
+    </article>
+
+    <article style="display: none" class="newInstall">
+        <header>Set CAD Directory</header>
+
+        <label for="install_type"> Select Setup Type </label>
+        <select name="install_type" id="install_type">
+            <option value="null" hidden diabled selected>
+                Select Installation Type...
+            </option>
+            <option value="new">New CAD Installation</option>
+            <option value="existing">Existing CAD Installation</option>
+        </select>
+
+        <footer>
+            <button class="btn md info wizard_next">
+                <span>Next</span>
+                <i class="mio">east</i>
+            </button>
+            <button class="btn md info wizard_prev">
+                <i class="mio">refresh</i>
+                <span>Restart Wizard</span>
+            </button>
+        </footer>
+    </article>
 </div>
