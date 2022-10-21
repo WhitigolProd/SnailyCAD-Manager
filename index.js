@@ -1,6 +1,6 @@
 // This file does not need to be diagnosed. As this is the only file that runs on the Main Process
 
-const { app, ipcMain, BrowserWindow, shell } = require('electron');
+const { app, ipcMain, BrowserWindow, shell, dialog } = require('electron');
 
 const createWindow = () => {
     let mainWindow = new BrowserWindow({
@@ -19,6 +19,8 @@ const createWindow = () => {
             contextIsolation: false,
         }
     })
+
+    const renderer = mainWindow.webContents;
 
     mainWindow.loadFile('./index.html');
     mainWindow.on('ready-to-show', () => {
@@ -45,6 +47,11 @@ const createWindow = () => {
     })
     ipcMain.on('url', (e, arg) => {
         shell.openExternal(arg)
+    })
+    ipcMain.on('directory', (e, title) => {
+        dialog.showOpenDialog(mainWindow, { title: title, properties: ['openDirectory'], defaultPath: '' }).then((result) => {
+            renderer.send('dir-cb', `${result.filePaths}`);
+        }).catch((err) => alert(err))
     })
 }
 

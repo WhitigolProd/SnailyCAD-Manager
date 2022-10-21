@@ -1,5 +1,5 @@
 <div class="wizard_steps">
-    <article>
+    <article class="home">
         <header>
             Welcome to the Setup Wizard!
             <span class="muted">It all starts here!</span>
@@ -25,8 +25,8 @@
         </footer>
     </article>
 
-    <article style="display: none">
-        <header>Set CAD Directory</header>
+    <article style="display: none" class="type">
+        <header>Installation Type</header>
 
         <label for="install_type"> Select Setup Type </label>
         <select name="install_type" id="install_type">
@@ -49,17 +49,63 @@
         </footer>
     </article>
 
-    <article style="display: none" class="newInstall">
+    <article style="display: none" class="install">
+        <header>
+            Select Directory <span class="muted">New Installation</span>
+        </header>
+
+        <label for="select_new_install">Installation Directory</label>
+        <div class="btn md info" id="select_new_install">
+            <i class="mio">folder</i>
+            <span>Select Directory</span>
+        </div>
+
+        <footer>
+            <button class="btn md info wizard_next">
+                <span>Next</span>
+                <i class="mio">east</i>
+            </button>
+            <button class="btn md info wizard_prev">
+                <i class="mio">refresh</i>
+                <span>Restart Wizard</span>
+            </button>
+        </footer>
+    </article>
+
+    <article style="display: none" class="existing">
         <header>Set CAD Directory</header>
 
-        <label for="install_type"> Select Setup Type </label>
-        <select name="install_type" id="install_type">
-            <option value="null" hidden diabled selected>
-                Select Installation Type...
-            </option>
-            <option value="new">New CAD Installation</option>
-            <option value="existing">Existing CAD Installation</option>
-        </select>
+        <label for="select_new_install">Existing CAD</label>
+        <div class="btn md info" id="select_new_install">
+            <i class="mio">folder</i>
+            <span>Select Directory</span>
+        </div>
+        <span class="muted"
+            >This directory must be a standalone installation of SnailyCAD</span
+        >
+
+        <footer>
+            <button class="btn md info wizard_next">
+                <span>Next</span>
+                <i class="mio">east</i>
+            </button>
+            <button class="btn md info wizard_prev">
+                <i class="mio">refresh</i>
+                <span>Restart Wizard</span>
+            </button>
+        </footer>
+    </article>
+
+    <article style="display: none" class="confirm">
+        <header>Confirm Setup</header>
+
+        <p>
+            That's it! Please confirm the following below, and click "Continue"
+        </p>
+        <span class="muted"
+            >If something was improperly selected, please restart the
+            wizard.</span
+        >
 
         <footer>
             <button class="btn md info wizard_next">
