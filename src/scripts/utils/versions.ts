@@ -72,7 +72,6 @@ const cadCheck = async () => {
             }
         };
     } else {
-        log('ERR: NO_CAD_DIRECTORY', 'warning');
         return log(
             'Error: Could not check CAD Version since a CAD Directory was not specified.\nThis is likely because the wizard has not been completed.',
             'error'

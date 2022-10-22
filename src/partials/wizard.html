@@ -75,8 +75,8 @@
     <article style="display: none" class="existing">
         <header>Set CAD Directory</header>
 
-        <label for="select_new_install">Existing CAD</label>
-        <div class="btn md info" id="select_new_install">
+        <label for="select_existing_setup">Existing CAD</label>
+        <div class="btn md info" id="select_existing_setup">
             <i class="mio">folder</i>
             <span>Select Directory</span>
         </div>
@@ -100,16 +100,22 @@
         <header>Confirm Setup</header>
 
         <p>
-            That's it! Please confirm the following below, and click "Continue"
+            That's it! Please confirm that the following below is correct, and
+            click "Continue"
         </p>
+
+        <span
+            >Setup/Installation Directory: <code id="wizard_directory"></code
+        ></span>
+
         <span class="muted"
             >If something was improperly selected, please restart the
             wizard.</span
         >
 
         <footer>
-            <button class="btn md info wizard_next">
-                <span>Next</span>
+            <button class="btn md success wizard_next">
+                <span>Start Setup</span>
                 <i class="mio">east</i>
             </button>
             <button class="btn md info wizard_prev">
@@ -117,5 +123,25 @@
                 <span>Restart Wizard</span>
             </button>
         </footer>
+    </article>
+
+    <article style="display: none" class="setup">
+        <header>
+            Running Setup
+            <span aria-busy="true"></span>
+        </header>
+
+        <span aria-busy="true" id="setup_stages">Running Setup</span>
+
+        <p>
+            SnailyCAD Manager is running the setup. Your app will restart
+            automatically when the setup has been complete.
+        </p>
+        <span style="color: orange"
+            >Do not restart or close the app while the setup is in
+            progress!</span
+        >
+
+        <footer></footer>
     </article>
 </div>

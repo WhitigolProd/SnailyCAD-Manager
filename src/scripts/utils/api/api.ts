@@ -77,4 +77,32 @@ appAPI.post('/stop', async (req: any, res: any) => {
         .catch((err: any) => log(err, 'error'));
 });
 
+appAPI.post('/install', (req: any, res: any) => {
+    res.json({
+        message: 'Starting Installation',
+    });
+    const installScript = spawn(
+        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && yarn && Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD && yarn turbo run build && echo Installation Complete',
+        [],
+        {
+            shell: true,
+            cwd: wizardStorage.cadDir,
+        }
+    );
+
+    installScript.stdout.on('data', (data: Buffer) => {
+        let d = data.toString();
+        log(d, 'neutral');
+
+        // * Install Steps (To Display on Wizard)
+        if ((d = 'Downloading Repository')) $('#setup_stages').text(d);
+        if ((d = 'Opening Directory')) $('#setup_stages').text(d);
+        if ((d = 'Installing Dependencies (This may take a while)'))
+            $('#setup_stages').text(d);
+        if ((d = 'Copying ENV')) $('#setup_stages').text(d);
+        if ((d = 'Moving ENV')) $('#setup_stages').text(d);
+        if ((d = 'Installation Complete')) $('#setup_stages').text(d);
+    });
+});
+
 startAPI();

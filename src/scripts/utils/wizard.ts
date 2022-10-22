@@ -30,17 +30,16 @@ $(document).on('click', '.wizard_steps .type .wizard_next', () => {
         return toast.warning('Invalid Selection');
     }
     if (type == 'new') {
+        wizardStorage.installType = type;
         $('.type').slideToggle();
         $('.install').delay(400).slideToggle();
     }
     if (type == 'existing') {
+        wizardStorage.installType = type;
         $('.type').slideToggle();
         $('.existing').delay(400).slideToggle();
     }
-    console.log(type);
 });
-
-// * Type: New Installation
 
 // * Reset Wizard
 $(document).on('click', '.wizard_prev', () => {
@@ -49,6 +48,7 @@ $(document).on('click', '.wizard_prev', () => {
     $(beginning).delay(400).slideToggle();
 });
 
+// * Type: New Installation
 $(document).on('click', '#select_new_install', async () => {
     ipc.send('directory', 'Choose Installation Directory');
     ipc.on('dir-cb', (e, arg) => {
@@ -63,4 +63,97 @@ $(document).on('click', '#select_new_install', async () => {
             wizardStorage.cadDir = arg;
         }
     });
+});
+
+// * Existing Setup
+$(document).on('click', '#select_existing_setup', async () => {
+    ipc.send(
+        'directory',
+        'Choose SnailyCAD Directory (MUST CONTAIN package.json)'
+    );
+    ipc.on('dir-cb', (e, arg) => {
+        if (arg == '') {
+            $('#select_existing_setup span')
+                .text('Select Directory (Canceled)')
+                .css('color', 'orange');
+        } else {
+            $('#select_existing_setup span')
+                .text(`${arg.replaceAll('\\', '/')}`)
+                .css('color', ''); // Reset Color
+            wizardStorage.cadDir = arg;
+        }
+    });
+});
+
+// * Verify Existing Installation
+$(document).on('click', '.existing:visible .wizard_next', () => {
+    if (wizardStorage.cadDir == '') {
+        toast.warning('Please select a directory');
+        return;
+    }
+    fs.exists(
+        path.join(wizardStorage.cadDir, '/package.json'),
+        (exists: boolean) => {
+            if (exists) {
+                fs.readFile(
+                    path.join(wizardStorage.cadDir, '/package.json'),
+                    (err: Error, data: any) => {
+                        if (data) data = JSON.parse(data);
+                        if (err) return toast.error(err);
+                        if (data.name == 'snailycad') {
+                            $('#wizard_directory').text(wizardStorage.cadDir);
+                            $('.existing').slideToggle().delay(400);
+                            $('.confirm').slideToggle();
+                            return;
+                        }
+                        toast.error(
+                            'The directory provided is not a SnailyCAD Installation'
+                        );
+                        return;
+                    }
+                );
+                return;
+            }
+            toast.error('Could not find <code>package.json</code>');
+        }
+    );
+});
+
+// * Verify New Installation
+$(document).on('click', '.install:visible .wizard_next', () => {
+    if (wizardStorage.cadDir == '') {
+        toast.warning('Please select a directory');
+        return;
+    }
+    fs.readdir(wizardStorage.cadDir, (err: Error, data: any) => {
+        if (err) toast.error(err);
+        if (data) {
+            let d: Array<any> = data; // Just helps intellisense understand it's an array.
+            if (d.find((elm) => elm == 'snaily-cadv4') == 'snaily-cadv4') {
+                return toast.warning(
+                    'SnailyCAD is already in the specified directory!'
+                );
+            }
+
+            api.post('/install', {}, (data, err) => {
+                if (data) log(data, 'neutral');
+                if (err) {
+                    log(err, 'error');
+                    toast.error(err);
+                }
+            });
+        }
+    });
+});
+
+// * Setup
+$(document).on('click', '.confirm:visible .wizard_next', async () => {
+    $('.confirm').slideToggle().delay(400);
+    $('.setup').slideToggle();
+
+    // if (wizardStorage.installType == 'existing') {
+    //     storage('cadDir').write(wizardStorage.cadDir);
+    //     storage('wizardComplete').write('true');
+    //     location.reload();
+    // }
 });
