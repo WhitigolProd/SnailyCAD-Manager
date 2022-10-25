@@ -1,14 +1,18 @@
 .bg {
-  z-index: -1;
+    z-index: -1;
 }
 .titlebar {
-  z-index: 10000000; // Always on top. Why? Because it's the damn titlebar!
+    z-index: 10000000; // Always on top. Why? Because it's the damn titlebar!
 }
 
 .requirements {
-  z-index: 100;
+    z-index: 100;
 }
 
 .wizard {
-  z-index: 1;
+    z-index: 1;
+}
+
+.appVersion {
+    z-index: 1000000;
 }

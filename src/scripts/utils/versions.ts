@@ -67,6 +67,7 @@ const cadCheck = async () => {
                 $('#sc_latest')
                     .text(`(v${cad.version.latest} available)`)
                     .css('color', 'orange');
+                $('#update_cad').show();
                 log('CAD Versions out of Sync — Update Available', 'warning');
                 return;
             }

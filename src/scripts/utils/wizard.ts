@@ -135,13 +135,9 @@ $(document).on('click', '.install:visible .wizard_next', () => {
                 );
             }
 
-            api.post('/install', {}, (data, err) => {
-                if (data) log(data, 'neutral');
-                if (err) {
-                    log(err, 'error');
-                    toast.error(err);
-                }
-            });
+            $('#wizard_directory').text(wizardStorage.cadDir);
+            $('.install:visible').slideToggle().delay(400);
+            $('.confirm').slideToggle();
         }
     });
 });
@@ -151,9 +147,19 @@ $(document).on('click', '.confirm:visible .wizard_next', async () => {
     $('.confirm').slideToggle().delay(400);
     $('.setup').slideToggle();
 
-    // if (wizardStorage.installType == 'existing') {
-    //     storage('cadDir').write(wizardStorage.cadDir);
-    //     storage('wizardComplete').write('true');
-    //     location.reload();
-    // }
+    if (wizardStorage.installType == 'existing') {
+        storage('cadDir').write(wizardStorage.cadDir);
+        storage('wizardComplete').write('true');
+        location.reload();
+        return;
+    }
+    if (wizardStorage.installType == 'new') {
+        api.post('/install', {}, (data, err) => {
+            if (data) log(data, 'neutral');
+            if (err) {
+                log(err, 'error');
+                toast.error(err);
+            }
+        });
+    }
 });

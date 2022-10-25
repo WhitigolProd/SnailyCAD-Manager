@@ -82,7 +82,7 @@ appAPI.post('/install', (req: any, res: any) => {
         message: 'Starting Installation',
     });
     const installScript = spawn(
-        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && yarn && Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD && yarn turbo run build && echo Installation Complete',
+        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && yarn && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && yarn turbo run build && echo Installation Complete',
         [],
         {
             shell: true,
@@ -92,16 +92,40 @@ appAPI.post('/install', (req: any, res: any) => {
 
     installScript.stdout.on('data', (data: Buffer) => {
         let d = data.toString();
-        log(d, 'neutral');
 
         // * Install Steps (To Display on Wizard)
-        if ((d = 'Downloading Repository')) $('#setup_stages').text(d);
-        if ((d = 'Opening Directory')) $('#setup_stages').text(d);
-        if ((d = 'Installing Dependencies (This may take a while)'))
+        if (d.includes('Downloading Repository')) {
             $('#setup_stages').text(d);
-        if ((d = 'Copying ENV')) $('#setup_stages').text(d);
-        if ((d = 'Moving ENV')) $('#setup_stages').text(d);
-        if ((d = 'Installation Complete')) $('#setup_stages').text(d);
+        }
+        if (d.includes('Opening Directory')) {
+            $('#setup_stages').text(d);
+        }
+        if (d.includes('Installing Dependencies (This may take a while)')) {
+            $('#setup_stages').text(d);
+        }
+        if (d.includes('Copying ENV')) {
+            $('#setup_stages').text(d);
+        }
+        if (d.includes('Moving ENV')) {
+            $('#setup_stages').text(d);
+        }
+        if (d.includes('Building CAD (This might take a while)')) {
+            $('#setup_stages').text(d);
+        }
+        if (d.includes('Installation Complete')) {
+            $('#setup_stages').text(d);
+            storage('cadDir').write(
+                path.join(wizardStorage.cadDir, '/snaily-cadv4')
+            );
+            storage('wizardComplete').write('true');
+            app.hard_restart();
+        }
+        log(d, 'neutral');
+    });
+
+    installScript.stderr.on('data', (data: Buffer) => {
+        let d = data.toString();
+        log(d, 'warning');
     });
 });
 

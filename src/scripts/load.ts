@@ -36,6 +36,12 @@ $(async () => {
     /*console.log(
         `Okay... But why Snaily? Hmm.. Probably FiveM's mascot Snail.. Or maybe not 🤔👀`
     );*/
+
+    if (localStorage.getItem('start-message')) {
+        let startMessage = localStorage.getItem('start-message');
+
+        // if (startMessage == 'show-env')
+    }
 });
 
 // * Import HTML Partials

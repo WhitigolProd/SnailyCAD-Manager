@@ -53,6 +53,10 @@ const createWindow = () => {
             renderer.send('dir-cb', `${result.filePaths}`);
         }).catch((err) => alert(err))
     })
+    ipcMain.on('hard-restart', () => {
+        app.relaunch({ args: process.argv.slice(1).concat(['--relaunch']) });
+        app.exit(0);
+    })
 }
 
 app.on('ready', createWindow);

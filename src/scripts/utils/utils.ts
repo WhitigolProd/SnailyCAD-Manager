@@ -20,6 +20,12 @@ const app = {
     maximize: () => {
         return ipc.send('maximize');
     },
+    restart: () => {
+        location.reload();
+    },
+    hard_restart: () => {
+        return ipc.send('hard-restart');
+    },
 };
 
 const fromRoot = (query: string) => {
