@@ -79,6 +79,11 @@ dialog {
     article {
         max-height: 90vh;
         min-width: 85vw !important;
+
+        footer {
+            display: flex;
+            align-items: center;
+        }
     }
 }
 
@@ -106,4 +111,8 @@ dialog {
         background-color: rgba($color: red, $alpha: 0.05);
         border-color: rgba($color: red, $alpha: 0.5);
     }
+}
+
+a {
+    cursor: pointer !important;
 }

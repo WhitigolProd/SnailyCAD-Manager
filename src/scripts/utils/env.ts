@@ -102,6 +102,10 @@ const envClass = class {
         log('ENV Warning: NO_CAD_DIRECTORY', 'warning');
         return null;
     }
+
+    write() {
+        fs.writeFile();
+    }
 };
 
 const env = (
@@ -129,4 +133,40 @@ const env = (
         | 'STEAM_API_KEY'
 ) => {
     return new envClass(selector);
+};
+
+const createEnvInputs = () => {
+    let fields = [
+        'POSTGRES_PASSWORD',
+        'POSTGRES_USER',
+        'DB_HOST',
+        'DB_PORT',
+        'POSTGRES_DB',
+        'JWT_SECRET',
+        'ENCRYPTION_TOKEN',
+        'CORS_ORIGIN_URL',
+        'NEXT_PUBLIC_PROD_ORIGIN',
+        'DOMAIN',
+        'PORT_CLIENT',
+        'PORT_API',
+        'DISCORD_BOT_TOKEN',
+        'DISCORD_SERVER_ID',
+        'DISCORD_CLIENT_ID',
+        'DISCORD_CLIENT_SECRET',
+        'STEAM_API_KEY',
+    ];
+
+    fields.forEach((field) => {
+        $('#env_content').append(`
+        <label for="env_${field}">
+        ${field}
+            <input
+                type="text"
+                id="env_${field}"
+                placeholder="${field}"
+                name="${field}"
+            />
+        </label>
+        `);
+    });
 };
