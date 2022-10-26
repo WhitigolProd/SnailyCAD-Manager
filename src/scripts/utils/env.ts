@@ -185,6 +185,8 @@ const createEnvInputs = () => {
         'TELEMETRY_ENABLED',
     ];
 
+    $('#env_content').html(''); // Reset
+
     fields.forEach((field) => {
         if (field === 'SECURE_COOKIES_FOR_IFRAME') {
             $('#env_content').append(`
@@ -253,10 +255,12 @@ const loadEnvValues = () => {
             } else {
                 $(`#env_${field}`).prop('checked', false);
             }
+            console.log(`${field} input created.`);
             return;
         }
 
         // @ts-expect-error
         $(`#env_${field}`).val(`${env(`${field}`).read() || ''}`);
+        console.log(`${field} input created.`);
     });
 };

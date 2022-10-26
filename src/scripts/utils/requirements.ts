@@ -83,5 +83,6 @@ const checkRequirements = async () => {
         $('.requirements').hide();
         await loadWizard();
         await cadCheck();
+        createEnvInputs(); // Render the ENV Inputs when the requirements are passed.
     }
 };

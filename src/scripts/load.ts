@@ -42,8 +42,6 @@ $(async () => {
 
         // if (startMessage == 'show-env')
     }
-
-    createEnvInputs();
 });
 
 // * Import HTML Partials
