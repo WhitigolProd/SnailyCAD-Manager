@@ -78,4 +78,5 @@ const cadCheck = async () => {
             'error'
         );
     }
+    setTimeout(cadCheck, 1800000); // Check every 30 minutes
 };
