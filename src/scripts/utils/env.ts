@@ -132,6 +132,10 @@ const envClass = class {
             ).prop('checked')}`,
             TELEME: `${$('#env_POSTGRES_PASSWORD').val()}`,
         });
+        $('#env_editor article header [style="color: orange;"]').remove();
+        $('#env_editor article footer .error').show();
+        modal('#env_editor').close();
+        toast.success('ENV Saved!');
     }
 };
 

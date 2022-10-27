@@ -4,7 +4,8 @@ type storageKeys =
     | 'cadDir'
     | 'dismissedUpdate'
     | 'remPort'
-    | 'remoteOnStart';
+    | 'remoteOnStart'
+    | 'start-func';
 
 // * Storage Class
 const storeClass = class {
@@ -13,7 +14,7 @@ const storeClass = class {
         this.key = key;
     }
     read() {
-        return localStorage.getItem(this.key);
+        return `${localStorage.getItem(this.key)}`;
     }
     write(value: string) {
         return localStorage.setItem(this.key, value);

@@ -83,6 +83,15 @@ const checkRequirements = async () => {
         $('.requirements').hide();
         await loadWizard();
         await cadCheck();
-        createEnvInputs(); // Render the ENV Inputs when the requirements are passed.
+
+        // * Everything else that should be ran if requirements are passed
+        executeStartFunction();
+        if (storage('remoteOnStart').read()) {
+            let remoteOnStart = storage('remoteOnStart').read();
+            if (remoteOnStart == 'true') startRemoteServer();
+            if (remoteOnStart == 'false') return;
+        } else {
+            toast.warning('Remote Server has not been configured!');
+        }
     }
 };

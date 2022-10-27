@@ -134,4 +134,12 @@ const api = {
     },
 };
 
+const executeStartFunction = async () => {
+    if (storage('start-func').read()) {
+        let func = storage('start-func').read();
+        eval(func);
+        localStorage.removeItem('start-func');
+    }
+};
+
 const elements = {};

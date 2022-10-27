@@ -118,6 +118,11 @@ appAPI.post('/install', (req: any, res: any) => {
                 path.join(wizardStorage.cadDir, '/snaily-cadv4')
             );
             storage('wizardComplete').write('true');
+            storage('start-func').write(`
+                modal('#env_editor').open();
+                $('#env_editor article header').append('<span style="color: orange;">Initial Configuration Required</span>');
+                $('#env_editor article footer .error').hide();
+            `);
             app.hard_restart();
         }
         log(d, 'neutral');
