@@ -135,11 +135,24 @@ const api = {
 };
 
 const executeStartFunction = async () => {
-    if (storage('start-func').read()) {
+    if (storage('start-func').read() != 'null') {
         let func = storage('start-func').read();
         eval(func);
         localStorage.removeItem('start-func');
     }
+};
+
+const genString = (length: number) => {
+    let result = '';
+    let characters =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+            Math.floor(Math.random() * charactersLength)
+        );
+    }
+    return result;
 };
 
 const elements = {};

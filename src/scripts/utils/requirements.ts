@@ -93,5 +93,8 @@ const checkRequirements = async () => {
         } else {
             toast.warning('Remote Server has not been configured!');
         }
+
+        createEnvInputs();
+        loadEnvValues();
     }
 };

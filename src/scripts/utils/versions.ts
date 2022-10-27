@@ -42,7 +42,7 @@ let cad = {
 };
 
 const cadCheck = async () => {
-    if (storage('cadDir').read()) {
+    if (storage('cadDir').read() != 'null') {
         $.get(storage('cadDir').read() + '\\package.json').then(
             async (data) => {
                 let v = data.version;

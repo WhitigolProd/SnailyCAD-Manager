@@ -24,13 +24,13 @@ const envClass = class {
             | 'DISCORD_CLIENT_ID'
             | 'DISCORD_CLIENT_SECRET'
             | 'STEAM_API_KEY'
-            | '__empty__'
+            | ''
     ) {
         this.selector = selector;
     }
 
     read() {
-        if (storage('cadDir').read()) {
+        if (storage('cadDir').read() != 'null') {
             let currentenv = require('dotenv').config({
                 path: path.join(storage('cadDir').read(), '/.env'),
                 encoding: 'utf8',
@@ -130,8 +130,9 @@ const envClass = class {
             SECURE_COOKIES_FOR_IFRAME: `${$(
                 '#env_SECURE_COOKIES_FOR_IFRAME'
             ).prop('checked')}`,
-            TELEME: `${$('#env_POSTGRES_PASSWORD').val()}`,
+            TELEMETRY_ENABLED: `${$('#env_POSTGRES_PASSWORD').prop('checked')}`,
         });
+        parsenv.write({ path: path.join(storage('cadDir').read(), '/.env') });
         $('#env_editor article header [style="color: orange;"]').remove();
         $('#env_editor article footer .error').show();
         modal('#env_editor').close();
@@ -162,6 +163,7 @@ const env = (
         | 'DISCORD_CLIENT_ID'
         | 'DISCORD_CLIENT_SECRET'
         | 'STEAM_API_KEY'
+        | ''
 ) => {
     return new envClass(selector);
 };
@@ -189,6 +191,7 @@ const createEnvInputs = () => {
         'TELEMETRY_ENABLED',
     ];
 
+    if (storage('cadDir').read() == 'null') return;
     $('#env_content').html(''); // Reset
 
     fields.forEach((field) => {
@@ -227,6 +230,7 @@ const createEnvInputs = () => {
 };
 
 const loadEnvValues = () => {
+    if (storage('cadDir').read() == 'null') return;
     let fields = [
         'POSTGRES_PASSWORD',
         'POSTGRES_USER',
@@ -262,6 +266,10 @@ const loadEnvValues = () => {
             console.log(`${field} input created.`);
             return;
         }
+
+        if (field == 'JWT_SECRET') return $(`#env_${field}`).val(genString(16));
+        if (field == 'ENCRYPTION_TOKEN')
+            return $(`#env_${field}`).val(genString(32));
 
         // @ts-expect-error
         $(`#env_${field}`).val(`${env(`${field}`).read() || ''}`);

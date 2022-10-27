@@ -14,7 +14,10 @@
         </div>
     </div>
     <div class="row center-justify center-itms">
-        <div class="btn md error" onclick="api.post('/stop', '');">
+        <div
+            class="btn md error"
+            onclick="api.post('/stop', ''); toast.warning('Forcing CAD Shutdown')"
+        >
             <i class="mio">dangerous</i>
             <span>Force Shutdown CAD</span>
         </div>
