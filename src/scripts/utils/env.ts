@@ -30,7 +30,7 @@ const envClass = class {
     }
 
     read() {
-        if (storage('cadDir').read() != 'null') {
+        if (storage('cadDir').read()) {
             let currentenv = require('dotenv').config({
                 path: path.join(storage('cadDir').read(), '/.env'),
                 encoding: 'utf8',
@@ -191,7 +191,7 @@ const createEnvInputs = () => {
         'TELEMETRY_ENABLED',
     ];
 
-    if (storage('cadDir').read() == 'null') return;
+    if (!storage('cadDir').read()) return;
     $('#env_content').html(''); // Reset
 
     fields.forEach((field) => {
@@ -230,7 +230,7 @@ const createEnvInputs = () => {
 };
 
 const loadEnvValues = () => {
-    if (storage('cadDir').read() == 'null') return;
+    if (!storage('cadDir').read()) return;
     let fields = [
         'POSTGRES_PASSWORD',
         'POSTGRES_USER',

@@ -14,6 +14,7 @@ const storeClass = class {
         this.key = key;
     }
     read() {
+        if (localStorage.getItem(this.key) == null) return null;
         return `${localStorage.getItem(this.key)}`;
     }
     write(value: string) {
