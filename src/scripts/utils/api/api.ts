@@ -38,7 +38,7 @@ appAPI.post('/start', async (req: any, res: any) => {
     setTimeout(() => {
         cadLoading = false;
     }, 10000);
-    if (req.body.keys.shift) {
+    if (keys.shift) {
         cadProcess = spawn(
             `yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
             [],
@@ -52,11 +52,17 @@ appAPI.post('/start', async (req: any, res: any) => {
         );
     }
 
+    cadProcess.on('exit', (code: number) => {
+        log(`CAD Process exited with code ${code}`, 'warning');
+        toast.info(
+            'The CAD Process has exited. If this was in error, check logs!'
+        );
+    });
+
     cadProcess.stdout.on('data', (data: any) => {
         data = data.toString();
         log(data, 'neutral');
         if (data.indexOf('exited with code 1') > 0) {
-            toast.error('CAD Could not start! Check logs!');
             api.post('/stop', {}, (data, err) => {
                 if (data) log(data, 'neutral');
                 if (err) {

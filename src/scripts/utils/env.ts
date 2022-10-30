@@ -117,11 +117,12 @@ const envClass = class {
             POSTGRES_PASSWORD: `${$('#env_POSTGRES_PASSWORD').val()}`,
             POSTGRES_USER: `${$('#env_POSTGRES_USER').val()}`,
             DB_HOST: `${$('#env_DB_HOST').val()}`,
-            DB_PORT: `${$('#env_PORT').val()}`,
+            DB_PORT: `${$('#env_DB_PORT').val()}`,
             POSTGRES_DB: `${$('#env_POSTGRES_DB').val()}`,
             JWT_SECRET: `${$('#env_JWT_SECRET').val()}`,
             ENCRYPTION_TOKEN: `${$('#env_ENCRYPTION_TOKEN').val()}`,
             CORS_ORIGIN_URL: `${$('#env_CORS_ORIGIN_URL').val()}`,
+            NEXT_PUBLIC_CLIENT_URL: `${$('#env_NEXT_PUBLIC_CLIENT_URL').val()}`,
             NEXT_PUBLIC_PROD_ORIGIN: `${$(
                 '#env_NEXT_PUBLIC_PROD_ORIGIN'
             ).val()}`,

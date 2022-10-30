@@ -1,25 +1,9 @@
 let cadLoading: boolean = false;
+let client_status: boolean = false;
+let api_status: boolean = false;
 const getCadStatus = async () => {
-    let client_status: boolean = false;
-    let api_status: boolean = false;
-
     const updateButtons = async () => {
         if (cadLoading) {
-            $('#starting_cad').hide();
-            $('#start_cad').show();
-            $('#stop_cad').hide();
-        }
-        if (!client_status && !api_status && !cadLoading) {
-            $('#starting_cad').hide();
-            $('#start_cad').show();
-            $('#stop_cad').hide();
-        }
-        if (client_status && !api_status) {
-            $('#starting_cad').show();
-            $('#start_cad').hide();
-            $('#stop_cad').hide();
-        }
-        if (!client_status && api_status) {
             $('#starting_cad').show();
             $('#start_cad').hide();
             $('#stop_cad').hide();
@@ -28,6 +12,12 @@ const getCadStatus = async () => {
             $('#starting_cad').hide();
             $('#start_cad').hide();
             $('#stop_cad').show();
+            cadLoading = false;
+        }
+        if (!client_status && !api_status && !cadLoading) {
+            $('#starting_cad').hide();
+            $('#start_cad').show();
+            $('#stop_cad').hide();
         }
         setTimeout(getCadStatus, 1000);
     };
@@ -56,6 +46,7 @@ const getCadStatus = async () => {
                 async (list: any) => {
                     if (list.length > 0) {
                         api_status = true;
+                        if (client_status) cadLoading = false;
                         $('#status_api').text('API').css('color', 'lime');
                     } else {
                         $('#status_api').text('API').css('color', '#ff5757');
