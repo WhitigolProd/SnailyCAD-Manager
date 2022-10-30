@@ -11,6 +11,7 @@ const envClass = class {
             | 'JWT_SECRET'
             | 'ENCRYPTION_TOKEN'
             | 'CORS_ORIGIN_URL'
+            | 'NEXT_PUBLIC_CLIENT_URL'
             | 'NEXT_PUBLIC_PROD_ORIGIN'
             | 'DOMAIN'
             | 'SECURE_COOKIES_FOR_IFRAME'
@@ -24,6 +25,8 @@ const envClass = class {
             | 'DISCORD_CLIENT_ID'
             | 'DISCORD_CLIENT_SECRET'
             | 'STEAM_API_KEY'
+            | 'NODE_ENV'
+            | 'DATABSE_URL'
             | ''
     ) {
         this.selector = selector;
@@ -59,6 +62,9 @@ const envClass = class {
             }
             if (this.selector == 'CORS_ORIGIN_URL') {
                 return currentenv.parsed.CORS_ORIGIN_URL;
+            }
+            if (this.selector == 'NEXT_PUBLIC_CLIENT_URL') {
+                return currentenv.parsed.NEXT_PUBLIC_CLIENT_URL;
             }
             if (this.selector == 'NEXT_PUBLIC_PROD_ORIGIN') {
                 return currentenv.parsed.NEXT_PUBLIC_PROD_ORIGIN;
@@ -131,6 +137,8 @@ const envClass = class {
                 '#env_SECURE_COOKIES_FOR_IFRAME'
             ).prop('checked')}`,
             TELEMETRY_ENABLED: `${$('#env_POSTGRES_PASSWORD').prop('checked')}`,
+            NODE_ENV: `${env('NODE_ENV').read()}`,
+            DATABASE_URL: `${env('DATABASE_URL').read()}`,
         });
         parsenv.write({ path: path.join(storage('cadDir').read(), '/.env') });
         $('#env_editor article header [style="color: orange;"]').remove();
@@ -150,6 +158,7 @@ const env = (
         | 'JWT_SECRET'
         | 'ENCRYPTION_TOKEN'
         | 'CORS_ORIGIN_URL'
+        | 'NEXT_PUBLIC_CLIENT_URL'
         | 'NEXT_PUBLIC_PROD_ORIGIN'
         | 'DOMAIN'
         | 'SECURE_COOKIES_FOR_IFRAME'
@@ -163,6 +172,8 @@ const env = (
         | 'DISCORD_CLIENT_ID'
         | 'DISCORD_CLIENT_SECRET'
         | 'STEAM_API_KEY'
+        | 'NODE_ENV'
+        | 'DATABASE_URL'
         | ''
 ) => {
     return new envClass(selector);
@@ -178,6 +189,7 @@ const createEnvInputs = () => {
         'JWT_SECRET',
         'ENCRYPTION_TOKEN',
         'CORS_ORIGIN_URL',
+        'NEXT_PUBLIC_CLIENT_URL',
         'NEXT_PUBLIC_PROD_ORIGIN',
         'DOMAIN',
         'PORT_CLIENT',
@@ -240,6 +252,7 @@ const loadEnvValues = () => {
         'JWT_SECRET',
         'ENCRYPTION_TOKEN',
         'CORS_ORIGIN_URL',
+        'NEXT_PUBLIC_CLIENT_URL',
         'NEXT_PUBLIC_PROD_ORIGIN',
         'DOMAIN',
         'PORT_CLIENT',

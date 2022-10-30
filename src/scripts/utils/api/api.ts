@@ -55,6 +55,16 @@ appAPI.post('/start', async (req: any, res: any) => {
     cadProcess.stdout.on('data', (data: any) => {
         data = data.toString();
         log(data, 'neutral');
+        if (data.indexOf('exited with code 1') > 0) {
+            toast.error('CAD Could not start! Check logs!');
+            api.post('/stop', {}, (data, err) => {
+                if (data) log(data, 'neutral');
+                if (err) {
+                    log(err, 'error');
+                    toast.error(err);
+                }
+            });
+        }
     });
 
     cadProcess.stderr.on('data', (data: any) => {
