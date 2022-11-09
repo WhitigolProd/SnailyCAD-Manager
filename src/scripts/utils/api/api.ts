@@ -155,7 +155,7 @@ appAPI.post('/update', (req: any, res: any) => {
         message: 'Starting Update',
     });
     const updateScript = spawn(
-        'echo Updating Repository && git pull origin main && echo Installing Dependencies (This may take a while) && yarn && echo Building CAD (This might take a while) && yarn turbo run build && echo Update Complete',
+        'echo Stashing Changes && git stash && echo Updating Repository && git pull origin main && echo Installing Dependencies (This may take a while) && yarn && echo Building CAD (This might take a while) && yarn turbo run build && echo Update Complete',
         [],
         {
             shell: true,
