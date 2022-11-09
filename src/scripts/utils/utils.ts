@@ -40,6 +40,9 @@ const log = (
         return $('.logs').scrollTop($('.logs').prop('scrollHeight'));
     };
 
+    // Change system message to the log string
+    $('#system_message').text(string);
+
     if (type === 'success') {
         $('.logs').append(`<span style="color: lime;">${string}</span>`);
         scrollBottom();

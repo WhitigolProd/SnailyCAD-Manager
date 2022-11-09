@@ -10,6 +10,10 @@ $(document).on('keydown', async (e) => {
 
     // * Toggle Shift Key
     if (e.shiftKey) {
+        // Set #system_message text to show that shift is pressed
+        $('#system_message').html(
+            'Shift Key Pressed &mdash; ENV Build will be skipped!'
+        );
         return (keys.shift = true);
     }
 
@@ -27,6 +31,8 @@ $(document).on('keydown', async (e) => {
 // * Key Releases
 $(document).on('keyup', (e) => {
     if (e.key == 'Shift') {
+        // Set #system_message text to show that shift is released
+        $('#system_message').html('Shift Key Released');
         return (keys.shift = false);
     }
 });

@@ -91,7 +91,6 @@ const checkRequirements = async () => {
             if (remoteOnStart == 'true') startRemoteServer();
             if (remoteOnStart == 'false') return;
         } else {
-            toast.warning('Remote Server has not been configured!');
             log('Remote server is not configured!', 'warning');
         }
 

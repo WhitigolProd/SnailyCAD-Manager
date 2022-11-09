@@ -150,4 +150,53 @@ appAPI.post('/install', (req: any, res: any) => {
     });
 });
 
+appAPI.post('/update', (req: any, res: any) => {
+    res.json({
+        message: 'Starting Update',
+    });
+    const updateScript = spawn(
+        'echo Updating Repository && git pull origin main && echo Installing Dependencies (This may take a while) && yarn && echo Building CAD (This might take a while) && yarn turbo run build && echo Update Complete',
+        [],
+        {
+            shell: true,
+            cwd: storage('cadDir').read(),
+        }
+    );
+
+    updateScript.stdout.on('data', (data: Buffer) => {
+        let d = data.toString();
+        log(d, 'neutral');
+
+        // When the update has started, hide the update button, and show the update loading button
+        if (d.includes('Updating Repository')) {
+            $('#update_cad').hide();
+            $('#update_loading').show();
+        }
+
+        // When the update has finished, hide both buttons
+        if (d.includes('Update Complete')) {
+            $('#update_cad').hide();
+            $('#update_loading').hide();
+            // Soft Restart App
+            app.restart();
+        }
+    });
+
+    updateScript.stderr.on('data', (data: Buffer) => {
+        let d = data.toString();
+        log(d, 'warning');
+    });
+
+    updateScript.on('exit', (code: number) => {
+        log(`Update Process exited with code ${code}`, 'warning');
+        toast.info(
+            'The Update Process has exited. If this was in error, check logs!'
+        );
+        // Hide the update loading button
+        $('#update_loading').hide();
+        // Show the update button
+        $('#update_cad').show();
+    });
+});
+
 startAPI();

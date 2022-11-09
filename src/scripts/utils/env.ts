@@ -146,6 +146,7 @@ const envClass = class {
         $('#env_editor article footer .error').show();
         modal('#env_editor').close();
         toast.success('ENV Saved!');
+        log('ENV Saved', 'success');
     }
 };
 

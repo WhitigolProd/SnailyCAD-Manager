@@ -80,3 +80,13 @@ const cadCheck = async () => {
     }
     setTimeout(cadCheck, 1800000); // Check every 30 minutes
 };
+
+// When the update button is clicked, send the update request to the API.
+$(document).on('click', '#update_cad', () => {
+    api.post('/update', {}, (data, err) => {
+        if (err) {
+            return log(err, 'error');
+        }
+        log(data.message, 'success');
+    });
+});
