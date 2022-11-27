@@ -10,6 +10,7 @@ import * as path from 'path';
 // * Import scripts to HTML
 let scriptImports = [
     '/app/scripts/utils/utils.js',
+    '/app/scripts/utils/toasts.js',
     '/app/scripts/utils/storage.js',
     '/app/scripts/utils/shortcuts.js',
     '/app/scripts/utils/requirements.js',

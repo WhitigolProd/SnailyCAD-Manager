@@ -6,7 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./app/styles/dist/index.min.css" />
         <title>SnailyCAD Manager</title>
+        <script
+            src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"
+            defer
+        ></script>
         <script src="./app/scripts/load.js" defer></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
     </head>
     <body>
         <div class="bg"><!-- Set Bakcground --></div>
@@ -49,6 +57,15 @@
 
         <!-- Message -->
         <span class="muted" id="system_message">APP_ONLINE</span>
+
+        <!-- Log Button -->
+        <div
+            class="btn sm warning logOpen"
+            onclick="modal('#log_output').open();"
+        >
+            <i class="mio">article</i>
+            <span>Open Log</span>
+        </div>
 
         <script defer>
             let exports = {};

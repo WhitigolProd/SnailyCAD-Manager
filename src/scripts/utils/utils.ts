@@ -3,8 +3,6 @@ const path = require('path');
 const { spawn, exec } = require('child_process');
 const commandExists = require('command-exists');
 const findProcess = require('find-process');
-let toast: any;
-require('whit-toasts');
 const pm2 = require('pm2'); // * For Remote Server
 const express = require('express');
 const killPort = require('kill-port');
