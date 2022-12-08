@@ -153,6 +153,10 @@ appAPI.post('/install', (req: any, res: any) => {
 appAPI.post('/update', (req: any, res: any) => {
     // Hide the start button
     $('#start_cad').hide();
+    // Hide the update button
+    $('#update_cad').hide();
+    // Show the update loading button
+    $('#update_loading').show();
     res.json({
         message: 'Starting Update',
     });

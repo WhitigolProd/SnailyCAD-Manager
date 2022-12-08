@@ -57,6 +57,10 @@
     position: fixed;
     bottom: 5px;
     left: 10px;
+    &::before {
+        content: 'Latest Log>';
+        margin-right: 5px;
+    }
 }
 
 .logOpen {

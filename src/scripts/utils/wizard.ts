@@ -97,7 +97,7 @@ $(document).on('click', '.existing:visible .wizard_next', () => {
             if (exists) {
                 fs.readFile(
                     path.join(wizardStorage.cadDir, '/package.json'),
-                    (err: Error, data: any) => {
+                    (err: string, data: any) => {
                         if (data) data = JSON.parse(data);
                         if (err) return toast.error(err);
                         if (data.name == 'snailycad') {
@@ -125,7 +125,7 @@ $(document).on('click', '.install:visible .wizard_next', () => {
         toast.warning('Please select a directory');
         return;
     }
-    fs.readdir(wizardStorage.cadDir, (err: Error, data: any) => {
+    fs.readdir(wizardStorage.cadDir, (err: string, data: any) => {
         if (err) toast.error(err);
         if (data) {
             let d: Array<any> = data; // Just helps intellisense understand it's an array.
