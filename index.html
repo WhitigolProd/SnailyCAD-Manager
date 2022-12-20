@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./app/styles/dist/index.min.css" />
+        <link rel="stylesheet" href="./app/styles/dist/tailwind-compile.css" />
         <title>SnailyCAD Manager</title>
         <script
             src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"
@@ -39,22 +40,25 @@
         <dialog id="setup_wizard" partial="./src/partials/wizard.html"></dialog>
 
         <!-- App Settings -->
-        <div
-            class="appSettings"
-            partial="./src/partials/appSettings.html"
-        ></div>
+        <div class="appSettings" partial="./src/partials/appTools.html"></div>
 
         <!-- Log Output -->
         <dialog partial="./src/partials/output.html" id="log_output"></dialog>
 
         <!-- Tools -->
-        <dialog partial="./src/partials/tools.html" id="toolbox"></dialog>
+        <dialog partial="./src/partials/cadTools.html" id="toolbox"></dialog>
 
         <!-- ENV Editor -->
         <dialog partial="./src/partials/env.html" id="env_editor"></dialog>
 
         <!-- About -->
         <dialog partial="./src/partials/about.html" id="about"></dialog>
+
+        <!-- Remote Server Settings -->
+        <dialog
+            partial="./src/partials/remoteSettings.html"
+            id="remote_server"
+        ></dialog>
 
         <!-- End Partials -->
 
@@ -74,5 +78,7 @@
             let exports = {};
             window.$ = window.jQuery = require('jquery');
         </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js"></script>
     </body>
 </html>

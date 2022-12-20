@@ -1,0 +1,38 @@
+<form>
+    <article>
+        <header>
+            <div>
+                <span>Remote Server Settings</span>
+                <span class="muted">Change Remote Server Settings</span>
+            </div>
+        </header>
+        <label for="server_settings_port">
+            <span>
+                Port
+                <span class="muted sm"
+                    >Port to listen on. (Must be 4-5 number port)</span
+                >
+            </span>
+            <input
+                type="text"
+                name="server_settings_port"
+                id="server_settings_port"
+                pattern="[0-9]{4,5}"
+                required
+            />
+        </label>
+        <footer>
+            <button class="btn success md">
+                <i class="mio">save</i>
+                <span>Save Settings</span>
+            </button>
+            <div
+                class="btn error md"
+                onclick="modal('#remote_server').close();"
+            >
+                <i class="mio">close</i>
+                <span>Close Settings</span>
+            </div>
+        </footer>
+    </article>
+</form>

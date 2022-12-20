@@ -34,9 +34,9 @@ $(async () => {
     }, 150);
     ipcRenderer.send('focus');
     await checkRequirements();
-    /*console.log(
+    console.log(
         `Okay... But why Snaily? Hmm.. Probably FiveM's mascot Snail.. Or maybe not 🤔👀`
-    );*/
+    );
 });
 
 // * Import HTML Partials

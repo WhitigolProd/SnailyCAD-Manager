@@ -30,6 +30,12 @@ const fromRoot = (query: string) => {
     return path.join(__dirname, query);
 };
 
+// Clear the log file on startup
+fs.writeFile(fromRoot('/logs/app.log'), '', (err: string) => {
+    if (err) {
+        toast.error(err);
+    }
+});
 const log = (
     string: string,
     type: 'success' | 'info' | 'warning' | 'error' | 'neutral'
@@ -40,6 +46,13 @@ const log = (
 
     // Change system message to the log string
     $('#system_message').text(string);
+
+    // Write to the log file
+    fs.appendFile(fromRoot('/logs/app.log'), string + '\n', (err: string) => {
+        if (err) {
+            toast.error(err);
+        }
+    });
 
     if (type === 'success') {
         $('.logs').append(`<span style="color: lime;">${string}</span>`);
@@ -84,6 +97,7 @@ const modalClass = class {
     }
 
     open() {
+        $('dialog').removeAttr('open');
         if (this.selector == 'output_log') {
             $('.logs').scrollTop($('.logs').prop('scrollHeight'));
         }

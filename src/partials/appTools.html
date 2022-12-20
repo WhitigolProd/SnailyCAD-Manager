@@ -1,9 +1,9 @@
 <dialog id="app_settings">
     <article>
         <header>
-            <span
+            <span class="flex flex-row items-center"
                 >App Settings
-                <span class="muted sm">Modify app Settings</span>
+                <span class="muted sm ml-2">Modify app Settings</span>
             </span>
             <a
                 href="#"
@@ -17,7 +17,7 @@
                 <i class="mio">play_arrow</i>
                 <span>Start Remote Server</span>
             </div>
-            <div class="btn md info">
+            <div class="btn md info" onclick="modal('#remote_server').open();">
                 <i class="mio">settings_remote</i>
                 <span>Server Settings</span>
             </div>

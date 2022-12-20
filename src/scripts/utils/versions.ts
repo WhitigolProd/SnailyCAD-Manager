@@ -68,8 +68,10 @@ const cadCheck = async () => {
                     .text(`(v${cad.version.latest} available)`)
                     .css('color', 'orange');
                 $('#update_cad').show();
-                log('CAD Versions out of Sync — Update Available', 'warning');
+                log('CAD Version out of date!', 'warning');
                 return;
+            } else {
+                log('CAD Version up to date!', 'success');
             }
         };
     } else {
