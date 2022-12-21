@@ -3,7 +3,11 @@ module.exports = {
   mode: "jit",
   content: ["*/**/*.html", "*/**/*.js", "*/**/*.ts", "*/**/*.tsx", "*/**/*.ejs", "./src/styles/_util.scss"],
   theme: {
-    extend: {},
+    extend: {
+      backdropBrightness: {
+        25: ".25",
+      }
+    },
   },
   plugins: [],
 }

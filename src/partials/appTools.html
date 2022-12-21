@@ -1,4 +1,4 @@
-<dialog id="app_settings">
+<dialog id="app_settings" open>
     <article>
         <header>
             <span class="flex flex-row items-center"
@@ -12,17 +12,43 @@
             ></a>
         </header>
 
-        <div class="row center-justify">
-            <div class="btn md success">
-                <i class="mio">play_arrow</i>
-                <span>Start Remote Server</span>
-            </div>
-            <div
-                class="btn md info"
-                onclick="modal('#remote_server').open(); loadServerSettings();"
-            >
-                <i class="mio">settings_remote</i>
-                <span>Server Settings</span>
+        <div
+            class="flex flex-col items-center p-3 backdrop-brightness-90 rounded"
+        >
+            <span class="text-md mb-2">Remote Server</span>
+            <span class="text-sm muted mb-2">
+                Start a remote server to access the manager from anywhere!
+            </span>
+            <span class="mb-2"
+                >Status
+                <code id="remote_server_status" class="text-red-500"
+                    >Offline</code
+                >
+            </span>
+            <div class="row center-justify">
+                <div
+                    class="btn md success"
+                    id="start_remote_server"
+                    onclick="startRemoteServer();"
+                >
+                    <i class="mio">play_arrow</i>
+                    <span>Start Remote Server</span>
+                </div>
+                <div
+                    class="btn md error hidden"
+                    id="stop_remote_server"
+                    onclick="stopRemoteServer();"
+                >
+                    <i class="mio">stop</i>
+                    <span>Stop Remote Server</span>
+                </div>
+                <div
+                    class="btn md info"
+                    onclick="modal('#remote_server').open(); loadServerSettings();"
+                >
+                    <i class="mio">settings_remote</i>
+                    <span>Server Settings</span>
+                </div>
             </div>
         </div>
 
