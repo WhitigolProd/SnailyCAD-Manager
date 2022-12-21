@@ -55,8 +55,12 @@
 #system_message {
     font-size: 12px;
     position: fixed;
+    width: 80%;
     bottom: 5px;
     left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     &::before {
         content: 'Latest Log>';
         margin-right: 5px;

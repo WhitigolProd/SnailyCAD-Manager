@@ -3,7 +3,8 @@ type storageKeys =
     | 'wizardComplete'
     | 'cadDir'
     | 'dismissedUpdate'
-    | 'remPort'
+    | 'remotePort'
+    | 'remotePassword'
     | 'remoteOnStart'
     | 'start-func';
 

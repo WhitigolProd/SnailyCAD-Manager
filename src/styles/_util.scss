@@ -73,7 +73,7 @@ article {
 }
 
 dialog {
-    border-radius: 15px;
+    border-radius: 8px;
     padding-top: 47px;
 
     article {
@@ -84,32 +84,6 @@ dialog {
             display: flex;
             align-items: center;
         }
-    }
-}
-
-.tag {
-    padding: 2px 4px;
-    border-radius: 5px;
-    font-size: 10px;
-    color: #bbc6ce;
-    border-width: 1px;
-    border-style: solid;
-
-    &.success {
-        background-color: rgba($color: lime, $alpha: 0.05);
-        border-color: rgba($color: lime, $alpha: 0.5);
-    }
-    &.info {
-        background-color: rgba($color: cornflowerblue, $alpha: 0.05);
-        border-color: rgba($color: cornflowerblue, $alpha: 0.5);
-    }
-    &.warning {
-        background-color: rgba($color: orange, $alpha: 0.05);
-        border-color: rgba($color: orange, $alpha: 0.5);
-    }
-    &.error {
-        background-color: rgba($color: red, $alpha: 0.05);
-        border-color: rgba($color: red, $alpha: 0.5);
     }
 }
 
@@ -135,5 +109,37 @@ a {
         left: 0;
         bottom: 0;
         right: 0;
+    }
+}
+
+// WIP
+@layer components {
+    .badge {
+        @apply text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold;
+
+        &.badge-primary {
+            @apply bg-blue-500 text-white;
+        }
+        &.badge-secondary {
+            @apply bg-purple-500 text-white;
+        }
+        &.badge-success {
+            @apply bg-green-500 text-white;
+        }
+        &.badge-danger {
+            @apply bg-red-500 text-white;
+        }
+        &.badge-warning {
+            @apply bg-yellow-500 text-white;
+        }
+        &.badge-info {
+            @apply bg-blue-500 text-white;
+        }
+        &.badge-light {
+            @apply bg-gray-500 text-white;
+        }
+        &.badge-dark {
+            @apply bg-gray-800 text-white;
+        }
     }
 }

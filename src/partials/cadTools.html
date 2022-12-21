@@ -29,6 +29,16 @@
             <span>Open CAD Directory</span>
         </div>
     </div>
+    <!-- Reset Node Modules -->
+    <div class="row center-justify center-itms">
+        <div
+            class="btn md error"
+            onclick="api.post('/reset', ''); toast.warning('Resetting Node Modules')"
+        >
+            <i class="bi bi-exclamation-diamond"></i>
+            <span>Reset Node Modules</span>
+        </div>
+    </div>
     <footer>
         <div class="btn md error" onclick="modal('#toolbox').close();">
             <i class="mio">close</i>

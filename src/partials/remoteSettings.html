@@ -1,11 +1,12 @@
-<form>
+<form id="remote_settings_form">
     <article>
         <header>
             <div>
                 <span>Remote Server Settings</span>
-                <span class="muted">Change Remote Server Settings</span>
+                <span class="muted text-xs">Change Remote Server Settings</span>
             </div>
         </header>
+        <!-- Server Port -->
         <label for="server_settings_port">
             <span>
                 Port
@@ -21,8 +22,37 @@
                 required
             />
         </label>
+        <!-- Server Password -->
+        <label for="server_settings_password">
+            <div>
+                <span>Remote Server Password</span>
+                <span class="muted text-xs"
+                    >The password used to access the remote server</span
+                >
+            </div>
+            <input
+                type="text"
+                name="server_settings_password"
+                id="server_settings_password"
+                required
+            />
+        </label>
+        <!-- Server on Start -->
+        <label for="server_settings_onstart">
+            <input
+                type="checkbox"
+                id="server_settings_onstart"
+                name="server_settings_onstart"
+                role="switch"
+            />
+            <span>Enable when App is Started</span>
+            <span class="muted text-xs"
+                >Enable the remote server when SnailyCAD Manager is
+                started.</span
+            >
+        </label>
         <footer>
-            <button class="btn success md">
+            <button class="btn success md" type="submit">
                 <i class="mio">save</i>
                 <span>Save Settings</span>
             </button>

@@ -20,6 +20,7 @@ let scriptImports = [
     '/app/scripts/utils/cad.js',
     '/app/scripts/utils/api/api.js',
     '/app/scripts/utils/remote/server.js',
+    '/app/scripts/utils/remote/settings.js',
 ];
 
 scriptImports.forEach((script) => {
