@@ -60,6 +60,38 @@
             id="remote_server"
         ></dialog>
 
+        <!-- Confirm App Data Delete -->
+        <dialog id="confirm_app_data_delete">
+            <article>
+                <header>
+                    <div class="text-red-500">
+                        <i class="mio">warning</i>
+                        <span>Are you sure?</span>
+                    </div>
+                </header>
+                <p class="text-red-400">
+                    This will delete all app data, and send you back to the
+                    setup wizard.
+                </p>
+                <footer>
+                    <div
+                        class="btn md success"
+                        onclick="localStorage.clear(); location.reload();"
+                    >
+                        <i class="mio">check</i>
+                        <span>Confirm</span>
+                    </div>
+                    <div
+                        class="btn md error"
+                        onclick="modal('#app_settings').open(); toast.info('Action Canceled');"
+                    >
+                        <i class="mio">close</i>
+                        <span>Cancel</span>
+                    </div>
+                </footer>
+            </article>
+        </dialog>
+
         <!-- End Partials -->
 
         <!-- Message -->

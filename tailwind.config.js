@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: "jit",
-  content: ["*/**/*.html", "*/**/*.js", "*/**/*.ts", "*/**/*.tsx", "*/**/*.ejs", "./src/styles/_util.scss"],
+  content: ["*/**/*.html", "*/**/*.js", "*/**/*.ts", "*/**/*.tsx", "*/**/*.ejs", "./app/styles/dist/index.min.css"],
   theme: {
     extend: {
       backdropBrightness: {

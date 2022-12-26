@@ -1,4 +1,4 @@
-<dialog id="app_settings" open>
+<dialog id="app_settings">
     <article>
         <header>
             <span class="flex flex-row items-center"
@@ -13,7 +13,7 @@
         </header>
 
         <div
-            class="flex flex-col items-center p-3 backdrop-brightness-90 rounded"
+            class="flex flex-col items-center p-3 backdrop-brightness-90 rounded mb-3"
         >
             <span class="text-md mb-2">Remote Server</span>
             <span class="text-sm muted mb-2">
@@ -49,6 +49,17 @@
                     <i class="mio">settings_remote</i>
                     <span>Server Settings</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Delete App Data -->
+        <div class="flex flex-row items-center justify-center">
+            <div
+                class="btn md error"
+                onclick="modal('#confirm_app_data_delete').open();"
+            >
+                <i class="mio">delete</i>
+                <span>Delete App Data (App Reset)</span>
             </div>
         </div>
 

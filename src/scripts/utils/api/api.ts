@@ -35,9 +35,7 @@ appAPI.get('/', async (req: any, res: any) => {
 
 appAPI.post('/start', async (req: any, res: any) => {
     cadLoading = true;
-    setTimeout(() => {
-        cadLoading = false;
-    }, 10000);
+
     if (keys.shift) {
         cadProcess = spawn(
             `yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
@@ -57,6 +55,7 @@ appAPI.post('/start', async (req: any, res: any) => {
         toast.info(
             'The CAD Process has exited. If this was in error, check logs!'
         );
+        cadLoading = false;
     });
 
     cadProcess.stdout.on('data', (data: any) => {
@@ -151,6 +150,12 @@ appAPI.post('/install', (req: any, res: any) => {
 });
 
 appAPI.post('/update', (req: any, res: any) => {
+    if (client_status || api_status) {
+        toast.error('Please stop the CAD before updating!');
+        return res.json({
+            message: 'Please stop the CAD before updating!',
+        });
+    }
     // Hide the start button
     $('#start_cad').hide();
     // Hide the update button
@@ -202,6 +207,36 @@ appAPI.post('/update', (req: any, res: any) => {
         $('#update_loading').hide();
         // Show the update button
         $('#update_cad').show();
+    });
+});
+
+appAPI.post('/reset', (req: any, res: any) => {
+    const resetScript = spawn(
+        'echo Resetting Node Modules && rmdir /s /q "node_modules" && echo Installing Dependencies (This may take a while) && yarn && echo Node Modules Reset',
+        [],
+        {
+            shell: true,
+            cwd: storage('cadDir').read(),
+        }
+    );
+    $('#reset_node_modules').attr('aria-busy', 'true');
+
+    resetScript.stdout.on('data', (data: Buffer) => {
+        let d = data.toString();
+        log(d, 'neutral');
+    });
+
+    resetScript.stderr.on('data', (data: Buffer) => {
+        let d = data.toString();
+        log(d, 'warning');
+    });
+
+    resetScript.on('exit', (code: number) => {
+        log(`Reset Process exited with code ${code}`, 'warning');
+        toast.info(
+            'The Reset Process has exited. If this was in error, check logs!'
+        );
+        $('#reset_node_modules').attr('aria-busy', 'false');
     });
 });
 
