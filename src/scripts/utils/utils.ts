@@ -152,7 +152,6 @@ const api = {
 const executeStartFunction = async () => {
     if (storage('start-func').read()) {
         let func = storage('start-func').read();
-        // @ts-expect-error
         eval(func);
         localStorage.removeItem('start-func');
     }

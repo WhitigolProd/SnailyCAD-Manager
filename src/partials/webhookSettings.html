@@ -1,0 +1,123 @@
+<form id="webhook_settings_form">
+    <article>
+        <header>
+            <div class="flex flex-row justify-center items-center gap-2">
+                <h2>Webhook Settings</h2>
+                <span class="muted text-xs">Modify Webhook Settings</span>
+            </div>
+        </header>
+
+        <!-- Online Webhook -->
+        <label for="webhookURL">
+            <span class="text-md">Webhook URL</span>
+            <span class="text-sm muted"
+                >URL to send webhook requests to (Leave blank to disable)</span
+            >
+            <input
+                type="url"
+                pattern="^.*(discord|discordapp)\.com\/api\/webhooks\/([\d]+)\/([a-zA-Z0-9_-]+)$"
+                id="webhookURL"
+                name="webhookURL"
+                placeholder="https://discord.com/api/webhooks/..."
+            />
+        </label>
+        <div class="backdrop-brightness-95 p-2 mb-2 rounded">
+            <label for="onlineToggle">
+                <input
+                    type="checkbox"
+                    role="switch"
+                    id="onlineToggle"
+                    name="onlineToggle"
+                />
+                <span class="text-md"
+                    >Enable
+                    <span class="text-green-500">Online</span> Webhook</span
+                >
+            </label>
+            <div id="wh_group_online" class="hidden">
+                <label for="onlineTitle">
+                    <span class="text-md">Online Title</span>
+                    <span class="text-sm muted"
+                        >Title to display when the server is online</span
+                    >
+                    <input
+                        type="text"
+                        id="onlineTitle"
+                        name="onlineTitle"
+                        placeholder="🟢 Online (Default)"
+                    />
+                </label>
+                <label for="onlineDesc">
+                    <span class="text-md">Online Description</span>
+                    <span class="text-sm muted"
+                        >Description to display when the server is online
+                        (Supports Discord Markdown)</span
+                    >
+                    <textarea
+                        class="p-3"
+                        id="onlineDesc"
+                        name="onlineDesc"
+                        placeholder="The CAD is now online. (Default)"
+                    ></textarea>
+                </label>
+            </div>
+        </div>
+
+        <!-- Offline Webhook -->
+        <div class="backdrop-brightness-95 p-2 mb-2 rounded">
+            <label for="offlineToggle">
+                <input
+                    type="checkbox"
+                    role="switch"
+                    id="offlineToggle"
+                    name="offlineToggle"
+                />
+                <span class="text-md"
+                    >Enable
+                    <span class="text-red-500">Offline</span> Webhook</span
+                >
+            </label>
+            <div id="wh_group_offline" class="hidden">
+                <label for="offlineTitle">
+                    <span class="text-md">Offline Title</span>
+                    <span class="text-sm muted"
+                        >Title to display when the server is offline</span
+                    >
+                    <input
+                        type="text"
+                        id="offlineTitle"
+                        name="offlineTitle"
+                        placeholder="🔴 Offline (Default)"
+                    />
+                </label>
+                <label for="offlineDesc">
+                    <span class="text-md">Offline Description</span>
+                    <span class="text-sm muted"
+                        >Description to display when the server is offline
+                        (Supports Discord Markdown)</span
+                    >
+                    <textarea
+                        class="p-3"
+                        id="offlineDesc"
+                        name="offlineDesc"
+                        placeholder="The CAD is now offline. (Default)"
+                    ></textarea>
+                </label>
+            </div>
+        </div>
+
+        <footer>
+            <button class="btn md success" type="submit">
+                <i class="mio">save</i>
+                <span>Save</span>
+            </button>
+            <div
+                class="btn md error"
+                onclick="modal('#webhook_settings').close();"
+            >
+                <i class="mio">close</i>
+                <span>Close</span>
+            </div>
+        </footer>
+    </article>
+</form>

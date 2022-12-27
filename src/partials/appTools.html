@@ -53,13 +53,24 @@
         </div>
 
         <!-- Delete App Data -->
-        <div class="flex flex-row items-center justify-center">
+        <div class="flex flex-row items-center justify-center mb-3">
             <div
                 class="btn md error"
                 onclick="modal('#confirm_app_data_delete').open();"
             >
                 <i class="mio">delete</i>
                 <span>Delete App Data (App Reset)</span>
+            </div>
+        </div>
+
+        <!-- Webhook -->
+        <div class="flex flex-row items-center justify-center mb-3">
+            <div
+                class="btn md info"
+                onclick="modal('#webhook_settings').open(); webhooks.settings.load();"
+            >
+                <i class="mio">notifications</i>
+                <span>Webhook Settings</span>
             </div>
         </div>
 

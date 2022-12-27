@@ -6,7 +6,14 @@ type storageKeys =
     | 'remotePort'
     | 'remotePassword'
     | 'remoteOnStart'
-    | 'start-func';
+    | 'start-func'
+    | 'wh_OnlineEnabled'
+    | 'wh_OnlineTitle'
+    | 'wh_OnlineDesc'
+    | 'wh_OfflineEnabled'
+    | 'wh_OfflineTitle'
+    | 'wh_OfflineDesc'
+    | 'wh_url';
 
 // * Storage Class
 const storeClass = class {
@@ -16,7 +23,8 @@ const storeClass = class {
     }
     read() {
         if (localStorage.getItem(this.key) == null) return null;
-        return `${localStorage.getItem(this.key)}`;
+        const value: any = localStorage.getItem(this.key);
+        return value;
     }
     write(value: string) {
         return localStorage.setItem(this.key, value);

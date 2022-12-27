@@ -36,6 +36,13 @@ appAPI.get('/', async (req: any, res: any) => {
 appAPI.post('/start', async (req: any, res: any) => {
     cadLoading = true;
 
+    const sendStartWebhook = setInterval(() => {
+        if (!cadLoading) {
+            webhooks.online();
+            clearInterval(sendStartWebhook);
+        }
+    }, 1000);
+
     if (keys.shift) {
         cadProcess = spawn(
             `yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
@@ -51,6 +58,11 @@ appAPI.post('/start', async (req: any, res: any) => {
     }
 
     cadProcess.on('exit', (code: number) => {
+        const offlineWebhook = setInterval(() => {
+            webhooks.offline();
+            clearInterval(offlineWebhook);
+        });
+
         log(`CAD Process exited with code ${code}`, 'warning');
         toast.info(
             'The CAD Process has exited. If this was in error, check logs!'
