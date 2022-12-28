@@ -7,6 +7,7 @@ const pm2 = require('pm2'); // * For Remote Server
 const express = require('express');
 const killPort = require('kill-port');
 const fs = require('fs');
+const convertAnsi = require('ansi-to-html');
 
 const app = {
     close: () => {
@@ -44,15 +45,26 @@ const log = (
         return $('.logs').scrollTop($('.logs').prop('scrollHeight'));
     };
 
+    const convert = new convertAnsi({
+        newline: true,
+        escapeXML: true,
+    });
+    const oldString = string;
+    string = convert.toHtml(string);
+
     // Change system message to the log string
     $('#system_message').text(string);
 
     // Write to the log file
-    fs.appendFile(fromRoot('/logs/app.log'), string + '\n', (err: string) => {
-        if (err) {
-            toast.error(err);
+    fs.appendFile(
+        fromRoot('/logs/app.log'),
+        oldString + '\n',
+        (err: string) => {
+            if (err) {
+                toast.error(err);
+            }
         }
-    });
+    );
 
     if (type === 'success') {
         $('.logs').append(`<span style="color: lime;">${string}</span>`);
@@ -75,13 +87,13 @@ const log = (
         return console.log('%c' + string, 'color: #ff5757;');
     }
     if (type === 'neutral') {
-        $('.logs').append(`<span>${string}</span>`);
+        $('.logs').append(string);
         scrollBottom();
-        return console.log(string);
+        return console.log(oldString);
     }
     $('.logs').append(`<span>${string}</span>`);
     scrollBottom();
-    console.log(string);
+    console.log(oldString);
 };
 
 const launchURL = (url: string) => {

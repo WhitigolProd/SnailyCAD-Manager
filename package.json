@@ -61,6 +61,7 @@
         }
     },
     "dependencies": {
+        "ansi-to-html": "^0.7.2",
         "command-exists": "^1.2.9",
         "discord-webhook-nodejs": "^1.2.2",
         "dotenv": "^16.0.3",

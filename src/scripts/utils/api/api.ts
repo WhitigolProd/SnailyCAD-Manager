@@ -168,6 +168,9 @@ appAPI.post('/update', (req: any, res: any) => {
             message: 'Please stop the CAD before updating!',
         });
     }
+
+    toast.info('Starting Update...');
+
     // Hide the start button
     $('#start_cad').hide();
     // Hide the update button
@@ -253,3 +256,5 @@ appAPI.post('/reset', (req: any, res: any) => {
 });
 
 startAPI();
+
+$('dialog').scrollTop();

@@ -26,6 +26,30 @@ $(document).on('keydown', async (e) => {
     if (ctrl && key('s')) {
         modal('#app_settings').open();
     }
+
+    if (ctrl && key('r')) {
+        e.preventDefault();
+        api.post('/start', {}, (data, err) => {
+            if (err) {
+                return console.error(err);
+            }
+            console.log(data);
+        });
+    }
+
+    if (ctrl && key('t')) {
+        e.preventDefault();
+        if (client_status && api_status && !cadLoading) {
+            api.post('/stop', {}, (data, err) => {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log(data);
+            });
+            return;
+        }
+        toast.error(`Can't stop CAD Process!`);
+    }
 });
 
 // * Key Releases
