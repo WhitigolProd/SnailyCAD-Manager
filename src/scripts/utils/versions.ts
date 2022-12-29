@@ -56,6 +56,7 @@ const cadCheck = async () => {
                 'https://api.github.com/repos/SnailyCAD/snaily-cadv4/releases'
             ).then(async (data) => {
                 let v = data[0].tag_name;
+                $('#cad_notes #notes').html(mdConvert.makeHtml(data[0].body));
                 cad.version.latest = v;
 
                 await compare();
@@ -66,7 +67,11 @@ const cadCheck = async () => {
             if (cad.version.current < cad.version.latest) {
                 $('#sc_latest')
                     .text(`(v${cad.version.latest} available)`)
-                    .css('color', 'orange');
+                    .css('color', 'orange')
+                    .parent()
+                    .append(
+                        `<span onclick="modal('#cad_notes').open();" class="cursor-pointer text-blue-500 hover:text-blue-400 ml-1 text-xs">What's New?</span>`
+                    );
                 $('#update_cad').show();
                 log('CAD Version out of date!', 'warning');
                 return;

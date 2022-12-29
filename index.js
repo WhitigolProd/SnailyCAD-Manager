@@ -59,6 +59,9 @@ const createWindow = () => {
         app.relaunch({ args: process.argv.slice(1).concat(['--relaunch']) });
         app.exit(0);
     })
+    ipcMain.on('devTools', () => {
+        mainWindow.webContents.openDevTools();
+    })
 }
 
 app.on('ready', createWindow);

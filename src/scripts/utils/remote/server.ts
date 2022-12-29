@@ -1,14 +1,19 @@
 const remApp = express();
+let remoteProcess: any;
 
 remApp.set('view engine', 'ejs');
 remApp.set('views', fromRoot('/src/scripts/utils/remote/views'));
 remApp.use(express.static(fromRoot('/app/styles/dist/')));
 
 const startRemoteServer = () => {
-    if (storage('remoteOnStart').read() && storage('remotePort').read()) {
+    if (
+        storage('remotePort').read() !== '' &&
+        storage('remotePassword').read() !== ''
+    ) {
         let remotePort = storage('remotePort').read();
-        remApp.listen(`${remotePort}`, () => {
+        remoteProcess = remApp.listen(`${remotePort}`, () => {
             log(`Remote Server Running @ [::]:${remotePort}`, 'success');
+            toast.info(`Remote Server Running @ [::]:${remotePort}`);
             $('#remote_server_status')
                 .text('Online')
                 .removeClass('text-red-500')
@@ -20,9 +25,9 @@ const startRemoteServer = () => {
 };
 
 const stopRemoteServer = () => {
-    remApp.close(() => {
-        log('Remote Server Stopped', 'success');
-        toast.success('Remote Server Stopped');
+    remoteProcess.close(() => {
+        log(`Remote Server Stopped`, 'success');
+        toast.info('Remote Server Stopped');
         $('#remote_server_status')
             .text('Offline')
             .removeClass('text-green-500')

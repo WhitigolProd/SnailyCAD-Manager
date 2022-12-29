@@ -8,6 +8,7 @@ const express = require('express');
 const killPort = require('kill-port');
 const fs = require('fs');
 const convertAnsi = require('ansi-to-html');
+const mdConvert = new (require('showdown').Converter)();
 
 const app = {
     close: () => {
@@ -53,7 +54,7 @@ const log = (
     string = convert.toHtml(string);
 
     // Change system message to the log string
-    $('#system_message').text(string);
+    $('#system_message').html(string);
 
     // Write to the log file
     fs.appendFile(

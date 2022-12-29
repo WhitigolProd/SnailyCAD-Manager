@@ -50,6 +50,10 @@ $(document).on('keydown', async (e) => {
         }
         toast.error(`Can't stop CAD Process!`);
     }
+
+    if (e.code == '123') {
+        ipc.send('devTools');
+    }
 });
 
 // * Key Releases
