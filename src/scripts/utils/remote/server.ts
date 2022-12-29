@@ -4,6 +4,7 @@ let remoteProcess: any;
 remApp.set('view engine', 'ejs');
 remApp.set('views', fromRoot('/src/scripts/utils/remote/views'));
 remApp.use(express.static(fromRoot('/app/styles/dist/')));
+remApp.use(express.static(fromRoot('/app/scripts/utils/remote/app')));
 
 const startRemoteServer = () => {
     if (
@@ -37,6 +38,6 @@ const stopRemoteServer = () => {
     });
 };
 
-remApp.get('/', (req: any, res: any) => {
-    res.render('index');
-});
+// Routes
+remApp.use('/', require(fromRoot('/app/scripts/utils/remote/routes/main')));
+remApp.use('/api', require(fromRoot('/app/scripts/utils/remote/routes/api')));

@@ -838,6 +838,10 @@ video {
   height: 2.25rem;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .flex-shrink {
   flex-shrink: 1;
 }

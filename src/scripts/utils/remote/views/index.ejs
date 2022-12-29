@@ -7,8 +7,15 @@
         <title>SnailyCAD Manager - Remote</title>
 
         <link rel="stylesheet" href="index.min.css" />
+        <link rel="stylesheet" href="tailwind-compile.css" />
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="/index.js" defer></script>
     </head>
-    <body style="background-color: var(--background-color)">
+    <body
+        class="container flex flex-col h-screen justify-center items-center"
+        style="background-color: var(--background-color)"
+    >
         <article>
             <header>Remote Manager</header>
             The remote manager is running!
@@ -16,5 +23,34 @@
                 <span class="muted">Created by Whitigol Web Design</span>
             </footer>
         </article>
+
+        <dialog id="login" open>
+            <form id="login_form">
+                <article>
+                    <header>
+                        <div>
+                            <span>Log In</span>
+                            <span class="muted text-xs"
+                                >Log into the SnailyCAD Remote Manager</span
+                            >
+                        </div>
+                    </header>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="password">
+                            <span>Password</span>
+                            <input type="password" id="password" required />
+                        </label>
+                    </div>
+
+                    <footer>
+                        <button class="btn md success" type="submit">
+                            <i class="material-symbols-outlined">check</i>
+                            <span>Log In</span>
+                        </button>
+                    </footer>
+                </article>
+            </form>
+        </dialog>
     </body>
 </html>
