@@ -8,9 +8,8 @@
 
 | Resource                     | Link                                                                               |
 | ---------------------------- | ---------------------------------------------------------------------------------- |
-| SnailyCAD Manager v1         | [Download (exe)](https://manager.cossys.tk/)                                       |
+| SnailyCAD Manager v2         | [Download (exe)](https://manager.cossys.tk/)                                       |
 | SnailyCAD Manager v1 Archive | [Visit Archive](https://github.com/WhitigolProd/SnailyCAD-Manager/tree/v1-archive) |
-| SnailyCAD Manager v2         | Soon™                                                                              |
 | --                           | --                                                                                 |
 
 ## Contributors
