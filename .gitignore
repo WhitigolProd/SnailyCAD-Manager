@@ -132,3 +132,4 @@ dist
 # Compiled from Typescript
 app/**/*.js
 !app/styles/dist/
+.temp/

@@ -1,7 +1,9 @@
-const versions = {
+let versions = {
     app: null,
     cad: null,
 };
+
+let updateDownloadUrl: string;
 
 const checkAppVersion = async () => {
     await $.get(
@@ -12,6 +14,7 @@ const checkAppVersion = async () => {
             let current = require(fromRoot('/package.json')).version;
             versions.app = current;
             let latest = data[0].tag_name;
+            updateDownloadUrl = data[0].assets[0].browser_download_url;
 
             if (current < latest) {
                 log(

@@ -1,19 +1,38 @@
 <dialog id="d-app-version">
-  <article>
-    <header>SnailyCAD Manager &mdash; New Version</header>
-    <p>There's a new update available for SnailyCAD Manager!</p>
-    <hr />
-    <p>Current Version: <code id="app_current_version">Loading...</code></p>
-    <p>Latest Version: <code id="app_latest_version">Loading...</code></p>
-    <footer>
-      <div class="btn md success">
-        <i class="mio">download</i>
-        <span>Update Now</span>
-      </div>
-      <div class="btn md warning">
-        <i class="mio">pan_tool</i>
-        <span>Dismiss</span>
-      </div>
-    </footer>
-  </article>
+    <article>
+        <header>SnailyCAD Manager &mdash; New Version</header>
+        <p>There's a new update available for SnailyCAD Manager!</p>
+        <hr />
+        <p>Current Version: <code id="app_current_version">Loading...</code></p>
+        <p>Latest Version: <code id="app_latest_version">Loading...</code></p>
+        <div class="mt-3">
+            <span
+                >If you are having trouble updating the application, you can
+                always manually download the latest version
+                <span
+                    class="cursor-pointer text-blue-500 hover:text-blue-400"
+                    onclick="launchURL('https://manager.cossys.tk/')"
+                    >here</span
+                ></span
+            >
+        </div>
+        <footer>
+            <div
+                class="btn md success"
+                id="app_update_btn"
+                onclick="updateApp();"
+            >
+                <i class="mio">download</i>
+                <span>Update Now</span>
+            </div>
+            <div
+                class="btn md warning"
+                onclick="modal('#d-app-version').close();"
+                id="app_dismiss_btn"
+            >
+                <i class="mio">pan_tool</i>
+                <span>Dismiss</span>
+            </div>
+        </footer>
+    </article>
 </dialog>

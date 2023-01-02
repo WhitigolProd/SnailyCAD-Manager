@@ -7,12 +7,13 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "electron .",
         "compile": "tsc",
-        "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon 'public/icon-white-bg.png' --ignore \".*\\.\\(tx\\|tsx\\)\" --out 'E:/_Web_Development_/.electron/BUILDS/SnailyCADManager/[2.0.0]'",
+        "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon 'public/icon-white-bg.png' --ignore \"/^.*.(ts|tsx|exe|scss)/gm\" --asar --out 'E:/_Web_Development_/.electron/BUILDS/SnailyCADManager/[2.0.0]'",
+        "build:raw": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon 'public/icon-white-bg.png' --ignore \"/^.*.(ts|tsx|exe|scss)/gm\" --out 'E:/_Web_Development_/.electron/BUILDS/SnailyCADManager/[2.0.0]'",
         "tailwind": "npx tailwindcss -i \"./app/styles/dist/index.min.css\" -o \"./app/styles/dist/tailwind-compile.css\"",
         "dev": "concurrently \"npm run dev:tailwind\" \"npm run dev:tsc\" \"npm run dev:start\"",
         "dev:tailwind": "npx tailwindcss -o \"./app/styles/dist/tailwind-compile.css\" -w",
         "dev:tsc": "tsc -w",
-        "dev:start": "electron ."
+        "dev:start": "npx electronmon ."
     },
     "repository": {
         "type": "git",
@@ -60,11 +61,25 @@
             ]
         }
     },
+    "electronmon": {
+        "patterns": [
+            "app/**/*",
+            "public/**/*",
+            "index.html",
+            "index.js",
+            "main.js",
+            "package.json",
+            "tsconfig.json",
+            "tailwind.config.js",
+            "!logs/**/*"
+        ]
+    },
     "dependencies": {
         "ansi-to-html": "^0.7.2",
         "command-exists": "^1.2.9",
         "discord-webhook-nodejs": "^1.2.2",
         "dotenv": "^16.0.3",
+        "download": "^8.0.0",
         "ejs": "^3.1.8",
         "electron-squirrel-startup": "^1.0.0",
         "express": "^4.18.2",

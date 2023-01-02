@@ -22,6 +22,7 @@ let scriptImports = [
     '/app/scripts/utils/remote/server.js',
     '/app/scripts/utils/remote/settings.js',
     '/app/scripts/utils/webhook.js',
+    '/app/scripts/utils/appUpdate.js',
 ];
 
 scriptImports.forEach((script) => {
