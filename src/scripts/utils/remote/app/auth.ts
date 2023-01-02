@@ -26,7 +26,6 @@ $(document).on('submit', '#auth_form', (e) => {
                 .removeClass('text-green-500')
                 .addClass('text-red-500')
                 .text(data.message);
-            console.log(data);
         })
         .catch((err) => {
             $('#login_status')
