@@ -653,6 +653,14 @@ video {
   left: -0.25rem;
 }
 
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
+.left-2 {
+  left: 0.5rem;
+}
+
 .isolate {
   isolation: isolate;
 }

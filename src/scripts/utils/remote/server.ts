@@ -1,10 +1,20 @@
 const remApp = express();
 let remoteProcess: any;
+const session = require('express-session');
 
 remApp.set('view engine', 'ejs');
 remApp.set('views', fromRoot('/src/scripts/utils/remote/views'));
 remApp.use(express.static(fromRoot('/app/styles/dist/')));
 remApp.use(express.static(fromRoot('/app/scripts/utils/remote/app')));
+remApp.use('/public', express.static(fromRoot('/public/')));
+remApp.use(express.urlencoded({ extended: true }));
+remApp.use(
+    session({
+        secret: genString(10),
+        resave: false,
+        saveUninitialized: false,
+    })
+);
 
 const startRemoteServer = () => {
     if (
@@ -41,3 +51,4 @@ const stopRemoteServer = () => {
 // Routes
 remApp.use('/', require(fromRoot('/app/scripts/utils/remote/routes/main')));
 remApp.use('/api', require(fromRoot('/app/scripts/utils/remote/routes/api')));
+remApp.use('/auth', require(fromRoot('/app/scripts/utils/remote/routes/auth')));

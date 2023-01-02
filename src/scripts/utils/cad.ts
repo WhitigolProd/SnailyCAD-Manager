@@ -1,3 +1,4 @@
+// @ts-ignore
 let cadLoading: boolean = false;
 let client_status: boolean = false;
 let api_status: boolean = false;

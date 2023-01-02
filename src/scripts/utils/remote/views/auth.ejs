@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Please Login</title>
+        <link
+            rel="shortcut icon"
+            href="/public/icon-white.png"
+            type="image/x-icon"
+        />
+
+        <link rel="stylesheet" href="index.min.css" />
+        <link rel="stylesheet" href="tailwind-compile.css" />
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+        <script src="/auth.js" defer></script>
+    </head>
+    <body
+        class="h-screen flex flex-col justify-center items-center"
+        style="background-color: var(--background-color)"
+    >
+        <form id="auth_form">
+            <article>
+                <header>
+                    <div>
+                        <span>Login</span>
+                        <span class="ml-2 muted text-xs"
+                            >Please log in to access the remote manager.</span
+                        >
+                    </div>
+                </header>
+                <label for="password">
+                    <div>
+                        <span>Access Password</span>
+                        <span class="text-xs muted"
+                            >Please enter the password that was configured on
+                            SnailyCAD Manager</span
+                        >
+                    </div>
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        class="input"
+                        required
+                    />
+                    <span class="text-xs hidden" id="login_status"
+                        >Checking...</span
+                    >
+                </label>
+                <footer>
+                    <button class="btn md success" type="submit">
+                        <i class="material-symbols-outlined">check</i>
+                        <span>Log In</span>
+                    </button>
+                </footer>
+            </article>
+        </form>
+    </body>
+</html>

@@ -1,4 +1,4 @@
-// @ts-expect-error
+// @ts-nocheck
 const tst = new Notyf({
     duration: 3000,
     ripple: true,
@@ -47,7 +47,6 @@ const tst = new Notyf({
     ],
 });
 
-// @ts-expect-error
 const toast = {
     success: (string: string) => {
         return tst.open({

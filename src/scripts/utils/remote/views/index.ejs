@@ -5,52 +5,92 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>SnailyCAD Manager - Remote</title>
+        <link
+            rel="shortcut icon"
+            href="/public/icon-white.png"
+            type="image/x-icon"
+        />
 
         <link rel="stylesheet" href="index.min.css" />
         <link rel="stylesheet" href="tailwind-compile.css" />
 
+        <script
+            src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"
+            defer
+        ></script>
+        <script src="./app/scripts/load.js" defer></script>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="/index.js" defer></script>
+        <script src="/toast.js" defer></script>
+        <script src="/status.js" defer></script>
+        <script src="/control.js" defer></script>
     </head>
     <body
-        class="container flex flex-col h-screen justify-center items-center"
+        class="container flex flex-col h-screen justify-center items-center gap-2"
         style="background-color: var(--background-color)"
     >
         <article>
-            <header>Remote Manager</header>
-            The remote manager is running!
-            <footer>
-                <span class="muted">Created by Whitigol Web Design</span>
-            </footer>
+            <header>
+                <div>
+                    <span>SnailyCAD</span>
+                    <span class="muted text-xs"
+                        >v<span id="cad_version">Loading</span></span
+                    >
+                </div>
+            </header>
+            <div class="row center-itms center-justify">
+                <div id="snailyStatus">
+                    SnailyCAD Status:
+                    <code
+                        ><span id="status_loading" style="display: none"
+                            >LOADING</span
+                        ><span id="status_client" class="text-red-500"
+                            >CLIENT</span
+                        >&nbsp;|&nbsp;<span class="text-red-500" id="status_api"
+                            >API</span
+                        ></code
+                    >
+                </div>
+            </div>
+            <div class="flex flex-row items-center justify-evenly">
+                <div
+                    class="btn success"
+                    id="start_cad"
+                    onclick="remControl.start();"
+                    style=""
+                >
+                    <i class="material-symbols-outlined">play_arrow</i>
+                    <span>Start SnailyCAD</span>
+                </div>
+                <div
+                    class="btn warning"
+                    id="starting_cad"
+                    onclick="toast.warning('Please Wait...')"
+                    style="display: none"
+                >
+                    <span aria-busy="true"></span>
+                    <span>Loading</span>
+                </div>
+                <div
+                    class="btn error hidden"
+                    id="stop_cad"
+                    onclick="remControl.stop();"
+                    style="display: none"
+                >
+                    <i class="material-symbols-outlined">stop</i>
+                    <span>Stop SnailyCAD</span>
+                </div>
+            </div>
         </article>
-
-        <dialog id="login" open>
-            <form id="login_form">
-                <article>
-                    <header>
-                        <div>
-                            <span>Log In</span>
-                            <span class="muted text-xs"
-                                >Log into the SnailyCAD Remote Manager</span
-                            >
-                        </div>
-                    </header>
-
-                    <div class="flex flex-col gap-2">
-                        <label for="password">
-                            <span>Password</span>
-                            <input type="password" id="password" required />
-                        </label>
-                    </div>
-
-                    <footer>
-                        <button class="btn md success" type="submit">
-                            <i class="material-symbols-outlined">check</i>
-                            <span>Log In</span>
-                        </button>
-                    </footer>
-                </article>
-            </form>
-        </dialog>
+        <span class="fixed bottom-2 left-2 text-xs muted"
+            >This webpage is running atop SnailyCAD Manager v<span
+                id="app_version"
+            ></span
+        ></span>
     </body>
 </html>

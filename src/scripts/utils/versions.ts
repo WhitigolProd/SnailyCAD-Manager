@@ -1,3 +1,8 @@
+const versions = {
+    app: null,
+    cad: null,
+};
+
 const checkAppVersion = async () => {
     await $.get(
         'https://api.github.com/repos/WhitigolProd/SnailyCAD-Manager/releases'
@@ -5,6 +10,7 @@ const checkAppVersion = async () => {
         .then((data) => {
             // @ts-expect-error
             let current = require(fromRoot('/package.json')).version;
+            versions.app = current;
             let latest = data[0].tag_name;
 
             if (current < latest) {
@@ -46,6 +52,7 @@ const cadCheck = async () => {
         $.get(storage('cadDir').read() + '\\package.json').then(
             async (data) => {
                 let v = data.version;
+                versions.cad = v;
                 cad.version.current = v;
                 $('#sc_version').text('v' + v);
                 await checkLatest();
