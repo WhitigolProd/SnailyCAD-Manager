@@ -37,23 +37,23 @@ const remStatus = {
             .then((data) => {
                 $('#api_unreachable').removeAttr('open');
                 if (data.cadLoading) {
-                    $('#starting_cad').show();
-                    $('#start_cad').hide();
-                    $('#stop_cad').hide();
+                    $('#starting_cad').removeClass('hidden');
+                    $('#start_cad').addClass('hidden');
+                    $('#stop_cad').addClass('hidden');
                 }
                 if (data.client_status && data.api_status) {
-                    $('#starting_cad').hide();
-                    $('#start_cad').hide();
-                    $('#stop_cad').show();
+                    $('#starting_cad').addClass('hidden');
+                    $('#start_cad').addClass('hidden');
+                    $('#stop_cad').removeClass('hidden');
                 }
                 if (
                     !data.client_status &&
                     !data.api_status &&
                     !data.cadLoading
                 ) {
-                    $('#starting_cad').hide();
-                    $('#start_cad').show();
-                    $('#stop_cad').hide();
+                    $('#starting_cad').addClass('hidden');
+                    $('#start_cad').removeClass('hidden');
+                    $('#stop_cad').addClass('hidden');
                 }
             })
             .catch(() => {

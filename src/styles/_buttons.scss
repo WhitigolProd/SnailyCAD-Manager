@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
+    gap: 0.25rem;
     width: fit-content;
     height: fit-content;
     border-width: 1px !important;
@@ -14,11 +15,9 @@
     color: hsl(205deg, 16%, 77%);
 
     * {
-        margin-right: 5px;
-
-        &:last-child {
-            margin-right: 0;
-        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &.success {

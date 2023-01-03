@@ -143,7 +143,7 @@ const envClass = class {
         });
         parsenv.write({ path: path.join(storage('cadDir').read(), '/.env') });
         $('#env_editor article header [style="color: orange;"]').remove();
-        $('#env_editor article footer .error').show();
+        $('#env_editor article footer .error').removeClass('hidden');
         modal('#env_editor').close();
         toast.success('ENV Saved!');
         log('ENV Saved', 'success');

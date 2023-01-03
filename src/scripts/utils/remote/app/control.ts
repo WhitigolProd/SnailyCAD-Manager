@@ -2,9 +2,9 @@ const remControl = {
     start: () => {
         $.post('/api/control/start', {}).then((data) => {
             if (data.success) {
-                $('#start_cad').hide();
-                $('#stop_cad').show();
-                $('#starting_cad').show();
+                $('#start_cad').addClass('hidden');
+                $('#stop_cad').removeClass('hidden');
+                $('#starting_cad').removeClass('hidden');
                 toast.info(data.message);
             } else {
                 toast.error(data.message);
@@ -14,9 +14,9 @@ const remControl = {
     stop: () => {
         $.post('/api/control/stop', {}).then((data) => {
             if (data.success) {
-                $('#start_cad').show();
-                $('#stop_cad').hide();
-                $('#starting_cad').hide();
+                $('#start_cad').removeClass('hidden');
+                $('#stop_cad').addClass('hidden');
+                $('#starting_cad').addClass('hidden');
                 toast.info(data.message);
             } else {
                 toast.error(data.message);

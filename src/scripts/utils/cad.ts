@@ -5,20 +5,28 @@ let api_status: boolean = false;
 const getCadStatus = async () => {
     const updateButtons = async () => {
         if (cadLoading) {
-            $('#starting_cad').show();
-            $('#start_cad').hide();
-            $('#stop_cad').hide();
+            $('#starting_cad').removeClass('hidden');
+            $('#start_cad').addClass('hidden');
+            $('#stop_cad').addClass('hidden');
+            $('#launch_cad').addClass('hidden');
         }
         if (client_status && api_status) {
-            $('#starting_cad').hide();
-            $('#start_cad').hide();
-            $('#stop_cad').show();
+            $('#starting_cad').addClass('hidden');
+            $('#start_cad').addClass('hidden');
+            $('#stop_cad').removeClass('hidden');
+            $('#launch_cad')
+                .removeClass('hidden')
+                .attr(
+                    'onclick',
+                    'launchURL(env(`NEXT_PUBLIC_CLIENT_URL`).read())'
+                );
             cadLoading = false;
         }
         if (!client_status && !api_status && !cadLoading) {
-            $('#starting_cad').hide();
-            $('#start_cad').show();
-            $('#stop_cad').hide();
+            $('#starting_cad').addClass('hidden');
+            $('#start_cad').removeClass('hidden');
+            $('#stop_cad').addClass('hidden');
+            $('#launch_cad').addClass('hidden');
         }
         setTimeout(getCadStatus, 1000);
     };
@@ -27,7 +35,7 @@ const getCadStatus = async () => {
         const getClientStatus = async () => {
             await findProcess('port', env('PORT_CLIENT').read()).then(
                 async (list: any) => {
-                    $('#status_loading').hide();
+                    $('#status_loading').addClass('hidden');
                     if (list.length > 0) {
                         client_status = true;
                         $('#status_client').text('CLIENT').css('color', 'lime');

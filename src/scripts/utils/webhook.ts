@@ -79,8 +79,8 @@ const webhooks = {
         load: () => {
             // reset form
             $('#webhookURL').val('');
-            $('#wh_group_online').hide();
-            $('#wh_group_offline').hide();
+            $('#wh_group_online').addClass('hidden');
+            $('#wh_group_offline').addClass('hidden');
             $('#onlineToggle').prop('checked', false);
             $('#offlineToggle').prop('checked', false);
             $('#onlineTitle').val('');
@@ -93,7 +93,7 @@ const webhooks = {
             }
 
             if (storage('wh_OnlineEnabled').read() === 'true') {
-                $('#wh_group_online').show();
+                $('#wh_group_online').removeClass('hidden');
                 // Check the Online Toggle
                 $('#onlineToggle').prop('checked', true);
 
@@ -103,7 +103,7 @@ const webhooks = {
             }
 
             if (storage('wh_OfflineEnabled').read() === 'true') {
-                $('#wh_group_offline').show();
+                $('#wh_group_offline').removeClass('hidden');
                 // Check the Online Toggle
                 $('#offlineToggle').prop('checked', true);
 
@@ -148,17 +148,17 @@ const webhooks = {
 
 $(document).on('click', '#onlineToggle', () => {
     if ($('#onlineToggle').is(':checked')) {
-        $('#wh_group_online').show();
+        $('#wh_group_online').removeClass('hidden');
     } else {
-        $('#wh_group_online').hide();
+        $('#wh_group_online').addClass('hidden');
     }
 });
 
 $(document).on('click', '#offlineToggle', () => {
     if ($('#offlineToggle').is(':checked')) {
-        $('#wh_group_offline').show();
+        $('#wh_group_offline').removeClass('hidden');
     } else {
-        $('#wh_group_offline').hide();
+        $('#wh_group_offline').addClass('hidden');
     }
 });
 

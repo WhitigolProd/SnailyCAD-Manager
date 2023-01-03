@@ -29,14 +29,14 @@ const startRemoteServer = () => {
                 .text('Online')
                 .removeClass('text-red-500')
                 .addClass('text-green-500');
-            $('#start_remote_server').hide();
-            $('#stop_remote_server').show();
+            $('#start_remote_server').addClass('hidden');
+            $('#stop_remote_server').removeClass('hidden');
         });
     }
 };
 
 const stopRemoteServer = () => {
-    $('#stop_remote_server').hide();
+    $('#stop_remote_server').addClass('hidden');
     $('#remote_server_status')
         .removeClass('text-green-500')
         .addClass('text-orange-500')
@@ -48,8 +48,8 @@ const stopRemoteServer = () => {
             .text('Offline')
             .removeClass('text-green-500')
             .addClass('text-red-500');
-        $('#start_remote_server').show();
-        $('#stop_remote_server').hide();
+        $('#start_remote_server').removeClass('hidden');
+        $('#stop_remote_server').addClass('hidden');
     });
 };
 

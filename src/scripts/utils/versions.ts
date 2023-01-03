@@ -82,7 +82,7 @@ const cadCheck = async () => {
                     .append(
                         `<span onclick="modal('#cad_notes').open();" class="cursor-pointer text-blue-500 hover:text-blue-400 ml-1 text-xs">What's New?</span>`
                     );
-                $('#update_cad').show();
+                $('#update_cad').removeClass('hidden');
                 log('CAD Version out of date!', 'warning');
                 return;
             } else {

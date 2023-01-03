@@ -8,7 +8,7 @@ const updateApp = async () => {
         .text('Downloading...')
         .attr('onclick', 'toast.warning("Update In Progress");')
         .attr('aria-busy', 'true');
-    $('#app_dismiss_btn').hide();
+    $('#app_dismiss_btn').addClass('hidden');
     await download(updateDownloadUrl, fromRoot('/.temp'), {
         filename: 'update.exe',
     }).then(() => {

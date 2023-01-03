@@ -14,7 +14,7 @@ $(document).on('submit', '#auth_form', (e) => {
                     .removeClass('text-red-500')
                     .addClass('text-green-500')
                     .text('Success! Redirecting...');
-                $('#password').hide();
+                $('#password').addClass('hidden');
 
                 // Give the session time to authenticate, then redirect
                 setTimeout(() => {

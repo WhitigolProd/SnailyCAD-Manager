@@ -148,7 +148,7 @@ appAPI.post('/install', (req: any, res: any) => {
             storage('start-func').write(`
                 modal('#env_editor').open();
                 $('#env_editor article header').append('<span style="color: orange;">Initial Configuration Required</span>');
-                $('#env_editor article footer .error').hide();
+                $('#env_editor article footer .error').addClass('hidden');
             `);
             app.hard_restart();
         }
@@ -172,11 +172,11 @@ appAPI.post('/update', (req: any, res: any) => {
     toast.info('Starting Update...');
 
     // Hide the start button
-    $('#start_cad').hide();
+    $('#start_cad').addClass('hidden');
     // Hide the update button
-    $('#update_cad').hide();
+    $('#update_cad').addClass('hidden');
     // Show the update loading button
-    $('#update_loading').show();
+    $('#update_loading').removeClass('hidden');
     res.json({
         message: 'Starting Update',
     });
@@ -195,14 +195,14 @@ appAPI.post('/update', (req: any, res: any) => {
 
         // When the update has started, hide the update button, and show the update loading button
         if (d.includes('Updating Repository')) {
-            $('#update_cad').hide();
-            $('#update_loading').show();
+            $('#update_cad').addClass('hidden');
+            $('#update_loading').removeClass('hidden');
         }
 
         // When the update has finished, hide both buttons
         if (d.includes('Update Complete')) {
-            $('#update_cad').hide();
-            $('#update_loading').hide();
+            $('#update_cad').addClass('hidden');
+            $('#update_loading').addClass('hidden');
             // Soft Restart App
             app.restart();
         }
@@ -219,9 +219,9 @@ appAPI.post('/update', (req: any, res: any) => {
             'The Update Process has exited. If this was in error, check logs!'
         );
         // Hide the update loading button
-        $('#update_loading').hide();
+        $('#update_loading').addClass('hidden');
         // Show the update button
-        $('#update_cad').show();
+        $('#update_cad').removeClass('hidden');
     });
 });
 

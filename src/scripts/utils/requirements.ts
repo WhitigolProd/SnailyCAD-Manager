@@ -80,7 +80,7 @@ const checkRequirements = async () => {
         requirements.psql &&
         requirements.yarn
     ) {
-        $('.requirements').hide();
+        $('.requirements').addClass('hidden');
         await loadWizard();
         await cadCheck();
 

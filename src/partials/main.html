@@ -6,24 +6,30 @@
         ></span>
     </header>
     <div class="row center-itms center-justify">
-        <div id="snailyStatus">
-            SnailyCAD Status:
+        <div
+            id="snailyStatus"
+            class="flex flex-row justify-center items-center gap-1"
+        >
+            <span>SnailyCAD Status:</span>
             <code
                 ><span id="status_loading">LOADING</span
                 ><span id="status_client"></span>&nbsp;|&nbsp;<span
                     id="status_api"
                 ></span
             ></code>
+            <div class="btn sm info hidden" id="launch_cad">
+                <i class="mio">launch</i>
+                <span>Launch</span>
+            </div>
         </div>
     </div>
 
     <div class="flex flex-row items-center justify-evenly">
         <div
-            class="btn success"
+            class="btn success hidden"
             id="start_cad"
             onclick="startCad();"
             data-tooltip="Shift + Click to skip build"
-            style="display: none"
         >
             <i class="mio">play_arrow</i>
             <span>Start SnailyCAD</span>
@@ -36,23 +42,17 @@
             <span aria-busy="true"></span>
             <span>Loading</span>
         </div>
-        <div
-            class="btn error hidden"
-            id="stop_cad"
-            onclick="stopCad();"
-            style="display: none"
-        >
+        <div class="btn error hidden" id="stop_cad" onclick="stopCad();">
             <i class="mio">stop</i>
             <span>Stop SnailyCAD</span>
         </div>
-        <div class="btn info" id="update_cad" style="display: none">
+        <div class="btn info hidden" id="update_cad">
             <i class="mio">download</i>
             <span>Update SnailyCAD</span>
         </div>
         <div
-            class="btn warning"
+            class="btn warning hidden"
             id="update_loading"
-            style="display: none"
             onclick="toast.warning('Update in Progress')"
         >
             <i aria-busy="true"></i>
