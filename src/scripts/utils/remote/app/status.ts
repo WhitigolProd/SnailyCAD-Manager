@@ -33,23 +33,35 @@ const remStatus = {
         });
     },
     cad: () => {
-        $.get('/api/status/cad').then((data) => {
-            if (data.cadLoading) {
-                $('#starting_cad').show();
-                $('#start_cad').hide();
-                $('#stop_cad').hide();
-            }
-            if (data.client_status && data.api_status) {
-                $('#starting_cad').hide();
-                $('#start_cad').hide();
-                $('#stop_cad').show();
-            }
-            if (!data.client_status && !data.api_status && !data.cadLoading) {
-                $('#starting_cad').hide();
-                $('#start_cad').show();
-                $('#stop_cad').hide();
-            }
-        });
+        $.get('/api/status/cad')
+            .then((data) => {
+                $('#api_unreachable').removeAttr('open');
+                if (data.cadLoading) {
+                    $('#starting_cad').show();
+                    $('#start_cad').hide();
+                    $('#stop_cad').hide();
+                }
+                if (data.client_status && data.api_status) {
+                    $('#starting_cad').hide();
+                    $('#start_cad').hide();
+                    $('#stop_cad').show();
+                }
+                if (
+                    !data.client_status &&
+                    !data.api_status &&
+                    !data.cadLoading
+                ) {
+                    $('#starting_cad').hide();
+                    $('#start_cad').show();
+                    $('#stop_cad').hide();
+                }
+            })
+            .catch(() => {
+                $('#api_unreachable').attr('open', '');
+            })
+            .fail(() => {
+                $('#api_unreachable').attr('open', '');
+            });
 
         setTimeout(remStatus.cad, 1000);
     },

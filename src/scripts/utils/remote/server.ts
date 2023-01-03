@@ -36,6 +36,11 @@ const startRemoteServer = () => {
 };
 
 const stopRemoteServer = () => {
+    $('#stop_remote_server').hide();
+    $('#remote_server_status')
+        .removeClass('text-green-500')
+        .addClass('text-orange-500')
+        .text('Stopping');
     remoteProcess.close(() => {
         log(`Remote Server Stopped`, 'success');
         toast.info('Remote Server Stopped');

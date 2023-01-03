@@ -99,5 +99,31 @@
                 id="app_version"
             ></span
         ></span>
+
+        <div class="fixed top-0 right-0 m-3 btn md error" onclick="logOut();">
+            <i class="material-symbols-outlined">logout</i>
+            <span>Close Session (Log Out)</span>
+        </div>
+
+        <dialog id="api_unreachable">
+            <article>
+                <header>API Error</header>
+                <div class="flex flex-col items-center justify-center">
+                    <span class="text-center"
+                        >The API is unreachable. Please make sure that the API
+                        is running and that the port is correct.</span
+                    >
+                    <div class="flex flex-row items-center justify-evenly">
+                        <div
+                            class="mt-2 btn md success"
+                            onclick="window.location.reload();"
+                        >
+                            <i class="material-symbols-outlined">refresh</i>
+                            <span>Reload</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </dialog>
     </body>
 </html>
