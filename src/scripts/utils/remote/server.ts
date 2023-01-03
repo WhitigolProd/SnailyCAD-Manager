@@ -7,6 +7,7 @@ remApp.set('views', fromRoot('/src/scripts/utils/remote/views'));
 remApp.use(express.static(fromRoot('/app/styles/dist/')));
 remApp.use(express.static(fromRoot('/app/scripts/utils/remote/app')));
 remApp.use('/public', express.static(fromRoot('/public/')));
+remApp.use('/ace', express.static(fromRoot('/packages/ace/')));
 remApp.use(express.urlencoded({ extended: true }));
 remApp.use(
     session({
