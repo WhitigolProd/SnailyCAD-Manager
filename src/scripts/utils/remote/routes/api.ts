@@ -96,4 +96,26 @@ apiRoute.post('/control/stop', (req: any, res: any) => {
     stopCad();
 });
 
+apiRoute.get('/env/read', (req: any, res: any) => {
+    if (!req.session.auth)
+        return res.json({
+            success: false,
+            message: 'You are not authorized to do this',
+        });
+    res.send(fs.readFileSync(path.join(storage('cadDir').read(), '.env')));
+});
+
+apiRoute.post('/env/save', (req: any, res: any) => {
+    if (!req.session.auth)
+        return res.json({
+            success: false,
+            message: 'You are not authorized to do this',
+        });
+    fs.writeFileSync(path.join(storage('cadDir').read(), '.env'), req.body.env);
+    res.json({
+        success: true,
+        message: 'Saved .env file',
+    });
+});
+
 module.exports = apiRoute;

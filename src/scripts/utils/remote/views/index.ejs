@@ -30,6 +30,7 @@
         <script src="/toast.js" defer></script>
         <script src="/status.js" defer></script>
         <script src="/control.js" defer></script>
+        <script src="/env.js" defer></script>
     </head>
     <body
         class="container flex flex-col h-screen justify-center items-center gap-2"
@@ -44,6 +45,14 @@
                     >
                 </div>
             </header>
+            <div
+                class="flex flex-col mb-2 items-center justify-evenly text-center"
+            >
+                <span class="text-xs muted"
+                    >SnailyCAD Remote Server provides the basic necessities to
+                    remotely manage your SnailyCAD Instance.</span
+                >
+            </div>
             <div class="row center-itms center-justify">
                 <div id="snailyStatus">
                     SnailyCAD Status:
@@ -86,15 +95,68 @@
                     <span>Stop SnailyCAD</span>
                 </div>
             </div>
-            <div
-                class="flex flex-col mt-2 items-center justify-evenly text-center"
-            >
-                <span class="text-xs muted"
-                    >The remote server currently only supports start/stop
-                    functionality. More will be added in the future!</span
+        </article>
+
+        <article>
+            <header>
+                <div>
+                    <span>Additional Tools</span>
+                    <span class="text-xs muted"
+                        >Here's some additional tools to help you manage your
+                        SnailyCAD Instance!</span
+                    >
+                </div>
+            </header>
+
+            <div class="flex flex-row justify-center items-center gap-3">
+                <div
+                    class="btn md info"
+                    onclick="openEnvEditor();"
+                    id="edit_env_btn"
                 >
+                    <div class="load"></div>
+                    <i class="material-symbols-outlined">edit</i>
+                    <span>ENV Editor</span>
+                </div>
+                <div class="btn md error" onclick="remControl.stop();">
+                    <i class="material-symbols-outlined">dangerous</i>
+                    <span>Force CAD Shutdown</span>
+                </div>
             </div>
         </article>
+
+        <!-- ENV Editor -->
+        <dialog id="env_editor_window">
+            <article>
+                <header>
+                    <div>
+                        <span>ENV Editor</span>
+                        <span class="text-xs muted">Edit your .env file!</span>
+                    </div>
+                </header>
+                <div id="editor" class="h-[50vh]"></div>
+                <footer>
+                    <div
+                        class="btn md error mr-3"
+                        onclick="closeEnvEditor();"
+                        id="close_env_btn"
+                    >
+                        <i class="material-symbols-outlined">close</i>
+                        <span>Close</span>
+                    </div>
+                    <div
+                        class="btn md success"
+                        onclick="saveEnvEditor();"
+                        id="save_env_btn"
+                    >
+                        <div class="load"></div>
+                        <i class="material-symbols-outlined">save</i>
+                        <span>Save</span>
+                    </div>
+                </footer>
+            </article>
+        </dialog>
+
         <span class="fixed bottom-2 left-2 text-xs muted"
             >This webpage is running atop SnailyCAD Manager v<span
                 id="app_version"

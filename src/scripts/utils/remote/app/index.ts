@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 $(() => {
     $.get('/api/version/cad').then((data) => {
         $('#cad_version').text(data);
