@@ -118,6 +118,9 @@ const modalClass = class {
         $(this.selector).attr('open', '');
     }
     close() {
+        // Reset Scroll Posotion even if it's not open
+        $(this.selector).children('article').scrollTop(0);
+
         $(this.selector).removeAttr('open');
     }
 };
