@@ -107,3 +107,12 @@ $(document).on('click', '#update_cad', () => {
         log(data.message, 'success');
     });
 });
+
+$(document).on('click', '#pre_update_cad', () => {
+    api.post('/update', {}, (data, err) => {
+        if (err) {
+            return log(err, 'error');
+        }
+        log(data.message, 'success');
+    });
+});

@@ -1,0 +1,31 @@
+<article>
+    <header>
+        <div class="flex flex-row justify-center items-center gap-1">
+            <i class="mio text-red-500">warning</i>
+            <span>Warning</span>
+            <span class="text-xs muted">Pre-release Disclaimer</span>
+        </div>
+    </header>
+    <div class="flex flex-col justify-center items-center text-center gap-2">
+        <h1 class="text-4xl text-red-500">Warning</h1>
+        <p class="text-red-400">
+            Forcing an update may result in a broken installation. Please make
+            sure you have a backup of your CAD before continuing. If you are
+            unsure, please wait for a stable release.
+        </p>
+    </div>
+    <footer>
+        <div
+            class="btn md success"
+            id="pre_update_cad"
+            onclick="modal('#pre_release').close();"
+        >
+            <i class="mio">check</i>
+            <span>Continue Anyway</span>
+        </div>
+        <div class="btn md error" onclick="modal('#pre_release').close();">
+            <i class="mio">close</i>
+            <span>Cancel</span>
+        </div>
+    </footer>
+</article>
