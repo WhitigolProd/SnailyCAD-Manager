@@ -8,11 +8,8 @@ const {
     dialog,
     Menu,
 } = require('electron');
-const {
-    setupTitleBar,
-    attachTitlebarToWindow,
-} = require('custom-electron-titlebar/main');
 const path = require('path');
+const { createMenu } = require('./index.config');
 
 const createWindow = () => {
     let mainWindow = new BrowserWindow({
@@ -21,7 +18,7 @@ const createWindow = () => {
         minHeight: 600,
         width: 700,
         minWidth: 700,
-        transparent: true,
+        transparent: false,
         alwaysOnTop: true, // To prevent focus-loss on startup.
         maximizable: true,
         titleBarStyle: 'default',
@@ -32,8 +29,6 @@ const createWindow = () => {
             contextIsolation: false,
         },
     });
-
-    attachTitlebarToWindow(mainWindow);
 
     const renderer = mainWindow.webContents;
 
@@ -85,105 +80,7 @@ const createWindow = () => {
         mainWindow.webContents.openDevTools();
     });
 
-    // Menu
-    const menu = Menu.buildFromTemplate([
-        {
-            label: 'File',
-            submenu: [
-                {
-                    label: 'Exit',
-                    click: () => {
-                        app.quit();
-                    },
-                },
-            ],
-        },
-        {
-            label: 'View',
-            submenu: [
-                {
-                    label: 'Reload',
-                    click: () => {
-                        mainWindow.reload();
-                    },
-                },
-                {
-                    label: 'DevTools',
-                    click: () => {
-                        mainWindow.webContents.openDevTools();
-                    },
-                },
-            ],
-        },
-        {
-            label: 'Help',
-            submenu: [
-                {
-                    label: 'SnailyCAD Website',
-                    click: () => {
-                        shell.openExternal(
-                            'https://snailycad.caspertheghost.me'
-                        );
-                    },
-                },
-                {
-                    label: 'SnailyCAD Discord',
-                    click: () => {
-                        shell.openExternal('https://discord.gg/xVM7AFSQ8M');
-                    },
-                },
-                {
-                    label: 'SnailyCAD GitHub',
-                    click: () => {
-                        shell.openExternal(
-                            'https://github.com/SnailyCAD/snaily-cadv4'
-                        );
-                    },
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    label: 'SnailyCAD Manager Website',
-                    click: () => {
-                        shell.openExternal('https://manager.cossys.tk');
-                    },
-                },
-                {
-                    label: 'SnailyCAD Manager GitHub',
-                    click: () => {
-                        shell.openExternal(
-                            'https://github.com/WhitigolProd/SnailyCAD-Manager'
-                        );
-                    },
-                },
-
-                {
-                    type: 'separator',
-                },
-                {
-                    label: 'About',
-                    click: () => {
-                        dialog
-                            .showMessageBox(mainWindow, {
-                                title: 'About',
-                                message: 'SnailyCAD Manager',
-                                detail: 'Made by Whitigol Web Design',
-                                buttons: ['Close', 'GitHub'],
-                            })
-                            .then((result) => {
-                                if (result.response === 1) {
-                                    shell.openExternal(
-                                        'https://github.com/WhitigolProd'
-                                    );
-                                }
-                            });
-                    },
-                },
-            ],
-        },
-    ]);
-    Menu.setApplicationMenu(menu);
+    createMenu();
 };
 
 app.on('ready', createWindow);
