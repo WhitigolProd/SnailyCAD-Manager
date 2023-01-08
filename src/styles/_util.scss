@@ -27,10 +27,8 @@
 
 .fullscreen {
     position: absolute;
-    border-radius: var(--fs-border);
-    height: calc(100vh - 30px);
     width: 100vw;
-    margin-top: 30px;
+    height: 100vh;
     background-color: var(--background-color);
 }
 
@@ -73,9 +71,6 @@ article {
 }
 
 dialog {
-    border-radius: 8px;
-    padding-top: 47px;
-
     article {
         max-height: 90vh;
         min-width: 85vw !important;
