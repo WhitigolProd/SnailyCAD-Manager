@@ -9,6 +9,7 @@ const killPort = require('kill-port');
 const fs = require('fs');
 const convertAnsi = require('ansi-to-html');
 const mdConvert = new (require('showdown').Converter)();
+const isPostgres = require('is-postgres');
 
 const app = {
     close: () => {

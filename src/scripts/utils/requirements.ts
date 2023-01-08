@@ -55,21 +55,21 @@ const checkRequirements = async () => {
             .css('color', 'orange');
         log('Requirement YARN Failed', 'warning');
     });
-    await findProcess('name', 'postgres.exe').then((list: []) => {
-        if (list.length >= 1) {
+    await isPostgres((db:any) => {
+        if (db.running) {
             $('.rqPsql')
                 .text('PASSED')
                 .attr('aria-busy', 'false')
                 .css('color', 'lime');
-            log('Requirement PostgreSQL Passed', 'success');
+            log('Requirement PSQL Passed', 'success');
             return (requirements.psql = true);
         }
         $('.rqPsql')
-            .html('FAILED (Make sure the service is installed & running)')
+            .text('FAILED (Verify that Postgres is running)')
             .attr('aria-busy', 'false')
             .css('color', 'orange');
         log('Requirement PSQL Failed', 'warning');
-    });
+    })
 
     log('Requirement Tests Complete — Checking Versions', 'info');
     await checkAppVersion();
