@@ -291,3 +291,23 @@ const loadEnvValues = () => {
         console.log(`${field} input created.`);
     });
 };
+
+let textEditor: any;
+const loadTextEnv = () => {
+    // @ts-expect-error - Ace editor is loaded externally
+    ace.config.set('basePath', fromRoot('/packages/ace/'));
+    // @ts-expect-error - Ace editor is loaded externally
+    textEditor = ace.edit('env_code_editor');
+    textEditor.setTheme('ace/theme/twilight');
+    textEditor.session.setMode('ace/mode/dot');
+    textEditor.setValue(
+        fs.readFileSync(`${storage('cadDir').read()}/.env`, 'utf8'),
+        -1
+    );
+};
+
+const saveTextEnv = () => {
+    fs.writeFileSync(`${storage('cadDir').read()}/.env`, textEditor.getValue());
+    toast.success('Saved .env file');
+    modal('#env_code').close();
+};

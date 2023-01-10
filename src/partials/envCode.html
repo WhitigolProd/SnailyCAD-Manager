@@ -1,0 +1,25 @@
+<article>
+    <header>
+        <div>
+            <span>ENV Editor (Text Editor)</span>
+            <span class="muted text-xs"
+                >Edit your ENV file with the in-app code editor! (Save at
+                bottom)</span
+            >
+        </div>
+    </header>
+    <div id="env_code_editor" class="h-[50vh] rounded"></div>
+    <footer>
+        <div class="btn md success" onclick="saveTextEnv();">
+            <i class="mio">save</i>
+            <span>Save File</span>
+        </div>
+        <div
+            class="btn md error"
+            onclick="modal('#env_code').close(); toast.warning('ENV was not saved!')"
+        >
+            <i class="mio">close</i>
+            <span>Cancel</span>
+        </div>
+    </footer>
+</article>

@@ -80,6 +80,19 @@ const createWindow = () => {
         mainWindow.webContents.openDevTools();
     });
 
+    ipcMain.on('online', () => {
+        mainWindow.setOverlayIcon(
+            path.join(__dirname, '/public/overlay/online.png'),
+            'Online'
+        );
+    });
+    ipcMain.on('offline', () => {
+        mainWindow.setOverlayIcon(
+            path.join(__dirname, '/public/overlay/offline.png'),
+            'Offline'
+        );
+    });
+
     createMenu(mainWindow);
 };
 

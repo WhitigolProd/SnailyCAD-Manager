@@ -17,3 +17,7 @@ ipc.on('zoom-reset', () => {
     zoom = 1;
     $('body').css('transform', `scale(${zoom})`);
 });
+
+ipc.on('reload', () => {
+    app.restart();
+});

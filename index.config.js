@@ -1,5 +1,5 @@
 const path = require('path');
-const { Menu, app } = require('electron');
+const { Menu, app, dialog } = require('electron');
 module.exports.createMenu = (mainWindow) => {
     const menu = Menu.buildFromTemplate([
         {
@@ -46,45 +46,56 @@ module.exports.createMenu = (mainWindow) => {
             label: 'Help',
             submenu: [
                 {
-                    label: 'SnailyCAD Website',
-                    click: () => {
-                        shell.openExternal(
-                            'https://snailycad.caspertheghost.me'
-                        );
-                    },
-                },
-                {
-                    label: 'SnailyCAD Discord',
-                    click: () => {
-                        shell.openExternal('https://discord.gg/xVM7AFSQ8M');
-                    },
-                },
-                {
-                    label: 'SnailyCAD GitHub',
-                    click: () => {
-                        shell.openExternal(
-                            'https://github.com/SnailyCAD/snaily-cadv4'
-                        );
-                    },
+                    label: 'SnailyCAD',
+                    submenu: [
+                        {
+                            label: 'SnailyCAD Website',
+                            click: () => {
+                                shell.openExternal(
+                                    'https://snailycad.caspertheghost.me'
+                                );
+                            },
+                        },
+                        {
+                            label: 'SnailyCAD Discord',
+                            click: () => {
+                                shell.openExternal(
+                                    'https://discord.gg/xVM7AFSQ8M'
+                                );
+                            },
+                        },
+                        {
+                            label: 'SnailyCAD GitHub',
+                            click: () => {
+                                shell.openExternal(
+                                    'https://github.com/SnailyCAD/snaily-cadv4'
+                                );
+                            },
+                        },
+                    ],
                 },
                 {
                     type: 'separator',
                 },
                 {
-                    label: 'SnailyCAD Manager Website',
-                    click: () => {
-                        shell.openExternal('https://manager.cossys.tk');
-                    },
+                    label: 'Manager',
+                    submenu: [
+                        {
+                            label: 'SnailyCAD Manager Website',
+                            click: () => {
+                                shell.openExternal('https://manager.cossys.tk');
+                            },
+                        },
+                        {
+                            label: 'SnailyCAD Manager GitHub',
+                            click: () => {
+                                shell.openExternal(
+                                    'https://github.com/WhitigolProd/SnailyCAD-Manager'
+                                );
+                            },
+                        },
+                    ],
                 },
-                {
-                    label: 'SnailyCAD Manager GitHub',
-                    click: () => {
-                        shell.openExternal(
-                            'https://github.com/WhitigolProd/SnailyCAD-Manager'
-                        );
-                    },
-                },
-
                 {
                     type: 'separator',
                 },
@@ -121,8 +132,16 @@ module.exports.createMenu = (mainWindow) => {
             submenu: [
                 {
                     label: 'Open Developer Tools',
+                    accelerator: 'F12',
                     click: () => {
                         mainWindow.webContents.openDevTools();
+                    },
+                },
+                {
+                    label: 'Reload',
+                    accelerator: 'F5',
+                    click: () => {
+                        mainWindow.webContents.send('reload');
                     },
                 },
             ],

@@ -20,6 +20,7 @@ const getCadStatus = async () => {
                     'onclick',
                     'launchURL(env(`NEXT_PUBLIC_CLIENT_URL`).read())'
                 );
+            ipc.send('online');
             cadLoading = false;
         }
         if (!client_status && !api_status && !cadLoading) {
@@ -27,6 +28,7 @@ const getCadStatus = async () => {
             $('#start_cad').removeClass('hidden');
             $('#stop_cad').addClass('hidden');
             $('#launch_cad').addClass('hidden');
+            ipc.send('offline');
         }
         setTimeout(getCadStatus, 1000);
     };

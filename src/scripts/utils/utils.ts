@@ -1,3 +1,7 @@
+const fromRoot = (query: string) => {
+    return path.join(__dirname, query);
+};
+
 const ipc = require('electron').ipcRenderer;
 const path = require('path');
 const { spawn, exec } = require('child_process');
@@ -27,10 +31,6 @@ const app = {
     hard_restart: () => {
         return ipc.send('hard-restart');
     },
-};
-
-const fromRoot = (query: string) => {
-    return path.join(__dirname, query);
 };
 
 // Clear the log file on startup

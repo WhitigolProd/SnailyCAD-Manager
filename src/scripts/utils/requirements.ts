@@ -6,6 +6,38 @@ let requirements = {
     complete: false,
 };
 
+const checkComplete = setInterval(async () => {
+    if (
+        requirements.git &&
+        requirements.node &&
+        requirements.yarn &&
+        requirements.psql
+    ) {
+        requirements.complete = true;
+
+        log('Requirement Tests Complete — Checking Versions', 'info');
+        await checkAppVersion();
+
+        $('.requirements').addClass('hidden');
+        await loadWizard();
+        await cadCheck();
+
+        // * Everything else that should be ran if requirements are passed
+        executeStartFunction();
+        if (storage('remoteOnStart').read() && storage('cadDir').read()) {
+            let remoteOnStart = storage('remoteOnStart').read();
+            if (remoteOnStart == 'true') startRemoteServer();
+            if (remoteOnStart == 'false') return;
+        } else {
+            log('Remote server is not configured!', 'warning');
+        }
+
+        createEnvInputs();
+        loadEnvValues();
+        clearInterval(checkComplete);
+    }
+}, 300);
+
 const checkRequirements = async () => {
     await commandExists('git', (err: string, exists: boolean) => {
         if (err) throw new Error(err);
@@ -55,7 +87,7 @@ const checkRequirements = async () => {
             .css('color', 'orange');
         log('Requirement YARN Failed', 'warning');
     });
-    await isPostgres((db:any) => {
+    await isPostgres((db: any) => {
         if (db.running) {
             $('.rqPsql')
                 .text('PASSED')
@@ -69,32 +101,5 @@ const checkRequirements = async () => {
             .attr('aria-busy', 'false')
             .css('color', 'orange');
         log('Requirement PSQL Failed', 'warning');
-    })
-
-    log('Requirement Tests Complete — Checking Versions', 'info');
-    await checkAppVersion();
-
-    if (
-        requirements.git &&
-        requirements.node &&
-        requirements.psql &&
-        requirements.yarn
-    ) {
-        $('.requirements').addClass('hidden');
-        await loadWizard();
-        await cadCheck();
-
-        // * Everything else that should be ran if requirements are passed
-        executeStartFunction();
-        if (storage('remoteOnStart').read() && storage('cadDir').read()) {
-            let remoteOnStart = storage('remoteOnStart').read();
-            if (remoteOnStart == 'true') startRemoteServer();
-            if (remoteOnStart == 'false') return;
-        } else {
-            log('Remote server is not configured!', 'warning');
-        }
-
-        createEnvInputs();
-        loadEnvValues();
-    }
+    });
 };
