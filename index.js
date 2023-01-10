@@ -80,7 +80,7 @@ const createWindow = () => {
         mainWindow.webContents.openDevTools();
     });
 
-    createMenu();
+    createMenu(mainWindow);
 };
 
 app.on('ready', createWindow);

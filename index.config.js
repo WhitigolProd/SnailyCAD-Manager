@@ -1,6 +1,6 @@
 const path = require('path');
 const { Menu, app } = require('electron');
-module.exports.createMenu = () => {
+module.exports.createMenu = (mainWindow) => {
     const menu = Menu.buildFromTemplate([
         {
             label: 'File',
@@ -17,15 +17,27 @@ module.exports.createMenu = () => {
             label: 'View',
             submenu: [
                 {
-                    label: 'Reload',
+                    label: 'Zoom In',
+                    accelerator: 'CmdOrCtrl+=',
                     click: () => {
-                        mainWindow.reload();
+                        mainWindow.webContents.send('zoom-in');
                     },
                 },
                 {
-                    label: 'DevTools',
+                    label: 'Zoom Out',
+                    accelerator: 'CmdOrCtrl+-',
                     click: () => {
-                        mainWindow.webContents.openDevTools();
+                        mainWindow.webContents.send('zoom-out');
+                    },
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    label: 'Reset Zoom',
+                    accelerator: 'CmdOrCtrl+0',
+                    click: () => {
+                        mainWindow.webContents.send('zoom-reset');
                     },
                 },
             ],
@@ -108,12 +120,9 @@ module.exports.createMenu = () => {
             label: 'Debug',
             submenu: [
                 {
-                    label: 'Hard Restart',
+                    label: 'Open Developer Tools',
                     click: () => {
-                        app.relaunch({
-                            args: process.argv.slice(1).concat(['--relaunch']),
-                        });
-                        app.exit(0);
+                        mainWindow.webContents.openDevTools();
                     },
                 },
             ],
