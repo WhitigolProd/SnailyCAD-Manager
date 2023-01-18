@@ -75,13 +75,10 @@ const cadCheck = async () => {
 
         const compare = async () => {
             if (cad.version.current < cad.version.latest) {
-                $('#sc_latest')
-                    .text(`(v${cad.version.latest} available)`)
-                    .css('color', 'orange')
-                    .parent()
-                    .append(
-                        `<span onclick="modal('#cad_notes').open();" class="cursor-pointer text-blue-500 hover:text-blue-400 ml-1 text-xs">What's New?</span>`
-                    );
+                $('#sc_latest').html(`
+                    <span class="text-orange-500">(v${cad.version.latest} is available)</span>
+                    <span onclick="modal('#cad_notes').open();" class="cursor-pointer text-blue-500 hover:text-blue-400 ml-1 text-xs !animate-none">See what's new</span>
+                    `);
                 $('#update_cad').removeClass('hidden');
                 log('CAD Version out of date!', 'warning');
                 return;
