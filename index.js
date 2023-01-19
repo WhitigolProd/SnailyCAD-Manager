@@ -93,6 +93,15 @@ const createWindow = () => {
         );
     });
 
+    ipcMain.on('popup', (e, args) => {
+        dialog.showMessageBox(mainWindow, {
+            type: 'warning',
+            buttons: ['OK'],
+            title: args.title,
+            message: args.message,
+        });
+    });
+
     createMenu(mainWindow);
 };
 

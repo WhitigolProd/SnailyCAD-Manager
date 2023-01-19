@@ -34,8 +34,13 @@ const checkAppVersion = async () => {
             }
         })
         .catch((err) => {
-            alert(err);
-            throw new Error(err);
+            ipc.send('popup', {
+                title: 'Update Check Failed',
+                message:
+                    'Could not check for app updates.\nThis is likely due to GitHub API rate limiting.',
+            });
+            console.error(err);
+            log('Could not check for app updates.', 'error');
         });
 
     setTimeout(checkAppVersion, 1800000); // Check every 30 minutes for a new version.
@@ -64,13 +69,20 @@ const cadCheck = async () => {
         const checkLatest = async () => {
             await $.get(
                 'https://api.github.com/repos/SnailyCAD/snaily-cadv4/releases'
-            ).then(async (data) => {
-                let v = data[0].tag_name;
-                $('#cad_notes #notes').html(mdConvert.makeHtml(data[0].body));
-                cad.version.latest = v;
+            )
+                .then(async (data) => {
+                    let v = data[0].tag_name;
+                    $('#cad_notes #notes').html(
+                        mdConvert.makeHtml(data[0].body)
+                    );
+                    cad.version.latest = v;
 
-                await compare();
-            });
+                    await compare();
+                })
+                .catch((err) => {
+                    log('Could not check for CAD updates.', 'error');
+                    console.error(err);
+                });
         };
 
         const compare = async () => {

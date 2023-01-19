@@ -16,9 +16,8 @@ const checkComplete = setInterval(async () => {
         requirements.complete = true;
 
         log('Requirement Tests Complete — Checking Versions', 'info');
-        await checkAppVersion();
-
         $('.requirements').addClass('hidden');
+        await checkAppVersion();
         await loadWizard();
         await cadCheck();
 
