@@ -1,14 +1,14 @@
 {
     "name": "snailycad-manager-v2",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "description": "Easily manage SnailyCAD v4 with an easy-to-understand GUI.",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "electron .",
         "compile": "tsc",
-        "build": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon public/icon-white-bg.png --asar --out E:\\_Web_Development_\\.electron\\BUILDS\\SnailyCADManager\\[2.0.0]",
-        "build:raw": "npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon 'public/icon-white-bg.png' --ignore \"/^.*.(ts|tsx|exe|scss)/gm\" --out 'E:/_Web_Development_/.electron/BUILDS/SnailyCADManager/[2.0.0]'",
+        "build": "npm run compile && npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon public/icon-white-bg.png --asar --out E:\\_Web_Development_\\.electron\\BUILDS\\SnailyCADManager\\[2.0.0]",
+        "build:raw": "npm run compile && npx electron-packager . \"SnailyCAD Manager\" --overwrite --icon 'public/icon-white-bg.png' --ignore \"/^.*.(ts|tsx|exe|scss)/gm\" --out 'E:/_Web_Development_/.electron/BUILDS/SnailyCADManager/[2.0.0]'",
         "tailwind": "npx tailwindcss -i \"./app/styles/dist/index.min.css\" -o \"./app/styles/dist/tailwind-compile.css\"",
         "dev": "concurrently \"npm run dev:tailwind\" \"npm run dev:tsc\" \"npm run dev:start\"",
         "dev:tailwind": "npx tailwindcss -o \"./app/styles/dist/tailwind-compile.css\" -w",

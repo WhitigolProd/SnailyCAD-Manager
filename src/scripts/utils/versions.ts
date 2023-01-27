@@ -7,14 +7,21 @@ let updateDownloadUrl: string;
 
 const checkAppVersion = async () => {
     await $.get(
-        'https://api.github.com/repos/WhitigolProd/SnailyCAD-Manager/releases'
+        'https://raw.githubusercontent.com/WhitigolProd/SnailyCAD-Manager/master/package.json',
+        { cache: false }
     )
         .then((data) => {
             // @ts-expect-error
             let current = require(fromRoot('/package.json')).version;
+            data = JSON.parse(data);
             versions.app = current;
-            let latest = data[0].tag_name;
-            updateDownloadUrl = data[0].assets[0].browser_download_url;
+            let latest = data.version;
+            let latestExeName = latest.replace(/\./g, '_');
+            updateDownloadUrl = `https://github.com/WhitigolProd/SnailyCAD-Manager/releases/download/${latest}/snailycad_manger_${latestExeName}.exe`;
+            $('#app_download_link').attr(
+                'onclick',
+                'launchURL(updateDownloadUrl)'
+            );
 
             if (current < latest) {
                 log(
@@ -68,12 +75,14 @@ const cadCheck = async () => {
         );
         const checkLatest = async () => {
             await $.get(
-                'https://api.github.com/repos/SnailyCAD/snaily-cadv4/releases'
+                'https://raw.githubusercontent.com/SnailyCAD/snaily-cadv4/master/package.json',
+                { cache: false }
             )
                 .then(async (data) => {
-                    let v = data[0].tag_name;
+                    data = JSON.parse(data);
+                    let v = data.version;
                     $('#cad_notes #notes').html(
-                        mdConvert.makeHtml(data[0].body)
+                        `<span>View the latest changes <span class="cursor-pointer text-blue-500 hover:text-blue-400" onClick="launchURL('https://github.com/SnailyCAD/snaily-cadv4/compare/${cad.version.current}...${v}')">here</span>.</span>`
                     );
                     cad.version.latest = v;
 
