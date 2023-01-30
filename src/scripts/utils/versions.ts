@@ -39,6 +39,12 @@ const checkAppVersion = async () => {
             if (current > latest) {
                 log('App version check skipped: Development Version', 'info');
             }
+
+            if (current == latest) {
+                log('Manager up to date!', 'success');
+                $('#app_current_version').text(current).css('color', 'lime');
+                $('#app_latest_version').text(latest);
+            }
         })
         .catch((err) => {
             ipc.send('popup', {
@@ -49,8 +55,6 @@ const checkAppVersion = async () => {
             console.error(err);
             log('Could not check for app updates.', 'error');
         });
-
-    setTimeout(checkAppVersion, 1800000); // Check every 30 minutes for a new version.
 };
 
 // * Get SnailyCAD Version
@@ -113,7 +117,6 @@ const cadCheck = async () => {
             'error'
         );
     }
-    setTimeout(cadCheck, 1800000); // Check every 30 minutes
 };
 
 // When the update button is clicked, send the update request to the API.
@@ -134,3 +137,12 @@ $(document).on('click', '#pre_update_cad', () => {
         log(data.message, 'success');
     });
 });
+
+async function CheckVersions() {
+    await checkAppVersion();
+    await cadCheck();
+    setInterval(() => {
+        checkAppVersion();
+        cadCheck();
+    }, 1800000);
+}

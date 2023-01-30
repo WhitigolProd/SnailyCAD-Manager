@@ -181,7 +181,7 @@ appAPI.post('/update', (req: any, res: any) => {
         message: 'Starting Update',
     });
     const updateScript = spawn(
-        'echo Stashing Changes && git stash && echo Updating Repository && git pull origin main && echo Installing Dependencies (This may take a while) && yarn && echo Building CAD (This might take a while) && yarn turbo run build && echo Update Complete',
+        'echo Stashing Changes && git stash && echo Running Update Script && curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > autoupdate.js && node autoupdate.js && echo Update Complete',
         [],
         {
             shell: true,
@@ -194,7 +194,7 @@ appAPI.post('/update', (req: any, res: any) => {
         log(d, 'neutral');
 
         // When the update has started, hide the update button, and show the update loading button
-        if (d.includes('Updating Repository')) {
+        if (d.includes('Running Update Script')) {
             $('#update_cad').addClass('hidden');
             $('#update_loading').removeClass('hidden');
         }
