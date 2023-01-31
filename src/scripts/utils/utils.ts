@@ -34,7 +34,7 @@ const app = {
 };
 
 // Clear the log file on startup
-fs.writeFile(fromRoot('/logs/app.log'), '', (err: string) => {
+fs.writeFile(fromRoot('../logs/app.log'), '', (err: string) => {
     if (err) {
         toast.error(err);
     }
@@ -59,7 +59,7 @@ const log = (
 
     // Write to the log file
     fs.appendFile(
-        fromRoot('/logs/app.log'),
+        fromRoot('../logs/app.log'),
         oldString + '\n',
         (err: string) => {
             if (err) {
