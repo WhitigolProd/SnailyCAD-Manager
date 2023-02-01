@@ -38,8 +38,24 @@ $(async () => {
     }, 150);
     ipcRenderer.send('focus');
     await checkRequirements();
+    const devConsoleJokes = [
+        "Hey there, code sleuth! Looks like you're checking out the inner workings of this app. Just don't let all these bugs bite!",
+        'Well well, what do we have here? The master of the console has arrived! Just watch out for all the spaghetti code in here.',
+        "You must be a dev, because you're peeking behind the scenes of this app! Just don't get lost in all the mess of code.",
+        "Welcome to the console, the land of endless bugs and unreadable code. But hey, at least you're having a good time, right?",
+        "Oh, you're inspecting the code? I hope you brought your debugging skills, because there's a lot of messy code in here.",
+        "The dev console, where the bugs are plenty and the code is confusing. But don't worry, you're up to the challenge, right?",
+        "You're viewing the console, the land of mystery and code. Just make sure you don't get stuck in the web of bugs and errors!",
+        "The console, where the magic happens and the bugs arise. Just don't let all the mess of code bring you down!",
+        "Well, well, well, look who's checking out the inner workings of this app. Just watch out for all the code traps and bugs!",
+        "The dev console, where the code is messy and the bugs are plenty. But at least you're brave enough to face them, right?",
+    ];
+
     console.log(
-        `Okay... But why Snaily? Hmm.. Probably FiveM's mascot Snail.. Or maybe not 🤔👀`
+        `%c${
+            devConsoleJokes[Math.floor(Math.random() * devConsoleJokes.length)]
+        }`,
+        'color: #fff; background: #000; padding: 5px; border-radius: 5px;'
     );
 });
 
