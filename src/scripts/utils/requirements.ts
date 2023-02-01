@@ -14,9 +14,9 @@ const checkComplete = setInterval(async () => {
         requirements.psql
     ) {
         clearInterval(checkComplete);
-        
+
         requirements.complete = true;
-        
+
         log('Requirement Tests Complete — Checking Versions', 'info');
         $('.requirements').addClass('hidden');
         await checkAppVersion();
@@ -35,7 +35,6 @@ const checkComplete = setInterval(async () => {
 
         createEnvInputs();
         loadEnvValues();
-        
     }
 }, 300);
 
