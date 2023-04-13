@@ -181,7 +181,7 @@ appAPI.post('/update', (req: any, res: any) => {
         message: 'Starting Update',
     });
     const updateScript = spawn(
-        'echo Stashing Changes && git stash && echo Running Update Script && curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > autoupdate.js && node autoupdate.js && echo Update Complete',
+        'echo Stashing Changes && git stash && echo Running Update Script && curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > autoupdate.mjs && node autoupdate.mjs && echo Update Complete',
         [],
         {
             shell: true,
