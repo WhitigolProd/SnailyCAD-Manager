@@ -51,7 +51,7 @@ appAPI.post('/start', async (req: any, res: any) => {
         );
     } else {
         cadProcess = spawn(
-            `node scripts/copy-env.mjs --client --api && yarn workspace @snailycad/client build && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
+            `node scripts/copy-env.mjs --client --api && yarn turbo run build --filter=@snailycad/client && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
             [],
             { shell: true, cwd: storage('cadDir').read() }
         );
