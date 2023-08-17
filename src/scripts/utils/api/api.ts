@@ -51,7 +51,7 @@ appAPI.post('/start', async (req: any, res: any) => {
         );
     } else {
         cadProcess = spawn(
-            `node scripts/copy-env.mjs --client --api && yarn turbo run build --filter=@snailycad/client && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
+            `yarn turbo run build --filter=@snailycad/client && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
             [],
             { shell: true, cwd: storage('cadDir').read() }
         );
@@ -109,7 +109,7 @@ appAPI.post('/install', (req: any, res: any) => {
         message: 'Starting Installation',
     });
     const installScript = spawn(
-        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && yarn && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && yarn turbo run build --filter="{packages/**/**}" && yarn turbo run build --filter="{apps/**/**}" && echo Installation Complete',
+        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && yarn && echo Copying ENV && copy .env.example .env && echo Building CAD (This might take a while) && yarn turbo run build --filter="{packages/**/**}" && yarn turbo run build --filter="{apps/**/**}" && echo Installation Complete',
         [],
         {
             shell: true,
