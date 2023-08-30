@@ -109,7 +109,7 @@ appAPI.post('/install', (req: any, res: any) => {
         message: 'Starting Installation',
     });
     const installScript = spawn(
-        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && pnpm && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && pnpm turbo run build --filter="{packages/**/**}" && pnpm turbo run build --filter="{apps/**/**}" && echo Installation Complete',
+        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && pnpm install && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && pnpm turbo run build --filter="{packages/**/**}" && pnpm turbo run build --filter="{apps/**/**}" && echo Installation Complete',
         [],
         {
             shell: true,
