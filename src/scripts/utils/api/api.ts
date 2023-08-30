@@ -45,13 +45,13 @@ appAPI.post('/start', async (req: any, res: any) => {
 
     if (keys.shift) {
         cadProcess = spawn(
-            `yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
+            `pnpm run concurrently "pnpm workspace @snailycad/client start" "pnpm workspace @snailycad/api generate && pnpm workspace @snailycad/api start"`,
             [],
             { shell: true, cwd: storage('cadDir').read() }
         );
     } else {
         cadProcess = spawn(
-            `node scripts/copy-env.mjs --client --api && yarn turbo run build --filter=@snailycad/client && yarn run concurrently "yarn workspace @snailycad/client start" "yarn workspace @snailycad/api generate && yarn workspace @snailycad/api start"`,
+            `node scripts/copy-env.mjs --client --api && pnpm turbo run build --filter=@snailycad/client && pnpm run concurrently "pnpm workspace @snailycad/client start" "pnpm workspace @snailycad/api generate && pnpm workspace @snailycad/api start"`,
             [],
             { shell: true, cwd: storage('cadDir').read() }
         );
@@ -109,7 +109,7 @@ appAPI.post('/install', (req: any, res: any) => {
         message: 'Starting Installation',
     });
     const installScript = spawn(
-        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && yarn && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && yarn turbo run build --filter="{packages/**/**}" && yarn turbo run build --filter="{apps/**/**}" && echo Installation Complete',
+        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && pnpm && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && pnpm turbo run build --filter="{packages/**/**}" && pnpm turbo run build --filter="{apps/**/**}" && echo Installation Complete',
         [],
         {
             shell: true,
@@ -227,7 +227,7 @@ appAPI.post('/update', (req: any, res: any) => {
 
 appAPI.post('/reset', (req: any, res: any) => {
     const resetScript = spawn(
-        'echo Resetting Node Modules && rmdir /s /q "node_modules" && echo Installing Dependencies (This may take a while) && yarn && echo Node Modules Reset',
+        'echo Resetting Node Modules && rmdir /s /q "node_modules" && echo Installing Dependencies (This may take a while) && pnpm && echo Node Modules Reset',
         [],
         {
             shell: true,

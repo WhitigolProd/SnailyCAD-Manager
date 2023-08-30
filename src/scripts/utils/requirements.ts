@@ -1,18 +1,13 @@
 let requirements = {
     git: false,
     node: false,
-    yarn: false,
+    pnpm: false,
     psql: false,
     complete: false,
 };
 
 const checkComplete = setInterval(async () => {
-    if (
-        requirements.git &&
-        requirements.node &&
-        requirements.yarn &&
-        requirements.psql
-    ) {
+    if (requirements.git && requirements.node && requirements.pnpm) {
         clearInterval(checkComplete);
 
         requirements.complete = true;
@@ -71,35 +66,20 @@ const checkRequirements = async () => {
             .css('color', 'orange');
         log('Requirement NODE Failed', 'warning');
     });
-    await commandExists('yarn', (err: string, exists: boolean) => {
+    await commandExists('pnpm', (err: string, exists: boolean) => {
         if (err) throw new Error(err);
         if (exists) {
-            $('.rqYarn')
+            $('.rqPnpm')
                 .text('PASSED')
                 .attr('aria-busy', 'false')
                 .css('color', 'lime');
-            log('Requirement Yarn Passed', 'success');
-            return (requirements.yarn = true);
+            log('Requirement pnpm Passed', 'success');
+            return (requirements.pnpm = true);
         }
-        $('.rqYarn')
+        $('.rqPnpm')
             .text('FAILED')
             .attr('aria-busy', 'false')
             .css('color', 'orange');
-        log('Requirement YARN Failed', 'warning');
-    });
-    await isPostgres((db: any) => {
-        if (db.running) {
-            $('.rqPsql')
-                .text('PASSED')
-                .attr('aria-busy', 'false')
-                .css('color', 'lime');
-            log('Requirement PSQL Passed', 'success');
-            return (requirements.psql = true);
-        }
-        $('.rqPsql')
-            .text('FAILED (Verify that Postgres is running)')
-            .attr('aria-busy', 'false')
-            .css('color', 'orange');
-        log('Requirement PSQL Failed', 'warning');
+        log('Requirement pnpm Failed', 'warning');
     });
 };
