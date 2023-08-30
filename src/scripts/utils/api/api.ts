@@ -45,7 +45,7 @@ appAPI.post('/start', async (req: any, res: any) => {
 
     if (keys.shift) {
         cadProcess = spawn(
-            `pnpm run concurrently "pnpm workspace @snailycad/client start" "pnpm workspace @snailycad/api generate && pnpm workspace @snailycad/api start"`,
+            "pnpm run start",
             [],
             { shell: true, cwd: storage('cadDir').read() }
         );
