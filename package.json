@@ -1,6 +1,6 @@
 {
     "name": "snailycad-manager-v2",
-    "version": "2.2.6",
+    "version": "2.2.7",
     "description": "Easily manage SnailyCAD v4 with an easy-to-understand GUI.",
     "main": "index.js",
     "scripts": {
