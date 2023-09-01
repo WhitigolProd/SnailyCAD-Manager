@@ -44,11 +44,10 @@ appAPI.post('/start', async (req: any, res: any) => {
     }, 1000);
 
     if (keys.shift) {
-        cadProcess = spawn(
-            "pnpm run start",
-            [],
-            { shell: true, cwd: storage('cadDir').read() }
-        );
+        cadProcess = spawn('pnpm run start', [], {
+            shell: true,
+            cwd: storage('cadDir').read(),
+        });
     } else {
         cadProcess = spawn(
             `node scripts/copy-env.mjs --client --api && pnpm turbo run build --filter=@snailycad/client && pnpm run start`,
@@ -109,7 +108,7 @@ appAPI.post('/install', (req: any, res: any) => {
         message: 'Starting Installation',
     });
     const installScript = spawn(
-        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && pnpm install && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && pnpm turbo run build --filter="{packages/**/**}" && pnpm turbo run build --filter="{apps/**/**}" && echo Installation Complete',
+        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && pnpm install && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && pnpm run build && echo Installation Complete',
         [],
         {
             shell: true,
@@ -181,7 +180,7 @@ appAPI.post('/update', (req: any, res: any) => {
         message: 'Starting Update',
     });
     const updateScript = spawn(
-        'echo Stashing Changes && git stash && echo Running Update Script && curl https://raw.githubusercontent.com/SnailyCAD/autoupdater/main/dist/index.js > autoupdate.mjs && node autoupdate.mjs && echo Update Complete',
+        'echo Stashing Changes && git stash && echo Running Update Script && git pull origin main && pnpm install && pnpm run build && echo Update Complete',
         [],
         {
             shell: true,
@@ -227,7 +226,7 @@ appAPI.post('/update', (req: any, res: any) => {
 
 appAPI.post('/reset', (req: any, res: any) => {
     const resetScript = spawn(
-        'echo Resetting Node Modules && rmdir /s /q "node_modules" && echo Installing Dependencies (This may take a while) && pnpm install && echo Node Modules Reset',
+        'echo Resetting Node Modules && rmdir /s /q "node_modules" && del /s /q yarn.lock && del /s /q pnpm-lock.yaml && echo Installing Dependencies (This may take a while) && pnpm install && echo Node Modules Reset',
         [],
         {
             shell: true,
