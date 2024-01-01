@@ -108,7 +108,7 @@ appAPI.post('/install', (req: any, res: any) => {
         message: 'Starting Installation',
     });
     const installScript = spawn(
-        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && pnpm install --force && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && pnpm run build && echo Installation Complete',
+        'echo Downloading Repository && git clone https://github.com/SnailyCAD/snaily-cadv4.git && echo Opening Directory && cd snaily-cadv4 && echo Installing Dependencies (This may take a while) && pnpm install --config.confirmModulesPurge=false --prod=false && echo Copying ENV && copy .env.example .env && echo Moving ENV && node scripts/copy-env.mjs --client --api && echo Building CAD (This might take a while) && pnpm run build && echo Installation Complete',
         [],
         {
             shell: true,
@@ -180,7 +180,7 @@ appAPI.post('/update', (req: any, res: any) => {
         message: 'Starting Update',
     });
     const updateScript = spawn(
-        'echo Stashing Changes && git stash && echo Running Update Script && git pull origin main && pnpm install --force && pnpm run build && echo Update Complete',
+        'echo Stashing Changes && git stash && echo Running Update Script && git pull origin main && pnpm install --config.confirmModulesPurge=false --prod=false && pnpm run build && echo Update Complete',
         [],
         {
             shell: true,
