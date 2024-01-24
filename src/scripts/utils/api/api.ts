@@ -226,7 +226,7 @@ appAPI.post('/update', (req: any, res: any) => {
 
 appAPI.post('/reset', (req: any, res: any) => {
     const resetScript = spawn(
-        'echo Resetting Node Modules && rmdir /s /q "node_modules" && del /s /q yarn.lock && del /s /q pnpm-lock.yaml && echo Installing Dependencies (This may take a while) && pnpm install && echo Node Modules Reset',
+        'echo Resetting Node Modules && rmdir /s /q "node_modules" && del /s /q yarn.lock && del /s /q pnpm-lock.yaml && echo Installing Dependencies (This may take a while) && pnpm install --config.confirmModulesPurge=false --prod=false && echo Node Modules Reset',
         [],
         {
             shell: true,
